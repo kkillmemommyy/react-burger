@@ -1,5 +1,5 @@
 # React Burger
 
 # Technologies
--React
--React intersection observer
+- React
+- React intersection observer
