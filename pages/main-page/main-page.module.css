@@ -1,0 +1,13 @@
+.title {
+  margin-bottom: 20px;
+}
+
+.mainContentWrap {
+  display: flex;
+  gap: 40px;
+}
+
+.burgerConstructor {
+  flex: 1;
+}
+
