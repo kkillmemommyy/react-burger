@@ -1,7 +1,7 @@
-import cls from './main-page.module.css';
-import BurgerIngredients from '../../components/burger-ingredients/burger-ingredients';
+import cls from './MainPage.module.css';
+import { BurgerIngredients } from '../../components/BurgerIngredients/BurgerIngredients.jsx';
 
-const data = [
+const ingredients = [
   {
     _id: '60666c42cc7b410027a1a9b1',
     name: 'Краторная булка N-200i',
@@ -217,15 +217,15 @@ const data = [
 const MainPage = () => {
   return (
     <>
-      <h1 className={cls.title}>
+      <h1 className='mb-5'>
         <span className='text text_type_main-large'>Соберите бургер</span>
       </h1>
-      <div className={cls.mainContentWrap}>
-        <BurgerIngredients ingredients={data} />
-        <section className={cls.burgerConstructor}>2</section>
+      <div className={cls.wrap}>
+        <BurgerIngredients ingredients={ingredients} />
+        <section className={cls.burgerConstructor}>Burger Constructor</section>
       </div>
     </>
   );
 };
 
-export default MainPage;
+export { MainPage };

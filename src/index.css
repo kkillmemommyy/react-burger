@@ -28,12 +28,3 @@ a:hover {
 li {
   list-style-type: none;
 }
-
-main {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding-top: 40px;
-  @media (width < 1280px) {
-    padding-left: 20px;
-  }
-}

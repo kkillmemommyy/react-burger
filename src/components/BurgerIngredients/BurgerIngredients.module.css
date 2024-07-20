@@ -1,0 +1,24 @@
+.wrapp {
+  flex: 1;
+}
+
+.nav_items {
+  display: flex;
+}
+
+.nav_item {
+  flex: 1;
+}
+
+.ingredients {
+  height: calc(100vh - 320px);
+  overflow-y: scroll;
+  scroll-behavior: smooth;
+}
+
+.category_items {
+  display: flex;
+  gap: 32px 24px;
+  flex-wrap: wrap;
+}
+

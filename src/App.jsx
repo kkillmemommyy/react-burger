@@ -1,17 +1,16 @@
-import './index.css'
-import AppHeader from './components/app-header/app-header.jsx';
-import MainPage from './pages/main-page/main-page.jsx'
+import { AppHeader } from './components/AppHeader/AppHeader.jsx';
+import { MainPage } from './pages/MainPage/MainPage.jsx';
+import './App.css';
 
 function App() {
   return (
     <>
       <AppHeader />
-      <main>
+      <main className='pt-10'>
         <MainPage />
       </main>
     </>
   );
 }
 
-export default App;
-
+export { App };
