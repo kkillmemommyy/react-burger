@@ -1,0 +1,22 @@
+.main {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding-top: 40px;
+  @media (width < 1280px) {
+    padding-left: 20px;
+  }
+}
+
+.title {
+  margin-bottom: 20px;
+}
+
+.mainContentWrap {
+  display: flex;
+  gap: 40px;
+}
+
+.burgerConstructor {
+  flex: 1;
+}
+
