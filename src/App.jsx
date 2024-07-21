@@ -2,7 +2,7 @@ import { AppHeader } from './components/AppHeader/AppHeader.jsx';
 import { MainPage } from './pages/MainPage/MainPage.jsx';
 import './App.css';
 
-function App() {
+export const App = () => {
   return (
     <>
       <AppHeader />
@@ -11,6 +11,4 @@ function App() {
       </main>
     </>
   );
-}
-
-export { App };
+};

@@ -2,7 +2,7 @@ import clsx from 'clsx';
 import cls from './AppHeader.module.css';
 import { Logo, BurgerIcon, ListIcon, ProfileIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 
-const AppHeader = () => {
+export const AppHeader = () => {
   return (
     <header className={clsx(cls.header, 'pt-4 pb-4')}>
       <nav className={cls.nav}>
@@ -25,5 +25,3 @@ const AppHeader = () => {
     </header>
   );
 };
-
-export { AppHeader };

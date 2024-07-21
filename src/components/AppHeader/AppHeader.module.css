@@ -31,26 +31,24 @@
   display: flex;
   white-space: nowrap;
   transition: color 0.2s linear;
-  color: #8585ad !important;
+  color: #8585ad;
+  & svg {
+    transition: fill 0.2s linear;
+  }
   &:hover {
-    color: #f2f2f3 !important;
+    color: #f2f2f3;
   }
   &:hover svg {
-    fill: #f2f2f3 !important; 
-  } 
-}
-
-.nav_item svg {
-  transition: fill 0.2s linear;
+    fill: #f2f2f3;
+  }
+  &:last-child {
+    margin-left: auto;
+  }
 }
 
 .active {
-  color: #f2f2f3 !important;
+  color: #f2f2f3;
   & svg {
-    fill: #f2f2f3 !important;
+    fill: #f2f2f3;
   }
-}
-
-.nav_item:last-child {
-  margin-left: auto;
 }

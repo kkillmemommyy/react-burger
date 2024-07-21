@@ -5,17 +5,11 @@ import cls from './BurgerIngredients.module.css';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 import { IngredientCart } from '../IngredientCart/IngredientCart.jsx';
 
-const BurgerIngredients = ({ ingredients }) => {
+export const BurgerIngredients = ({ ingredients }) => {
   const [currentTab, setCurrentTab] = useState('buns');
-  const { ref: bunsRef, inView: bunsInView } = useInView({
-    threshold: 0,
-  });
-  const { ref: saucesRef, inView: saucesInView } = useInView({
-    threshold: 0,
-  });
-  const { ref: mainRef, inView: mainInView } = useInView({
-    threshold: 0,
-  });
+  const { ref: bunsRef, inView: bunsInView } = useInView();
+  const { ref: saucesRef, inView: saucesInView } = useInView();
+  const { ref: mainRef, inView: mainInView } = useInView();
 
   useEffect(() => {
     if (bunsInView) {
@@ -29,7 +23,6 @@ const BurgerIngredients = ({ ingredients }) => {
 
   return (
     <section className={cls.wrapp}>
-
       <nav className='mb-10'>
         <ul className={cls.nav_items}>
           <li className={cls.nav_item}>
@@ -65,7 +58,7 @@ const BurgerIngredients = ({ ingredients }) => {
             {ingredients
               .filter((ing) => ing.type === 'bun')
               .map((ing) => (
-                <IngredientCart ingredient={ing} key={ing._id} />
+                <IngredientCart image={ing.image} name={ing.name} price={ing.price} key={ing._id} />
               ))}
           </ul>
         </div>
@@ -77,7 +70,7 @@ const BurgerIngredients = ({ ingredients }) => {
             {ingredients
               .filter((ing) => ing.type === 'sauce')
               .map((ing) => (
-                <IngredientCart ingredient={ing} key={ing._id} />
+                <IngredientCart image={ing.image} name={ing.name} price={ing.price} key={ing._id} />
               ))}
           </ul>
         </div>
@@ -89,14 +82,11 @@ const BurgerIngredients = ({ ingredients }) => {
             {ingredients
               .filter((ing) => ing.type === 'main')
               .map((ing) => (
-                <IngredientCart ingredient={ing} key={ing._id} />
+                <IngredientCart image={ing.image} name={ing.name} price={ing.price} key={ing._id} />
               ))}
           </ul>
         </div>
       </div>
-      
     </section>
   );
 };
-
-export { BurgerIngredients };

@@ -214,7 +214,7 @@ const ingredients = [
   },
 ];
 
-const MainPage = () => {
+export const MainPage = () => {
   return (
     <>
       <h1 className='mb-5'>
@@ -227,5 +227,3 @@ const MainPage = () => {
     </>
   );
 };
-
-export { MainPage };
