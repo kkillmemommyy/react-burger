@@ -1,5 +1,7 @@
+import { useState } from 'react';
 import cls from './MainPage.module.css';
 import { BurgerIngredients } from '../../components/BurgerIngredients/BurgerIngredients.jsx';
+import { BurgerConstructor } from '../../components/BurgerConstructor/BurgerConstructor.jsx';
 
 const ingredients = [
   {
@@ -215,14 +217,23 @@ const ingredients = [
 ];
 
 export const MainPage = () => {
+  const [selectedIngredients, setSelectedIngredients] = useState([]);
+
   return (
     <>
       <h1 className='mb-5'>
         <span className='text text_type_main-large'>Соберите бургер</span>
       </h1>
       <div className={cls.wrap}>
-        <BurgerIngredients ingredients={ingredients} />
-        <section className={cls.burgerConstructor}>Burger Constructor</section>
+        <BurgerIngredients 
+          ingredients={ingredients} 
+          setSelectedIngredients={setSelectedIngredients} 
+          selectedIngredients={selectedIngredients} 
+        />
+        <BurgerConstructor
+          setSelectedIngredients={setSelectedIngredients} 
+          selectedIngredients={selectedIngredients}
+        />
       </div>
     </>
   );

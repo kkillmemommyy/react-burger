@@ -11,7 +11,7 @@
 }
 
 .ingredients {
-  height: calc(100vh - 320px);
+  height: calc(100vh - 324px);
   overflow-y: scroll;
   scroll-behavior: smooth;
 }

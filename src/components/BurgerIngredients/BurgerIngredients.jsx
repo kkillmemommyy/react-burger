@@ -5,7 +5,7 @@ import cls from './BurgerIngredients.module.css';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 import { IngredientCart } from '../IngredientCart/IngredientCart.jsx';
 
-export const BurgerIngredients = ({ ingredients }) => {
+export const BurgerIngredients = ({ ingredients, setSelectedIngredients, selectedIngredients }) => {
   const [currentTab, setCurrentTab] = useState('buns');
   const { ref: bunsRef, inView: bunsInView } = useInView();
   const { ref: saucesRef, inView: saucesInView } = useInView();
@@ -58,7 +58,16 @@ export const BurgerIngredients = ({ ingredients }) => {
             {ingredients
               .filter((ing) => ing.type === 'bun')
               .map((ing) => (
-                <IngredientCart image={ing.image} name={ing.name} price={ing.price} key={ing._id} />
+                <IngredientCart 
+                  image={ing.image} 
+                  name={ing.name} 
+                  price={ing.price} 
+                  key={ing._id} 
+                  setSelectedIngredients={setSelectedIngredients} 
+                  id={ing._id} 
+                  type={ing.type}
+                  selectedIngredients={selectedIngredients}
+                />
               ))}
           </ul>
         </div>
@@ -70,7 +79,16 @@ export const BurgerIngredients = ({ ingredients }) => {
             {ingredients
               .filter((ing) => ing.type === 'sauce')
               .map((ing) => (
-                <IngredientCart image={ing.image} name={ing.name} price={ing.price} key={ing._id} />
+                <IngredientCart 
+                  image={ing.image} 
+                  name={ing.name} 
+                  price={ing.price} 
+                  key={ing._id} 
+                  setSelectedIngredients={setSelectedIngredients} 
+                  id={ing._id} 
+                  type={ing.type}
+                  selectedIngredients={selectedIngredients}
+                />
               ))}
           </ul>
         </div>
@@ -82,7 +100,16 @@ export const BurgerIngredients = ({ ingredients }) => {
             {ingredients
               .filter((ing) => ing.type === 'main')
               .map((ing) => (
-                <IngredientCart image={ing.image} name={ing.name} price={ing.price} key={ing._id} />
+                <IngredientCart 
+                  image={ing.image} 
+                  name={ing.name} 
+                  price={ing.price} 
+                  key={ing._id} 
+                  setSelectedIngredients={setSelectedIngredients} 
+                  id={ing._id} 
+                  type={ing.type}
+                  selectedIngredients={selectedIngredients}
+                />
               ))}
           </ul>
         </div>
