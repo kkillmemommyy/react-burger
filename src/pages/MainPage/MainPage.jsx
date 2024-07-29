@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import cls from './MainPage.module.css';
-import { BurgerIngredients } from '../../components/BurgerIngredients/BurgerIngredients.jsx';
-import { BurgerConstructor } from '../../components/BurgerConstructor/BurgerConstructor.jsx';
+import { BurgerIngredients } from '../../components/BurgerIngredients/BurgerIngredients';
+import { BurgerConstructor } from '../../components/BurgerConstructor/BurgerConstructor';
 
 const ingredients = [
   {
@@ -221,19 +221,16 @@ export const MainPage = () => {
 
   return (
     <>
-      <h1 className='mb-5'>
-        <span className='text text_type_main-large'>Соберите бургер</span>
+      <h1 className='mb-5 text text_type_main-large' style={{ lineHeight: '40px' }}>
+        Соберите бургер
       </h1>
       <div className={cls.wrap}>
-        <BurgerIngredients 
-          ingredients={ingredients} 
-          setSelectedIngredients={setSelectedIngredients} 
-          selectedIngredients={selectedIngredients} 
-        />
-        <BurgerConstructor
-          setSelectedIngredients={setSelectedIngredients} 
+        <BurgerIngredients
+          ingredients={ingredients}
+          setSelectedIngredients={setSelectedIngredients}
           selectedIngredients={selectedIngredients}
         />
+        <BurgerConstructor setSelectedIngredients={setSelectedIngredients} selectedIngredients={selectedIngredients} />
       </div>
     </>
   );

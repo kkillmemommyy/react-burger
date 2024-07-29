@@ -3,7 +3,7 @@ import { useInView } from 'react-intersection-observer';
 import clsx from 'clsx';
 import cls from './BurgerIngredients.module.css';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
-import { IngredientCart } from '../IngredientCart/IngredientCart.jsx';
+import { IngredientCard } from '../IngredientCard/IngredientCard';
 
 export const BurgerIngredients = ({ ingredients, setSelectedIngredients, selectedIngredients }) => {
   const [currentTab, setCurrentTab] = useState('buns');
@@ -51,20 +51,18 @@ export const BurgerIngredients = ({ ingredients, setSelectedIngredients, selecte
 
       <div className={cls.ingredients}>
         <div className='mb-10' ref={bunsRef} id='buns'>
-          <h2 className='mb-6'>
-            <span className='text text_type_main-large'>Булки</span>
-          </h2>
+          <h2 className='mb-6 text text_type_main-medium'>Булки</h2>
           <ul className={clsx(cls.category_items, 'pl-4')}>
             {ingredients
               .filter((ing) => ing.type === 'bun')
               .map((ing) => (
-                <IngredientCart 
-                  image={ing.image} 
-                  name={ing.name} 
-                  price={ing.price} 
-                  key={ing._id} 
-                  setSelectedIngredients={setSelectedIngredients} 
-                  id={ing._id} 
+                <IngredientCard
+                  image={ing.image}
+                  name={ing.name}
+                  price={ing.price}
+                  key={ing._id}
+                  setSelectedIngredients={setSelectedIngredients}
+                  id={ing._id}
                   type={ing.type}
                   selectedIngredients={selectedIngredients}
                 />
@@ -72,20 +70,18 @@ export const BurgerIngredients = ({ ingredients, setSelectedIngredients, selecte
           </ul>
         </div>
         <div className='mb-10' ref={saucesRef} id='sauces'>
-          <h2 className='mb-6'>
-            <span className='text text_type_main-large'>Соусы</span>
-          </h2>
+        <h2 className='mb-6 text text_type_main-medium'>Соусы</h2>
           <ul className={clsx(cls.category_items, 'pl-4')}>
             {ingredients
               .filter((ing) => ing.type === 'sauce')
               .map((ing) => (
-                <IngredientCart 
-                  image={ing.image} 
-                  name={ing.name} 
-                  price={ing.price} 
-                  key={ing._id} 
-                  setSelectedIngredients={setSelectedIngredients} 
-                  id={ing._id} 
+                <IngredientCard
+                  image={ing.image}
+                  name={ing.name}
+                  price={ing.price}
+                  key={ing._id}
+                  setSelectedIngredients={setSelectedIngredients}
+                  id={ing._id}
                   type={ing.type}
                   selectedIngredients={selectedIngredients}
                 />
@@ -93,20 +89,18 @@ export const BurgerIngredients = ({ ingredients, setSelectedIngredients, selecte
           </ul>
         </div>
         <div className='mb-10' ref={mainRef} id='main'>
-          <h2 className='mb-6'>
-            <span className='text text_type_main-large'>Начинки</span>
-          </h2>
+        <h2 className='mb-6 text text_type_main-medium'>Начинки</h2>
           <ul className={clsx(cls.category_items, 'pl-4')}>
             {ingredients
               .filter((ing) => ing.type === 'main')
               .map((ing) => (
-                <IngredientCart 
-                  image={ing.image} 
-                  name={ing.name} 
-                  price={ing.price} 
-                  key={ing._id} 
-                  setSelectedIngredients={setSelectedIngredients} 
-                  id={ing._id} 
+                <IngredientCard
+                  image={ing.image}
+                  name={ing.name}
+                  price={ing.price}
+                  key={ing._id}
+                  setSelectedIngredients={setSelectedIngredients}
+                  id={ing._id}
                   type={ing.type}
                   selectedIngredients={selectedIngredients}
                 />

@@ -1,5 +1,5 @@
-import { AppHeader } from './components/AppHeader/AppHeader.jsx';
-import { MainPage } from './pages/MainPage/MainPage.jsx';
+import { AppHeader } from './components/AppHeader/AppHeader';
+import { MainPage } from './pages/MainPage/MainPage';
 import './App.css';
 
 export const App = () => {

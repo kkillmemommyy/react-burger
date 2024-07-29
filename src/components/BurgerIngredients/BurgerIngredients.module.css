@@ -11,9 +11,10 @@
 }
 
 .ingredients {
-  height: calc(100vh - 324px);
+  height: calc(100vh - 336px);
   overflow-y: scroll;
   scroll-behavior: smooth;
+  scrollbar-width: thin;
 }
 
 .category_items {
@@ -21,4 +22,6 @@
   gap: 32px 24px;
   flex-wrap: wrap;
 }
+
+
 
