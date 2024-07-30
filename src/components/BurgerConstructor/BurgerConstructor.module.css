@@ -1,0 +1,33 @@
+.wrap {
+  flex: 1;
+}
+
+.withScroll {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  height: calc(100vh - 536px);
+  overflow-y: auto;
+  scroll-behavior: smooth;
+  scrollbar-width: thin;
+}
+
+.total {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.price {
+  display: flex;
+  align-items: center;
+}
+
+.constructorElement {
+  display: flex;
+  max-height: 80px;
+}
+
+.dragIcon {
+  display: flex;
+  align-items: center;
+}
