@@ -8,7 +8,7 @@ export const IngredientCard = ({ image, name, price, id, selectedIngredients }) 
 
   useEffect(() => {
     setCount(selectedIngredients.filter((ing) => ing.id === id).length);
-  }, [selectedIngredients]);
+  }, [selectedIngredients, id]);
 
   return (
     <li className={cls.card}>

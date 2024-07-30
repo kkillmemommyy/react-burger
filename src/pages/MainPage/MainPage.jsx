@@ -272,7 +272,7 @@ export const MainPage = () => {
 
   return (
     <main className={clsx(cls.main, 'pt-10')}>
-      <h1 className='mb-5 text text_type_main-large' style={{ lineHeight: '40px' }}>
+      <h1 className={clsx(cls.h1, 'mb-5 text text_type_main-large')}>
         Соберите бургер
       </h1>
       <div className={cls.wrap}>
