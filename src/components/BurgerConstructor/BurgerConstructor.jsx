@@ -1,41 +1,38 @@
-import { useMemo } from 'react';
+import { useState, useEffect } from 'react';
 import clsx from 'clsx';
 import cls from './BurgerConstructor.module.css';
 import { ConstructorElement, CurrencyIcon, Button, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 
-export const BurgerConstructor = ({ selectedIngredients, setSelectedIngredients }) => {
-  const totalPrice = useMemo(() => {
-    return selectedIngredients.reduce((acc, item) => acc + item.price * item.count, 0);
-  }, [selectedIngredients]);
+export const BurgerConstructor = ({ selectedIngredients }) => {
+  const [totalPrice, setTotalPrice] = useState(0)
 
-  const bun = useMemo(() => {
-    return selectedIngredients.filter((ing) => ing.type === 'bun')[0];
-  }, [selectedIngredients]);
+  useEffect(() => {
+    const newTotalPrice = selectedIngredients.reduce((acc, ing) => {
+      return acc + ing.price;
+    }, 0);
+    setTotalPrice(newTotalPrice);
+  }, [selectedIngredients])
 
-  const others = useMemo(() => {
-    return selectedIngredients.filter((ing) => ing.type !== 'bun');
-  }, [selectedIngredients]);
+  const bun = selectedIngredients.find(ing => ing.type === 'bun');
+  const other = selectedIngredients.filter(ing => ing.type !== 'bun');
 
   return (
     <section className={cls.wrap}>
       <div className='pl-4'>
         <div className='mb-10'>
-          <div className={clsx(cls.bun, 'pl-8 mb-4')}>
-            {bun && <ConstructorElement type='top' isLocked={true} text={bun.name} price={bun.price} thumbnail={bun.image} />}
+          <div className={clsx(cls.constructorElement, 'pl-8 mb-4')}>
+            {!!Object.keys(bun).length && <ConstructorElement type='top' isLocked={true} text={bun.name} price={bun.price} thumbnail={bun.image} />}
           </div>
           <div className={cls.withScroll}>
-            {!!others.length &&
-              others.map((ing) => (
-                <div className={cls.constructorElement}>
-                  <div className={clsx(cls.dragIcon, 'mr-2')}>
-                    <DragIcon type='primary' />
-                  </div>
-                  <ConstructorElement text={ing.name} price={ing.price} thumbnail={ing.image} key={ing.id} />
-                </div>
-              ))}
+            {other.map(ing => (
+               <div className={cls.constructorElement}>
+                <div className={clsx(cls.dragIcon, 'mr-2')}><DragIcon type="primary" /></div>
+                <ConstructorElement text={ing.name} price={ing.price} thumbnail={ing.image}/>
+               </div>
+            ))}
           </div>
-          <div className={clsx(cls.bun, 'pl-8 mt-4')}>
-            {bun && <ConstructorElement type='bottom' isLocked={true} text={bun.name} price={bun.price} thumbnail={bun.image} />}
+          <div className={clsx(cls.constructorElement, 'pl-8 mt-4')}>
+            {!!Object.keys(bun).length && <ConstructorElement type='bottom' isLocked={true} text={bun.name} price={bun.price} thumbnail={bun.image} />}
           </div>
         </div>
         <div className={clsx(cls.total, 'pr-4')}>

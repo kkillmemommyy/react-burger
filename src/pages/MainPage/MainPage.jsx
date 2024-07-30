@@ -1,11 +1,12 @@
 import { useState } from 'react';
 import cls from './MainPage.module.css';
+import clsx from 'clsx';
 import { BurgerIngredients } from '../../components/BurgerIngredients/BurgerIngredients';
 import { BurgerConstructor } from '../../components/BurgerConstructor/BurgerConstructor';
 
 const ingredients = [
   {
-    _id: '60666c42cc7b410027a1a9b1',
+    id: '60666c42cc7b410027a1a9b1',
     name: 'Краторная булка N-200i',
     type: 'bun',
     proteins: 80,
@@ -19,7 +20,7 @@ const ingredients = [
     __v: 0,
   },
   {
-    _id: '60666c42cc7b410027a1a9b5',
+    id: '60666c42cc7b410027a1a9b5',
     name: 'Говяжий метеорит (отбивная)',
     type: 'main',
     proteins: 800,
@@ -33,7 +34,7 @@ const ingredients = [
     __v: 0,
   },
   {
-    _id: '60666c42cc7b410027a1a9b6',
+    id: '60666c42cc7b410027a1a9b6',
     name: 'Биокотлета из марсианской Магнолии',
     type: 'main',
     proteins: 420,
@@ -217,21 +218,67 @@ const ingredients = [
 ];
 
 export const MainPage = () => {
-  const [selectedIngredients, setSelectedIngredients] = useState([]);
+  const [selectedIngredients] = useState([
+    {
+      id: '60666c42cc7b410027a1a9b1',
+      type: 'bun',
+      name: 'Краторная булка N-200i',
+      price: 1255,
+      image: 'https://code.s3.yandex.net/react/code/bun-02.png',
+    },
+    {
+      id: '60666c42cc7b410027a1a9b9',
+      name: 'Соус традиционный галактический',
+      type: 'sauce',
+      price: 15,
+      image: 'https://code.s3.yandex.net/react/code/sauce-03.png',
+    },
+    {
+      id: '60666c42cc7b410027a1a9b4',
+      name: 'Мясо бессмертных моллюсков Protostomia',
+      type: 'main',
+      price: 1337,
+      image: 'https://code.s3.yandex.net/react/code/meat-02.png',
+    },
+    {
+      id: '60666c42cc7b410027a1a9bc',
+      name: 'Плоды Фалленианского дерева',
+      type: 'main',
+      price: 874,
+      image: 'https://code.s3.yandex.net/react/code/sp_1.png',
+    },
+    {
+      id: '60666c42cc7b410027a1a9bb',
+      name: 'Хрустящие минеральные кольца',
+      type: 'main',
+      price: 300,
+      image: 'https://code.s3.yandex.net/react/code/mineral_rings.png',
+    },
+    {
+      id: '60666c42cc7b410027a1a9bb',
+      name: 'Хрустящие минеральные кольца',
+      type: 'main',
+      price: 300,
+      image: 'https://code.s3.yandex.net/react/code/mineral_rings.png',
+    },
+    {
+      id: '60666c42cc7b410027a1a9b4',
+      name: 'Мясо бессмертных моллюсков Protostomia',
+      type: 'main',
+      price: 1337,
+      image: 'https://code.s3.yandex.net/react/code/meat-02.png',
+    },
+  ]);
 
   return (
-    <>
+    <main className={clsx(cls.main, 'pt-10')}>
       <h1 className='mb-5 text text_type_main-large' style={{ lineHeight: '40px' }}>
         Соберите бургер
       </h1>
       <div className={cls.wrap}>
-        <BurgerIngredients
-          ingredients={ingredients}
-          setSelectedIngredients={setSelectedIngredients}
-          selectedIngredients={selectedIngredients}
-        />
-        <BurgerConstructor setSelectedIngredients={setSelectedIngredients} selectedIngredients={selectedIngredients} />
+        <BurgerIngredients ingredients={ingredients} selectedIngredients={selectedIngredients} />
+        <BurgerConstructor selectedIngredients={selectedIngredients} />
       </div>
-    </>
+    </main>
   );
 };

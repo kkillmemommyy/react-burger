@@ -2,11 +2,6 @@
   flex: 1;
 }
 
-.bun {
-  min-height: 80px;
-  display: flex;
-}
-
 .withScroll {
   display: flex;
   flex-direction: column;

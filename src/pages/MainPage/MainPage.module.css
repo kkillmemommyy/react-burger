@@ -1,3 +1,11 @@
+.main {
+  max-width: 1240px;
+  margin: 0 auto;
+  @media (width < 1240px) {
+    padding-left: 20px;
+  }
+}
+
 .wrap {
   display: flex;
   gap: 40px;

@@ -1,24 +1,18 @@
 import clsx from 'clsx';
 import cls from './IngredientCard.module.css';
+import { useState, useEffect } from 'react';
 import { CurrencyIcon, Counter } from '@ya.praktikum/react-developer-burger-ui-components';
 
-export const IngredientCard = ({ image, name, price, id, type, selectedIngredients, setSelectedIngredients }) => {
-  const currentIng = selectedIngredients.find((ing) => ing.id === id);
+export const IngredientCard = ({ image, name, price, id, selectedIngredients }) => {
+  const [count, setCount] = useState(0);
 
-  const onClickHandler = () => {
-    if (type === 'bun') {
-      const notBuns = selectedIngredients.filter((ing) => ing.type !== 'bun');
-      setSelectedIngredients([...notBuns, { image, name, price, id, type, count: 2 }]);
-    } else {
-      const otherIng = selectedIngredients.filter((ing) => ing.id !== id);
-      const currentIngCount = currentIng?.count ?? 0;
-      setSelectedIngredients([...otherIng, { image, name, price, id, type, count: currentIngCount + 1 }]);
-    }
-  };
+  useEffect(() => {
+    setCount(selectedIngredients.filter((ing) => ing.id === id).length);
+  }, [selectedIngredients]);
 
   return (
-    <li className={cls.card} onClick={onClickHandler}>
-      {currentIng && <Counter count={currentIng.count} size='default' />}
+    <li className={cls.card}>
+      {!!count && <Counter count={count} size='default' />}
       <img className={clsx(cls.card_img, 'mb-1')} src={image} alt={name} />
       <p className={clsx(cls.card_description, 'mb-1')}>
         <span className='text text_type_digits-default mr-3'>{price}</span>

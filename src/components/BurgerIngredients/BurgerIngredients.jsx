@@ -5,7 +5,7 @@ import cls from './BurgerIngredients.module.css';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 import { IngredientCard } from '../IngredientCard/IngredientCard';
 
-export const BurgerIngredients = ({ ingredients, setSelectedIngredients, selectedIngredients }) => {
+export const BurgerIngredients = ({ ingredients, selectedIngredients }) => {
   const [currentTab, setCurrentTab] = useState('buns');
   const { ref: bunsRef, inView: bunsInView } = useInView();
   const { ref: saucesRef, inView: saucesInView } = useInView();
@@ -61,16 +61,14 @@ export const BurgerIngredients = ({ ingredients, setSelectedIngredients, selecte
                   name={ing.name}
                   price={ing.price}
                   key={ing._id}
-                  setSelectedIngredients={setSelectedIngredients}
-                  id={ing._id}
-                  type={ing.type}
+                  id={ing.id}
                   selectedIngredients={selectedIngredients}
                 />
               ))}
           </ul>
         </div>
         <div className='mb-10' ref={saucesRef} id='sauces'>
-        <h2 className='mb-6 text text_type_main-medium'>Соусы</h2>
+          <h2 className='mb-6 text text_type_main-medium'>Соусы</h2>
           <ul className={clsx(cls.category_items, 'pl-4')}>
             {ingredients
               .filter((ing) => ing.type === 'sauce')
@@ -80,16 +78,14 @@ export const BurgerIngredients = ({ ingredients, setSelectedIngredients, selecte
                   name={ing.name}
                   price={ing.price}
                   key={ing._id}
-                  setSelectedIngredients={setSelectedIngredients}
                   id={ing._id}
-                  type={ing.type}
                   selectedIngredients={selectedIngredients}
                 />
               ))}
           </ul>
         </div>
         <div className='mb-10' ref={mainRef} id='main'>
-        <h2 className='mb-6 text text_type_main-medium'>Начинки</h2>
+          <h2 className='mb-6 text text_type_main-medium'>Начинки</h2>
           <ul className={clsx(cls.category_items, 'pl-4')}>
             {ingredients
               .filter((ing) => ing.type === 'main')
@@ -99,9 +95,7 @@ export const BurgerIngredients = ({ ingredients, setSelectedIngredients, selecte
                   name={ing.name}
                   price={ing.price}
                   key={ing._id}
-                  setSelectedIngredients={setSelectedIngredients}
                   id={ing._id}
-                  type={ing.type}
                   selectedIngredients={selectedIngredients}
                 />
               ))}
