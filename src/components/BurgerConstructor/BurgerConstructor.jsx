@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 import clsx from 'clsx';
 import cls from './BurgerConstructor.module.css';
 import { ConstructorElement, CurrencyIcon, Button, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components';
@@ -25,7 +26,7 @@ export const BurgerConstructor = ({ selectedIngredients }) => {
           </div>
           <div className={cls.withScroll}>
             {other.map(ing => (
-               <div className={cls.constructorElement}>
+               <div className={cls.constructorElement} key={uuidv4()}>
                 <div className={clsx(cls.dragIcon, 'mr-2')}><DragIcon type="primary" /></div>
                 <ConstructorElement text={ing.name} price={ing.price} thumbnail={ing.image}/>
                </div>

@@ -60,8 +60,8 @@ export const BurgerIngredients = ({ ingredients, selectedIngredients }) => {
                   image={ing.image}
                   name={ing.name}
                   price={ing.price}
+                  id={ing._id}
                   key={ing._id}
-                  id={ing.id}
                   selectedIngredients={selectedIngredients}
                 />
               ))}
@@ -77,8 +77,8 @@ export const BurgerIngredients = ({ ingredients, selectedIngredients }) => {
                   image={ing.image}
                   name={ing.name}
                   price={ing.price}
-                  key={ing._id}
                   id={ing._id}
+                  key={ing._id}
                   selectedIngredients={selectedIngredients}
                 />
               ))}
@@ -94,8 +94,8 @@ export const BurgerIngredients = ({ ingredients, selectedIngredients }) => {
                   image={ing.image}
                   name={ing.name}
                   price={ing.price}
-                  key={ing._id}
                   id={ing._id}
+                  key={ing._id}
                   selectedIngredients={selectedIngredients}
                 />
               ))}
