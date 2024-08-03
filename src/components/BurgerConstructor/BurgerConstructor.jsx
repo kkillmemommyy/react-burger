@@ -3,16 +3,19 @@ import { v4 as uuidv4 } from 'uuid';
 import clsx from 'clsx';
 import cls from './BurgerConstructor.module.css';
 import { ConstructorElement, CurrencyIcon, Button, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components';
+import { Modal } from '../Modal/Modal';
+import { OrderDetails } from '../OrderDetails/OrderDetails'
 
 export const BurgerConstructor = ({ selectedIngredients }) => {
-  const [totalPrice, setTotalPrice] = useState(0)
+  const [totalPrice, setTotalPrice] = useState(0);
+  const [isModalActive, setIsModalActive] = useState(false);
 
   useEffect(() => {
     const newTotalPrice = selectedIngredients.reduce((acc, ing) => {
       return acc + ing.price;
     }, 0);
     setTotalPrice(newTotalPrice);
-  }, [selectedIngredients])
+  }, [selectedIngredients]);
 
   const bun = selectedIngredients.find(ing => ing.type === 'bun');
   const other = selectedIngredients.filter(ing => ing.type !== 'bun');
@@ -41,11 +44,16 @@ export const BurgerConstructor = ({ selectedIngredients }) => {
             <span className='text text_type_digits-medium mr-2'>{totalPrice}</span>
             <CurrencyIcon type='primary' />
           </div>
-          <Button htmlType='button' type='primary' size='large'>
+          <Button htmlType='button' type='primary' size='large' onClick={setIsModalActive}>
             Оформить заказ
           </Button>
         </div>
       </div>
+      {isModalActive && (
+        <Modal setIsModalActive={setIsModalActive}>
+          <OrderDetails />
+        </Modal>
+      )}
     </section>
   );
 };

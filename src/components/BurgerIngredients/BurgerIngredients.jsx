@@ -58,9 +58,14 @@ export const BurgerIngredients = ({ ingredients, selectedIngredients }) => {
               .map((ing) => (
                 <IngredientCard
                   image={ing.image}
+                  imageLarge={ing.image_large}
                   name={ing.name}
                   price={ing.price}
                   id={ing._id}
+                  proteins={ing.proteins}
+                  fat={ing.fat}
+                  carbohydrates={ing.carbohydrates}
+                  calories={ing.calories}
                   key={ing._id}
                   selectedIngredients={selectedIngredients}
                 />
@@ -75,9 +80,14 @@ export const BurgerIngredients = ({ ingredients, selectedIngredients }) => {
               .map((ing) => (
                 <IngredientCard
                   image={ing.image}
+                  imageLarge={ing.image_large}
                   name={ing.name}
                   price={ing.price}
                   id={ing._id}
+                  proteins={ing.proteins}
+                  fat={ing.fat}
+                  carbohydrates={ing.carbohydrates}
+                  calories={ing.calories}
                   key={ing._id}
                   selectedIngredients={selectedIngredients}
                 />
@@ -92,9 +102,14 @@ export const BurgerIngredients = ({ ingredients, selectedIngredients }) => {
               .map((ing) => (
                 <IngredientCard
                   image={ing.image}
+                  imageLarge={ing.image_large}
                   name={ing.name}
                   price={ing.price}
                   id={ing._id}
+                  proteins={ing.proteins}
+                  fat={ing.fat}
+                  carbohydrates={ing.carbohydrates}
+                  calories={ing.calories}
                   key={ing._id}
                   selectedIngredients={selectedIngredients}
                 />

@@ -1,0 +1,28 @@
+.modalWindow {
+  background-color: #1c1c21;
+  border-radius: 40px;
+}
+
+.modalWindow_head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 64px;
+  width: 640px;
+}
+
+.closeIcon {
+  height: 24px;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  &:hover svg {
+    fill: white;
+  }
+}
+
+.modalWindow_content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

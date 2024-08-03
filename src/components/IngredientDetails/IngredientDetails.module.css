@@ -1,0 +1,16 @@
+img {
+  width: 480px;
+  height: 240px;
+}
+
+.details {
+  width: 516px;
+  height: 56px;
+  display: flex;
+  gap: 20px
+}
+
+.detail {
+  flex: 1;
+  text-align: center;
+}
