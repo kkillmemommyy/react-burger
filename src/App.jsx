@@ -6,34 +6,39 @@ import { MainPage } from './pages/MainPage/MainPage';
 const API_URL = 'https://norma.nomoreparties.space/api/ingredients';
 
 export const App = () => {
-  const [ingredients, setIngredients] = useState({ data: [], isLoading: false, hasError: false });
+  const [ingredients, setIngredients] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [hasError, setHasError] = useState(false);
 
   useEffect(() => {
     const getIngredients = async () => {
       try {
-        setIngredients({ ...ingredients, isLoading: true });
+        setIsLoading(true);
         const response = await fetch(API_URL);
-        const data = await response.json();
-        if (!data.success || !response.ok) {
-          throw new Error();
+        if (!response.ok) {
+          throw new Error('Error while loading ingredients');
         }
-        setIngredients({ ...ingredients, data: data.data, isLoading: false, hasError: false });
+        const data = await response.json();
+        setIngredients(data.data);
+        setIsLoading(false);
+        setHasError(false);
       } catch {
-        setIngredients({ ...ingredients, isLoading: false, hasError: true });
+        setIsLoading(false);
+        setHasError(true);
       }
     };
 
     getIngredients();
   }, []);
 
+  if (hasError || isLoading) {
+    return (<div className='loading text text_type_main-large'>LOADING...</div>)
+  }
+
   return (
     <>
       <AppHeader />
-      {!ingredients.isLoading && !ingredients.hasError ? 
-        (<MainPage ingredients={ingredients.data} />)
-        :
-        (<div className='loading text text_type_main-large'>LOADING...</div>)
-      }
+      <MainPage ingredients={ingredients} />
     </>
   );
 };
