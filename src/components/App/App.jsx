@@ -31,8 +31,12 @@ export const App = () => {
     getIngredients();
   }, []);
 
-  if (hasError || isLoading) {
+  if (isLoading) {
     return (<div className='loading text text_type_main-large'>LOADING...</div>)
+  }
+
+  if (hasError) {
+    return (<div className='loading text text_type_main-large'>Something went wrong</div>)
   }
 
   return (

@@ -45,9 +45,6 @@
   &:hover svg {
     fill: #f2f2f3;
   }
-  /* &:visited {
-    color: inherit;
-  } */
 }
 
 .active {
