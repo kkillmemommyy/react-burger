@@ -32,11 +32,15 @@ export const App = () => {
   }, []);
 
   if (isLoading) {
-    return (<div className='loading text text_type_main-large'>LOADING...</div>)
+    return <div className='prerender loading text text_type_main-large'>LOADING</div>;
   }
 
   if (hasError) {
-    return (<div className='loading text text_type_main-large'>Something went wrong</div>)
+    return (
+      <div className='prerender text text_type_main-large'>
+        something went wrong while the page was loading. Try refreshing the page or check back later.
+      </div>
+    );
   }
 
   return (

@@ -2,27 +2,25 @@ import { useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import clsx from 'clsx';
 import cls from './Modal.module.css';
-import { ModalOverlay } from '../ModalOverlay/ModalOverlay';
 import { CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components';
+import { ModalOverlay } from '../ModalOverlay/ModalOverlay';
 
 const modalRoot = document.getElementById('modal');
 
-export const Modal = ({ setIsModalActive, children, title }) => {
-  const closeModalHandler = () => setIsModalActive(false);
-
+export const Modal = ({ closeModal, children, title }) => {
   useEffect(() => {
-    const closeModalOnEscHandler = (e) => e.key === 'Escape' && setIsModalActive(false);
+    const closeModalOnEsc = (e) => e.key === 'Escape' && closeModal();
 
-    document.addEventListener('keyup', closeModalOnEscHandler);
-    return () => document.removeEventListener('keyup', closeModalOnEscHandler);
-  }, [setIsModalActive]);
+    document.addEventListener('keyup', closeModalOnEsc);
+    return () => document.removeEventListener('keyup', closeModalOnEsc);
+  }, [closeModal]);
 
   return createPortal(
-    <ModalOverlay closeModalHandler={closeModalHandler}>
+    <ModalOverlay closeModal={closeModal}>
       <div className={clsx(cls.modalWindow, 'pt-10')}>
         <div className={clsx(cls.modalWindow_head, 'pl-10 pr-10')}>
           <h2 className='text text_type_main-large'>{title}</h2>
-          <button onClick={closeModalHandler} className={cls.closeIcon} aria-label='close'>
+          <button onClick={closeModal} className={cls.closeIcon} aria-label='close'>
             <CloseIcon type='primary' />
           </button>
         </div>
