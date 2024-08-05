@@ -5,7 +5,7 @@ import { CurrencyIcon, Counter } from '@ya.praktikum/react-developer-burger-ui-c
 import { Modal } from '../Modal/Modal';
 import { IngredientDetails } from '../IngredientDetails/IngredientDetails';
 
-export const IngredientCard = ({ image, name, price, id, selectedIngredients, proteins, fat, carbohydrates, calories, imageLarge }) => {
+export const IngredientCard = ({ name, price, id, selectedIngredients, proteins, fat, carbohydrates, calories, image, imageLarge }) => {
   const [count, setCount] = useState(0);
   const [isModalActive, setIsModalActive] = useState(false);
 

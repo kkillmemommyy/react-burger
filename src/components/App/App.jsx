@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import './App.css';
-import { AppHeader } from './components/AppHeader/AppHeader';
-import { MainPage } from './pages/MainPage/MainPage';
+import { AppHeader } from '../AppHeader/AppHeader';
+import { MainPage } from '../../pages/MainPage/MainPage';
 
 const API_URL = 'https://norma.nomoreparties.space/api/ingredients';
 
