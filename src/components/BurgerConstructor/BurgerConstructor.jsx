@@ -1,5 +1,4 @@
-import { useState, useEffect } from 'react';
-import { v4 as uuidv4 } from 'uuid';
+import { useState } from 'react';
 import clsx from 'clsx';
 import cls from './BurgerConstructor.module.css';
 import { ConstructorElement, CurrencyIcon, Button, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components';
@@ -7,15 +6,11 @@ import { Modal } from '../Modal/Modal';
 import { OrderDetails } from '../OrderDetails/OrderDetails';
 
 export const BurgerConstructor = ({ selectedIngredients }) => {
-  const [totalPrice, setTotalPrice] = useState(0);
   const [isModalActive, setIsModalActive] = useState(false);
 
-  useEffect(() => {
-    const newTotalPrice = selectedIngredients.reduce((acc, ing) => {
-      return acc + ing.price;
-    }, 0);
-    setTotalPrice(newTotalPrice);
-  }, [selectedIngredients]);
+  const totalPrice = selectedIngredients.reduce((acc, ing) => {
+    return acc + ing.price;
+  }, 0);
 
   const closeModal = () => setIsModalActive(false);
 
@@ -33,8 +28,8 @@ export const BurgerConstructor = ({ selectedIngredients }) => {
               )}
             </div>
             <div className={cls.withScroll}>
-              {other.map((ing) => (
-                <div className={cls.constructorElement} key={uuidv4()}>
+              {other.map((ing, index) => (
+                <div className={cls.constructorElement} key={index}>
                   <div className={clsx(cls.dragIcon, 'mr-2')}>
                     <DragIcon type='primary' />
                   </div>

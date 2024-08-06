@@ -1,4 +1,4 @@
-import { useEffect, useState, useMemo } from 'react';
+import { useEffect, useState } from 'react';
 import { useInView } from 'react-intersection-observer';
 import clsx from 'clsx';
 import cls from './BurgerIngredients.module.css';
@@ -27,13 +27,11 @@ export const BurgerIngredients = ({ ingredients, selectedIngredients }) => {
 
   const closeModal = () => setIngredientForModal(null);
 
-  const countSelectedById = () =>
+  const countedIngredients = () =>
     selectedIngredients.reduce((result, { _id: ingId }) => {
       result[ingId] = (result[ingId] ?? 0) + 1;
       return result;
     }, {});
-
-  const countedIngredients = useMemo(countSelectedById, [selectedIngredients]);
 
   const renderInModal = () => {
     const ingredient = ingredients.find((ing) => ing._id === ingredientForModal);
