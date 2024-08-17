@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import './App.css';
 import { AppHeader } from '../AppHeader/AppHeader';
 import { MainPage } from '../../pages/MainPage/MainPage';
+import { IngredientsContext } from '../../services/AppContext';
 
 const API_URL = 'https://norma.nomoreparties.space/api/ingredients';
 
@@ -38,7 +39,7 @@ export const App = () => {
   if (hasError) {
     return (
       <div className='prerender text text_type_main-large'>
-        something went wrong while the page was loading. Try refreshing the page or check back later.
+        Something went wrong while the page was loading. Try refreshing the page or check back later.
       </div>
     );
   }
@@ -46,7 +47,9 @@ export const App = () => {
   return (
     <>
       <AppHeader />
-      <MainPage ingredients={ingredients} />
+      <IngredientsContext.Provider value={ingredients}>
+        <MainPage />
+      </IngredientsContext.Provider>
     </>
   );
 };
