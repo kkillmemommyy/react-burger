@@ -12,6 +12,7 @@
 
 .ingredients {
   height: calc(100vh - 336px);
+  outline: none;
   overflow-y: scroll;
   scroll-behavior: smooth;
   scrollbar-width: thin;
@@ -22,6 +23,3 @@
   gap: 32px 24px;
   flex-wrap: wrap;
 }
-
-
-

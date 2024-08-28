@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import { useInView } from 'react-intersection-observer';
 import clsx from 'clsx';
 import cls from './BurgerIngredients.module.css';
@@ -6,10 +6,15 @@ import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 import { IngredientCard } from '../IngredientCard/IngredientCard';
 import { Modal } from '../Modal/Modal';
 import { IngredientDetails } from '../IngredientDetails/IngredientDetails';
+import { IngredientsContext } from '../../services/AppContext';
+import { SelectedIngredientsContext } from '../../services/MainPageContext';
 
-export const BurgerIngredients = ({ ingredients, selectedIngredients }) => {
+export const BurgerIngredients = () => {
+  const ingredients = useContext(IngredientsContext);
+  const selectedIngredients = useContext(SelectedIngredientsContext);
+
   const [currentTab, setCurrentTab] = useState('buns');
-  const [ingredientForModal, setIngredientForModal] = useState(null);
+  const [contentInModal, setContentInModal] = useState(null);
 
   const { ref: bunsRef, inView: bunsInView } = useInView();
   const { ref: saucesRef, inView: saucesInView } = useInView();
@@ -25,28 +30,13 @@ export const BurgerIngredients = ({ ingredients, selectedIngredients }) => {
     }
   }, [bunsInView, saucesInView, mainInView]);
 
-  const closeModal = () => setIngredientForModal(null);
+  const closeModal = () => setContentInModal(null);
 
-  const countedIngredients = () =>
-    selectedIngredients.reduce((result, { _id: ingId }) => {
-      result[ingId] = (result[ingId] ?? 0) + 1;
+  const countedIngredients = (() =>
+    selectedIngredients.reduce((result, { _id }) => {
+      result[_id] = (result[_id] ?? 0) + 1;
       return result;
-    }, {});
-
-  const renderInModal = () => {
-    const ingredient = ingredients.find((ing) => ing._id === ingredientForModal);
-
-    return (
-      <IngredientDetails
-        proteins={ingredient.proteins}
-        fat={ingredient.fat}
-        carbohydrates={ingredient.carbohydrates}
-        calories={ingredient.calories}
-        image={ingredient.image_large}
-        name={ingredient.name}
-      />
-    );
-  };
+    }, {}))();
 
   return (
     <>
@@ -85,13 +75,17 @@ export const BurgerIngredients = ({ ingredients, selectedIngredients }) => {
                 .filter((ing) => ing.type === 'bun')
                 .map((ing) => (
                   <IngredientCard
-                    openModal={setIngredientForModal}
-                    id={ing._id}
+                    setContentInModal={setContentInModal}
+                    proteins={ing.proteins}
+                    fat={ing.fat}
+                    carbohydrates={ing.carbohydrates}
+                    calories={ing.calories}
+                    image_large={ing.image_large}
                     image={ing.image}
                     name={ing.name}
                     price={ing.price}
-                    key={ing._id}
                     count={countedIngredients[ing._id]}
+                    key={ing._id}
                   />
                 ))}
             </ul>
@@ -103,13 +97,17 @@ export const BurgerIngredients = ({ ingredients, selectedIngredients }) => {
                 .filter((ing) => ing.type === 'sauce')
                 .map((ing) => (
                   <IngredientCard
-                    openModal={setIngredientForModal}
-                    id={ing._id}
+                    setContentInModal={setContentInModal}
+                    proteins={ing.proteins}
+                    fat={ing.fat}
+                    carbohydrates={ing.carbohydrates}
+                    calories={ing.calories}
+                    image_large={ing.image_large}
                     image={ing.image}
                     name={ing.name}
                     price={ing.price}
-                    key={ing._id}
                     count={countedIngredients[ing._id]}
+                    key={ing._id}
                   />
                 ))}
             </ul>
@@ -121,22 +119,26 @@ export const BurgerIngredients = ({ ingredients, selectedIngredients }) => {
                 .filter((ing) => ing.type === 'main')
                 .map((ing) => (
                   <IngredientCard
-                    openModal={setIngredientForModal}
-                    id={ing._id}
+                    setContentInModal={setContentInModal}
+                    proteins={ing.proteins}
+                    fat={ing.fat}
+                    carbohydrates={ing.carbohydrates}
+                    calories={ing.calories}
+                    image_large={ing.image_large}
                     image={ing.image}
                     name={ing.name}
                     price={ing.price}
-                    key={ing._id}
                     count={countedIngredients[ing._id]}
+                    key={ing._id}
                   />
                 ))}
             </ul>
           </div>
         </div>
       </section>
-      {ingredientForModal && (
+      {contentInModal && (
         <Modal closeModal={closeModal} title='Детали ингредиента'>
-          {renderInModal()}
+          <IngredientDetails {...contentInModal} />
         </Modal>
       )}
     </>

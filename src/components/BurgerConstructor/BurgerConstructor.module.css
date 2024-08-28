@@ -12,16 +12,6 @@
   scrollbar-width: thin;
 }
 
-.total {
-  display: flex;
-  justify-content: flex-end;
-}
-
-.price {
-  display: flex;
-  align-items: center;
-}
-
 .constructorElement {
   display: flex;
   max-height: 80px;

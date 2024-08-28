@@ -2,8 +2,8 @@ import { useState, useEffect } from 'react';
 import './App.css';
 import { AppHeader } from '../AppHeader/AppHeader';
 import { MainPage } from '../../pages/MainPage/MainPage';
-
-const API_URL = 'https://norma.nomoreparties.space/api/ingredients';
+import { IngredientsContext } from '../../services/AppContext';
+import { getResourceUrl } from '../../utils/getResourceUrl';
 
 export const App = () => {
   const [ingredients, setIngredients] = useState([]);
@@ -14,7 +14,7 @@ export const App = () => {
     const getIngredients = async () => {
       try {
         setIsLoading(true);
-        const response = await fetch(API_URL);
+        const response = await fetch(getResourceUrl('ingredients'));
         if (!response.ok) {
           throw new Error('Error while loading ingredients');
         }
@@ -38,7 +38,7 @@ export const App = () => {
   if (hasError) {
     return (
       <div className='prerender text text_type_main-large'>
-        something went wrong while the page was loading. Try refreshing the page or check back later.
+        Something went wrong while the page was loading. Try refreshing the page or check back later.
       </div>
     );
   }
@@ -46,7 +46,9 @@ export const App = () => {
   return (
     <>
       <AppHeader />
-      <MainPage ingredients={ingredients} />
+      <IngredientsContext.Provider value={ingredients}>
+        <MainPage />
+      </IngredientsContext.Provider>
     </>
   );
 };
