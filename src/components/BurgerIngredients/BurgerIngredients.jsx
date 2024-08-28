@@ -11,7 +11,7 @@ import { SelectedIngredientsContext } from '../../services/MainPageContext';
 
 export const BurgerIngredients = () => {
   const ingredients = useContext(IngredientsContext);
-  const { selectedBun, selectedOther } = useContext(SelectedIngredientsContext);
+  const selectedIngredients = useContext(SelectedIngredientsContext);
 
   const [currentTab, setCurrentTab] = useState('buns');
   const [contentInModal, setContentInModal] = useState(null);
@@ -33,7 +33,7 @@ export const BurgerIngredients = () => {
   const closeModal = () => setContentInModal(null);
 
   const countedIngredients = (() =>
-    [...selectedBun, ...selectedOther].reduce((result, { _id }) => {
+    selectedIngredients.reduce((result, { _id }) => {
       result[_id] = (result[_id] ?? 0) + 1;
       return result;
     }, {}))();

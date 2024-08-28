@@ -6,17 +6,17 @@ import { Modal } from '../Modal/Modal';
 import { OrderDetails } from '../OrderDetails/OrderDetails';
 import { TotalPrice } from '../TotalPrice/TotalPrice';
 import { SelectedIngredientsContext } from '../../services/MainPageContext';
-
-const API_URL = 'https://norma.nomoreparties.space/api/orders';
+import { getResourceUrl } from '../../utils/getResourceUrl';
 
 export const BurgerConstructor = () => {
-  const { selectedBun, selectedOther } = useContext(SelectedIngredientsContext);
+  const selectedIngredients = useContext(SelectedIngredientsContext);
 
   const [isModalActive, setIsModalActive] = useState(false);
-  const [orderId, setOrderId] = useState(null);
-  const [hasOrderError, setHasOrderError] = useState(false);
 
-  const totalPrice = [...selectedBun, ...selectedOther].reduce((acc, ing) => {
+  const [orderId, setOrderId] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
+
+  const totalPrice = selectedIngredients.reduce((acc, ing) => {
     return acc + ing.price;
   }, 0);
 
@@ -24,13 +24,14 @@ export const BurgerConstructor = () => {
 
   const makeOrder = async () => {
     try {
-      setHasOrderError(false);
-      const response = await fetch(API_URL, {
+      setIsLoading(true);
+      setIsModalActive(true);
+      const response = await fetch(getResourceUrl('orders'), {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ ingredients: [...selectedBun, ...selectedOther].map((ing) => ing._id) }),
+        body: JSON.stringify({ ingredients: selectedIngredients.map((ing) => ing._id) }),
       });
 
       if (!response.ok) {
@@ -39,13 +40,16 @@ export const BurgerConstructor = () => {
 
       const data = await response.json();
       setOrderId(data.order.number);
-      setIsModalActive(true);
+      setIsLoading(false);
     } catch {
-      setHasOrderError(true);
+      setIsLoading(false);
+      closeModal();
+      alert('Во время оформления заказа что-то пошло не так. Попробуйте повторить заказ позднее.');
     }
   };
 
-  const bun = selectedBun[0];
+  const bun = selectedIngredients.filter((ing) => ing.type === 'bun')[0];
+  const notBun = selectedIngredients.filter((ing) => ing.type !== 'bun');
 
   return (
     <>
@@ -55,7 +59,7 @@ export const BurgerConstructor = () => {
             {bun && <ConstructorElement type='top' isLocked={true} text={bun.name} price={bun.price} thumbnail={bun.image} />}
           </div>
           <div className={cls.withScroll}>
-            {selectedOther.map((ing, index) => (
+            {notBun.map((ing, index) => (
               <div className={cls.constructorElement} key={index}>
                 <div className={clsx(cls.dragIcon, 'mr-2')}>
                   <DragIcon type='primary' />
@@ -70,9 +74,9 @@ export const BurgerConstructor = () => {
         </div>
         <TotalPrice makeOrder={makeOrder} totalPrice={totalPrice} />
       </section>
-      {isModalActive && !hasOrderError && orderId && (
+      {isModalActive && (
         <Modal closeModal={closeModal}>
-          <OrderDetails orderId={orderId} />
+          <OrderDetails orderId={orderId} isLoading={isLoading} />
         </Modal>
       )}
     </>

@@ -6,7 +6,7 @@ import { BurgerConstructor } from '../../components/BurgerConstructor/BurgerCons
 import { SelectedIngredientsContext } from '../../services/MainPageContext';
 
 export const MainPage = () => {
-  const [selectedBun] = useState([
+  const [selectedIngredients, setSelectedIngredients] = useState([
     {
       _id: '643d69a5c3f7b9001cfa093c',
       type: 'bun',
@@ -21,8 +21,6 @@ export const MainPage = () => {
       price: 1255,
       image: 'https://code.s3.yandex.net/react/code/bun-02.png',
     },
-  ]);
-  const [selectedOther] = useState([
     {
       _id: '643d69a5c3f7b9001cfa0944',
       name: 'Соус традиционный галактический',
@@ -71,7 +69,7 @@ export const MainPage = () => {
     <main className={clsx(cls.main, 'pt-10')}>
       <h1 className={clsx(cls.h1, 'mb-5 text text_type_main-large')}>Соберите бургер</h1>
       <div className={cls.wrap}>
-        <SelectedIngredientsContext.Provider value={{ selectedBun, selectedOther }}>
+        <SelectedIngredientsContext.Provider value={selectedIngredients}>
           <BurgerIngredients />
           <BurgerConstructor />
         </SelectedIngredientsContext.Provider>

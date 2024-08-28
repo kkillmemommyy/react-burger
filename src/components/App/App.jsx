@@ -3,8 +3,7 @@ import './App.css';
 import { AppHeader } from '../AppHeader/AppHeader';
 import { MainPage } from '../../pages/MainPage/MainPage';
 import { IngredientsContext } from '../../services/AppContext';
-
-const API_URL = 'https://norma.nomoreparties.space/api/ingredients';
+import { getResourceUrl } from '../../utils/getResourceUrl';
 
 export const App = () => {
   const [ingredients, setIngredients] = useState([]);
@@ -15,7 +14,7 @@ export const App = () => {
     const getIngredients = async () => {
       try {
         setIsLoading(true);
-        const response = await fetch(API_URL);
+        const response = await fetch(getResourceUrl('ingredients'));
         if (!response.ok) {
           throw new Error('Error while loading ingredients');
         }
