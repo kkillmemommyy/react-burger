@@ -1,24 +1,32 @@
-import { useEffect, useState, useContext } from 'react';
+import { useEffect, useState, useMemo, useCallback } from 'react';
+import { useSelector } from 'react-redux';
 import { useInView } from 'react-intersection-observer';
+
 import clsx from 'clsx';
 import cls from './BurgerIngredients.module.css';
+
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 import { IngredientCard } from '../IngredientCard/IngredientCard';
 import { Modal } from '../Modal/Modal';
 import { IngredientDetails } from '../IngredientDetails/IngredientDetails';
-import { IngredientsContext } from '../../services/AppContext';
-import { SelectedIngredientsContext } from '../../services/MainPageContext';
+
+import { useGetIngredientsQuery as getIngredients } from '../../services/api/burgersApi';
+import { getSelectedIngredients } from '../../services/selectors/selectedIngredientsSelectors';
+import { getDataInModal } from '../../services/selectors/modalSelectors';
 
 export const BurgerIngredients = () => {
-  const ingredients = useContext(IngredientsContext);
-  const selectedIngredients = useContext(SelectedIngredientsContext);
-
   const [currentTab, setCurrentTab] = useState('buns');
-  const [contentInModal, setContentInModal] = useState(null);
+  const [isModalActive, setIsModalActive] = useState(false);
 
   const { ref: bunsRef, inView: bunsInView } = useInView();
   const { ref: saucesRef, inView: saucesInView } = useInView();
   const { ref: mainRef, inView: mainInView } = useInView();
+
+  const {
+    data: { data: ingredients },
+  } = getIngredients();
+  const selectedIngredients = useSelector(getSelectedIngredients);
+  const dataInModal = useSelector(getDataInModal);
 
   useEffect(() => {
     if (bunsInView) {
@@ -30,13 +38,17 @@ export const BurgerIngredients = () => {
     }
   }, [bunsInView, saucesInView, mainInView]);
 
-  const closeModal = () => setContentInModal(null);
+  const countedIngredients = useMemo(
+    () =>
+      selectedIngredients.reduce((result, { _id }) => {
+        result[_id] = (result[_id] ?? 0) + 1;
+        return result;
+      }, {}),
+    [selectedIngredients]
+  );
 
-  const countedIngredients = (() =>
-    selectedIngredients.reduce((result, { _id }) => {
-      result[_id] = (result[_id] ?? 0) + 1;
-      return result;
-    }, {}))();
+  const deactivateModal = () => setIsModalActive(false);
+  const activateModal = useCallback(() => setIsModalActive(true), []);
 
   return (
     <>
@@ -75,7 +87,7 @@ export const BurgerIngredients = () => {
                 .filter((ing) => ing.type === 'bun')
                 .map((ing) => (
                   <IngredientCard
-                    setContentInModal={setContentInModal}
+                    activateModal={activateModal}
                     proteins={ing.proteins}
                     fat={ing.fat}
                     carbohydrates={ing.carbohydrates}
@@ -97,7 +109,7 @@ export const BurgerIngredients = () => {
                 .filter((ing) => ing.type === 'sauce')
                 .map((ing) => (
                   <IngredientCard
-                    setContentInModal={setContentInModal}
+                    activateModal={activateModal}
                     proteins={ing.proteins}
                     fat={ing.fat}
                     carbohydrates={ing.carbohydrates}
@@ -119,7 +131,7 @@ export const BurgerIngredients = () => {
                 .filter((ing) => ing.type === 'main')
                 .map((ing) => (
                   <IngredientCard
-                    setContentInModal={setContentInModal}
+                    activateModal={activateModal}
                     proteins={ing.proteins}
                     fat={ing.fat}
                     carbohydrates={ing.carbohydrates}
@@ -136,9 +148,9 @@ export const BurgerIngredients = () => {
           </div>
         </div>
       </section>
-      {contentInModal && (
-        <Modal closeModal={closeModal} title='Детали ингредиента'>
-          <IngredientDetails {...contentInModal} />
+      {isModalActive && (
+        <Modal title='Детали ингредиента' deactivateModal={deactivateModal}>
+          <IngredientDetails {...dataInModal} />
         </Modal>
       )}
     </>

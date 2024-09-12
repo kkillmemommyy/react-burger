@@ -1,8 +1,9 @@
+import { memo } from 'react'
 import clsx from 'clsx';
 import cls from './TotalPrice.module.css';
 import { Button, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 
-export const TotalPrice = ({ totalPrice, makeOrder }) => {
+export const TotalPrice = memo(({ totalPrice, makeOrder }) => {
   return (
     <div className={clsx(cls.total, 'pr-4')}>
       <div className={clsx(cls.price, 'mr-10')}>
@@ -14,4 +15,4 @@ export const TotalPrice = ({ totalPrice, makeOrder }) => {
       </Button>
     </div>
   );
-};
+});
