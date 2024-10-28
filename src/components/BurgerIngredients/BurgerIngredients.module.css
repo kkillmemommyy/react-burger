@@ -2,14 +2,6 @@
   flex: 1;
 }
 
-.nav_items {
-  display: flex;
-}
-
-.nav_item {
-  flex: 1;
-}
-
 .ingredients {
   height: calc(100vh - 336px);
   outline: none;

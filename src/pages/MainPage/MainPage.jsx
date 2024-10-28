@@ -1,6 +1,6 @@
 import cls from './MainPage.module.css';
 import clsx from 'clsx';
-import { BurgerIngredients } from '../../components/BurgerIngredients/BurgerIngredients';
+import { BurgerIngredients } from '../../components/BurgerIngredients';
 import { BurgerConstructor } from '../../components/BurgerConstructor/BurgerConstructor';
 
 export const MainPage = () => {

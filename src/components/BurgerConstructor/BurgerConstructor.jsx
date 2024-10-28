@@ -10,7 +10,7 @@ import { OrderDetails } from '../OrderDetails/OrderDetails';
 import { TotalPrice } from '../TotalPrice/TotalPrice';
 
 import { getSelectedIngredients } from '../../services/selectors/selectedIngredientsSelectors';
-import { useMakeOrderMutation } from '../../services/api/burgersApi';
+import { useMakeOrderMutation } from '../../services/api/normaApi';
 
 const ConstructorElement = memo(CE);
 const DragIcon = memo(DI);

@@ -1,5 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { burgersApi } from './api/burgersApi';
+import { burgersApi } from './api/normaApi';
 import { selectedIngredientsReducer } from './slices/selectedIngredientsSlice';
 import { modalReducer } from './slices/modalSlice';
 

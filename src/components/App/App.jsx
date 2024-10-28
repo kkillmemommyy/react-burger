@@ -1,7 +1,7 @@
 import './App.css';
 import { AppHeader } from '../AppHeader/AppHeader';
 import { MainPage } from '../../pages/MainPage/MainPage';
-import { useGetIngredientsQuery as getIngredients } from '../../services/api/burgersApi';
+import { useGetIngredientsQuery as getIngredients } from '../../services/api/normaApi';
 
 export const App = () => {
   const { error, isLoading } = getIngredients();

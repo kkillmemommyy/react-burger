@@ -1,9 +1,9 @@
-import { useState } from 'react';
+import { useState, memo } from 'react';
 import clsx from 'clsx';
 import cls from './AppHeader.module.css';
 import { Logo, BurgerIcon, ListIcon, ProfileIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 
-export const AppHeader = () => {
+export const AppHeader = memo(() => {
   const [activeTab, setActiveTab] = useState('constructor');
 
   return (
@@ -39,4 +39,4 @@ export const AppHeader = () => {
       </nav>
     </header>
   );
-};
+});

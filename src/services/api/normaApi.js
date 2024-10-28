@@ -1,10 +1,10 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
-const BASE_API_URL = 'https://norma.nomoreparties.space/api';
+const BASE_URL = 'https://norma.nomoreparties.space/api';
 
 export const burgersApi = createApi({
   reducerPath: 'burgers',
-  baseQuery: fetchBaseQuery({ baseUrl: BASE_API_URL }),
+  baseQuery: fetchBaseQuery({ baseUrl: BASE_URL }),
   endpoints: (builder) => ({
     getIngredients: builder.query({
       query: () => ({
