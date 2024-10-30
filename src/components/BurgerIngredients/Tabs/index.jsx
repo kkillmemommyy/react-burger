@@ -7,15 +7,15 @@ export const Tabs = memo(({ currentTab }) => {
     <nav className='mb-10'>
       <ul className={cls.nav_list}>
         <li className={cls.nav_item}>
-          <a href='#buns'>
-            <Tab value='buns' active={currentTab === 'buns'}>
+          <a href='#bun'>
+            <Tab value='bun' active={currentTab === 'bun'}>
               Булки
             </Tab>
           </a>
         </li>
         <li className={cls.nav_item}>
-          <a href='#sauces'>
-            <Tab value='sauces' active={currentTab === 'sauces'}>
+          <a href='#sauce'>
+            <Tab value='sauce' active={currentTab === 'sauce'}>
               Соусы
             </Tab>
           </a>

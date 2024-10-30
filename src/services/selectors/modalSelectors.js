@@ -1,1 +1,1 @@
-export const getDataInModal = (state) => state.modal.data;
+export const getDataInModal = (state) => state.modal;

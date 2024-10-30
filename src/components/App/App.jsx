@@ -1,10 +1,10 @@
 import './App.css';
 import { AppHeader } from '../AppHeader/AppHeader';
 import { MainPage } from '../../pages/MainPage/MainPage';
-import { useGetIngredientsQuery as getIngredients } from '../../services/api/normaApi';
+import { useGetIngredientsQuery } from '../../services/api/normaApi';
 
 export const App = () => {
-  const { error, isLoading } = getIngredients();
+  const { error, isLoading } = useGetIngredientsQuery();
 
   if (isLoading) {
     return <div className='prerender loading text text_type_main-large'>LOADING</div>;

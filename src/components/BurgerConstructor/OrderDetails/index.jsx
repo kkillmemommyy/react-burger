@@ -1,4 +1,4 @@
-import doneImg from '../../images/done.png';
+import doneImg from '../../../images/done.png';
 import cls from './OrderDetails.module.css';
 import clsx from 'clsx';
 

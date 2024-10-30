@@ -2,6 +2,10 @@
   flex: 1;
 }
 
+.constructorContainer {
+  height: calc(100vh - 344px);
+}
+
 .withScroll {
   display: flex;
   flex-direction: column;

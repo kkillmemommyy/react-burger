@@ -2,8 +2,8 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 const BASE_URL = 'https://norma.nomoreparties.space/api';
 
-export const burgersApi = createApi({
-  reducerPath: 'burgers',
+export const normaApi = createApi({
+  reducerPath: 'normaApi',
   baseQuery: fetchBaseQuery({ baseUrl: BASE_URL }),
   endpoints: (builder) => ({
     getIngredients: builder.query({
@@ -21,4 +21,4 @@ export const burgersApi = createApi({
   }),
 });
 
-export const { useGetIngredientsQuery, useMakeOrderMutation } = burgersApi;
+export const { useGetIngredientsQuery, useMakeOrderMutation } = normaApi;

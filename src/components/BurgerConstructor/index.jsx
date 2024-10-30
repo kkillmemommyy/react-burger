@@ -6,10 +6,10 @@ import cls from './BurgerConstructor.module.css';
 
 import { ConstructorElement as CE, DragIcon as DI } from '@ya.praktikum/react-developer-burger-ui-components';
 import { Modal } from '../Modal/Modal';
-import { OrderDetails } from '../OrderDetails/OrderDetails';
-import { TotalPrice } from '../TotalPrice/TotalPrice';
+import { OrderDetails } from './OrderDetails';
+import { TotalPrice } from './TotalPrice';
 
-import { getSelectedIngredients } from '../../services/selectors/selectedIngredientsSelectors';
+import { selectSelectedIngredients } from '../../services/selectors/selectedIngredientsSelectors';
 import { useMakeOrderMutation } from '../../services/api/normaApi';
 
 const ConstructorElement = memo(CE);
@@ -18,7 +18,7 @@ const DragIcon = memo(DI);
 export const BurgerConstructor = () => {
   const [isModalActive, setIsModalActive] = useState(false);
 
-  const selectedIngredients = useSelector(getSelectedIngredients);
+  const selectedIngredients = useSelector(selectSelectedIngredients);
 
   const [orederRequest, { data, isLoading }] = useMakeOrderMutation();
 
@@ -46,7 +46,7 @@ export const BurgerConstructor = () => {
   return (
     <>
       <section className={clsx(cls.wrap, 'pl-4')}>
-        <div className='mb-10'>
+        <div className={clsx(cls.constructorContainer, 'mb-10')}>
           <div className={clsx(cls.constructorElement, 'pl-8 mb-4')}>
             {bun && <ConstructorElement type='top' isLocked={true} text={bun.name} price={bun.price} thumbnail={bun.image} />}
           </div>

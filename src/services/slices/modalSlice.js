@@ -1,17 +1,13 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-const initialState = { data: null };
+const initialState = null;
 
 const modalSlice = createSlice({
   name: 'modal',
   initialState,
   reducers: {
-    openModal: (state, action) => {
-      state.data = action.payload;
-    },
-    closeModal: (state) => {
-      state.data = null;
-    },
+    openModal: (state, { payload }) => payload,
+    closeModal: () => null,
   },
 });
 
