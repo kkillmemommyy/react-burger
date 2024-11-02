@@ -19,6 +19,10 @@ const selectedIngredientsSlice = createSlice({
     removeIngredient: (state, { payload: { index } }) => {
       state.stuffing = state.stuffing.filter((_, ind) => ind !== index);
     },
+    moveCard: ({ stuffing }, { payload: { dragIndex, dropIndex } }) => {
+      const [movedCard] = stuffing.splice(dragIndex, 1);
+      stuffing.splice(dropIndex, 0, movedCard);
+    },
   },
 });
 

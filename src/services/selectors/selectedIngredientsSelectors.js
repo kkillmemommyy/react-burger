@@ -3,14 +3,13 @@ import { selectIngredients } from './normaApiSelectors';
 
 export const selectSelectedIngredients = (state) => state.selectedIngredients;
 
-export const selectIds = (state) => {
+export const selectIds = createSelector(selectSelectedIngredients, ({ bun, stuffing }) => {
   const ids = [];
-  const { bun, stuffing } = state.selectedIngredients;
   if (bun) {
     ids.push(bun);
   }
   return ids.concat(stuffing);
-};
+});
 
 export const selectIngredientCounts = createSelector(selectSelectedIngredients, (selectedIngredients) => {
   const countedIngredients = {};

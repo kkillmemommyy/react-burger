@@ -1,8 +1,8 @@
-import { useState, useCallback, memo } from 'react';
+import { useState, memo } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import clsx from 'clsx';
 import cls from './BurgerConstructor.module.css';
-import { ConstructorElement as CE, DragIcon as DI } from '@ya.praktikum/react-developer-burger-ui-components';
+import { ConstructorElement as CE, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import { Modal } from '../Modal/Modal';
 import { OrderDetails } from './OrderDetails';
 import { TotalPrice } from './TotalPrice';
@@ -11,16 +11,14 @@ import { useMakeOrderMutation } from '../../services/api/normaApi';
 import { selectIngredientById, selectIngredientsByIds } from '../../services/selectors/normaApiSelectors';
 import { useDrop } from 'react-dnd';
 import { selectedIngredientsActions } from '../../services/slices/selectedIngredientsSlice';
+import { DragbleElement } from './DragbleElement';
 
 const ConstructorElement = memo(CE);
-const DragIcon = memo(DI);
 
 export const BurgerConstructor = () => {
   const [isModalActive, setIsModalActive] = useState(false);
 
   const dispatch = useDispatch();
-
-  const removeIngredient = (index) => dispatch(selectedIngredientsActions.removeIngredient({ index }));
 
   const { bun: bunId, stuffing: stuffingIds } = useSelector(selectSelectedIngredients);
   const selectedIngredientsIds = useSelector(selectIds);
@@ -35,10 +33,10 @@ export const BurgerConstructor = () => {
 
   const [orderRequest, { data, isLoading, error }] = useMakeOrderMutation();
 
-  const makeOrder = useCallback(async () => {
+  const makeOrder = async () => {
     setIsModalActive(true);
     await orderRequest(selectedIngredientsIds);
-  }, [setIsModalActive, orderRequest, selectedIngredientsIds]);
+  };
 
   const deactivateModal = () => setIsModalActive(false);
 
@@ -47,14 +45,15 @@ export const BurgerConstructor = () => {
   const bun = useSelector(selectIngredientById(bunId));
   const stuffing = useSelector(selectIngredientsByIds(stuffingIds));
 
-  const ConstructorContainerClasses = clsx('mb-10', cls.constructorContainer, {
-    [cls.overConstructorContainer]: isOver,
-  });
-
   return (
     <>
       <section className={clsx(cls.wrap, 'pl-4')}>
-        <div className={ConstructorContainerClasses} ref={dropRef}>
+        <div
+          className={clsx('mb-10', cls.constructorContainer, {
+            [cls.overConstructorContainer]: isOver,
+          })}
+          ref={dropRef}
+        >
           <div className={clsx(cls.constructorElement, 'pl-8 mb-4')}>
             {bun && (
               <ConstructorElement type='top' isLocked={true} text={bun.name} price={bun.price} thumbnail={bun.image} />
@@ -62,17 +61,14 @@ export const BurgerConstructor = () => {
           </div>
           <div className={cls.withScroll}>
             {stuffing.map((ing, index) => (
-              <div className={cls.constructorElement} key={index}>
-                <div className={clsx(cls.dragIcon, 'mr-2')}>
-                  <DragIcon type='primary' />
-                </div>
+              <DragbleElement key={`${ing._id}${index}`} index={index}>
                 <ConstructorElement
                   text={ing.name}
                   price={ing.price}
                   thumbnail={ing.image}
-                  handleClose={() => removeIngredient(index)}
+                  handleClose={() => dispatch(selectedIngredientsActions.removeIngredient({ index }))}
                 />
-              </div>
+              </DragbleElement>
             ))}
           </div>
           <div className={clsx(cls.constructorElement, 'pl-8 mt-4')}>
@@ -87,7 +83,18 @@ export const BurgerConstructor = () => {
             )}
           </div>
         </div>
-        <TotalPrice makeOrder={makeOrder} />
+        <div className={clsx(cls.total, 'pr-4')}>
+          <TotalPrice />
+          <Button
+            htmlType='button'
+            type='primary'
+            size='large'
+            onClick={makeOrder}
+            disabled={selectedIngredientsIds.length === 0}
+          >
+            Оформить заказ
+          </Button>
+        </div>
       </section>
       {isModalActive && (
         <Modal deactivateModal={deactivateModal}>

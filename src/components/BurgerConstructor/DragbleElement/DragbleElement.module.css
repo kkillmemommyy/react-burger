@@ -1,0 +1,18 @@
+.constructorElement {
+  display: flex;
+  max-height: 80px;
+  cursor: grab;
+}
+
+.over {
+  opacity: 0.5;
+}
+
+.drag {
+  opacity: 0;
+}
+
+.dragIcon {
+  display: flex;
+  align-items: center;
+}

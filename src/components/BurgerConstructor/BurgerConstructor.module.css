@@ -2,6 +2,11 @@
   flex: 1;
 }
 
+.total {
+  display: flex;
+  justify-content: flex-end;
+}
+
 .constructorContainer {
   height: calc(100vh - 342px);
   border: 1px solid #131316;
@@ -21,12 +26,3 @@
   scrollbar-width: thin;
 }
 
-.constructorElement {
-  display: flex;
-  max-height: 80px;
-}
-
-.dragIcon {
-  display: flex;
-  align-items: center;
-}
