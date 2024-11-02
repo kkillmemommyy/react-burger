@@ -13,7 +13,7 @@ export const App = () => {
   if (error) {
     return (
       <div className='prerender text text_type_main-large'>
-        Something went wrong while the page was loading. Try refreshing the page or check back later.
+        При загрузке страницы что-то пошло не так. Попробуйте перезагрузить страницу или вернуться позднее.
       </div>
     );
   }

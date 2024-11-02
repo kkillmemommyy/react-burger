@@ -10,6 +10,18 @@ export const normaApi = createApi({
       query: () => ({
         url: 'ingredients',
       }),
+      transformResponse: (response) => {
+        const normalizedData = response.data.reduce(
+          (acc, item) => {
+            acc.entities[item._id] = item;
+            acc.ids.push(item._id);
+            return acc;
+          },
+          { entities: {}, ids: [] }
+        );
+
+        return normalizedData;
+      },
     }),
     makeOrder: builder.mutation({
       query: (ids) => ({

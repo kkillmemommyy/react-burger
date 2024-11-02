@@ -1,10 +1,16 @@
 import { normaApi } from '../api/normaApi';
 import { createSelector } from '@reduxjs/toolkit';
 
-const getIngredients = (state) => normaApi.endpoints.getIngredients.select()(state)?.data?.data || [];
+export const selectAll = (state) => normaApi.endpoints.getIngredients.select()(state).data ?? { entities: {}, ids: [] };
 
-export const getIngredientsByCategory = (category) =>
-  createSelector(getIngredients, (ingredients) => ingredients.filter((ing) => ing.type === category));
+export const selectIngredients = createSelector(selectAll, (state) => state.entities);
 
-export const getIngredient = (id) =>
-  createSelector(getIngredients, (ingredients) => ingredients.find((ing) => ing._id === id));
+export const selectIds = createSelector(selectAll, (state) => state.ids);
+
+export const selectIngredientsByType = (type) =>
+  createSelector(selectIngredients, (ingredients) => Object.values(ingredients).filter((ing) => ing.type === type));
+
+export const selectIngredientById = (id) => createSelector(selectIngredients, (ingredients) => ingredients[id]);
+
+export const selectIngredientsByIds = (ids) =>
+  createSelector(selectIngredients, (ingredients) => ids.map((id) => ingredients[id]));

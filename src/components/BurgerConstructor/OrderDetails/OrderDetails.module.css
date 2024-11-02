@@ -10,9 +10,19 @@
   width: 120px;
   height: 120px;
   animation: spin 2s linear infinite;
+  margin-top: 100px
+}
+
+.error {
+  margin-top: 130px;
+  text-align: center;
 }
 
 @keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }

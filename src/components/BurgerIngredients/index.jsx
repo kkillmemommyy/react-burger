@@ -32,9 +32,9 @@ export const BurgerIngredients = () => {
   const deactivateModal = () => setIsModalActive(false);
 
   const ingredientsSections = [
-    { category: 'bun', title: 'Булки', ref: bunsRef },
-    { category: 'sauce', title: 'Соусы', ref: saucesRef },
-    { category: 'main', title: 'Начинки', ref: mainRef },
+    { type: 'bun', title: 'Булки', ref: bunsRef },
+    { type: 'sauce', title: 'Соусы', ref: saucesRef },
+    { type: 'main', title: 'Начинки', ref: mainRef },
   ];
 
   return (
@@ -44,11 +44,11 @@ export const BurgerIngredients = () => {
         <div className={cls.ingredients}>
           {ingredientsSections.map((section) => (
             <IngredientsSection
-              category={section.category}
+              type={section.type}
               title={section.title}
               ref={section.ref}
               activateModal={activateModal}
-              key={section.category}
+              key={section.type}
             />
           ))}
         </div>
