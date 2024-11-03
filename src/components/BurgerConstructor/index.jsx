@@ -6,9 +6,8 @@ import { ConstructorElement as CE, Button } from '@ya.praktikum/react-developer-
 import { Modal } from '../Modal/Modal';
 import { OrderDetails } from './OrderDetails';
 import { TotalPrice } from './TotalPrice';
-import { selectSelectedIngredients, selectIds } from '../../services/selectors/selectedIngredientsSelectors';
+import { selectBun, selectStuffing } from '../../services/selectors/selectedIngredientsSelectors';
 import { useMakeOrderMutation } from '../../services/api/normaApi';
-import { selectIngredientById, selectIngredientsByIds } from '../../services/selectors/normaApiSelectors';
 import { useDrop } from 'react-dnd';
 import { selectedIngredientsActions } from '../../services/slices/selectedIngredientsSlice';
 import { DragbleElement } from './DragbleElement';
@@ -20,12 +19,11 @@ export const BurgerConstructor = () => {
 
   const dispatch = useDispatch();
 
-  const { bun: bunId, stuffing: stuffingIds } = useSelector(selectSelectedIngredients);
-  const selectedIngredientsIds = useSelector(selectIds);
-
   const [{ isOver }, dropRef] = useDrop({
     accept: 'ingredient',
-    drop: ({ id, type }) => dispatch(selectedIngredientsActions.addIngredient({ id, type })),
+    drop: ({ id, type, name, price, image }) => {
+      dispatch(selectedIngredientsActions.addIngredient({ id, type, name, price, image }));
+    },
     collect: (monitor) => ({
       isOver: monitor.isOver(),
     }),
@@ -33,17 +31,21 @@ export const BurgerConstructor = () => {
 
   const [orderRequest, { data, isLoading, error }] = useMakeOrderMutation();
 
+  const bun = useSelector(selectBun);
+  const stuffing = useSelector(selectStuffing);
+
   const makeOrder = async () => {
+    if (!bun) {
+      return;
+    }
+    const ids = [bun.id, ...stuffing.map((s) => s.id)];
     setIsModalActive(true);
-    await orderRequest(selectedIngredientsIds);
+    await orderRequest(ids);
   };
 
   const deactivateModal = () => setIsModalActive(false);
 
   const orderId = data?.order?.number;
-
-  const bun = useSelector(selectIngredientById(bunId));
-  const stuffing = useSelector(selectIngredientsByIds(stuffingIds));
 
   return (
     <>
@@ -61,7 +63,7 @@ export const BurgerConstructor = () => {
           </div>
           <div className={cls.withScroll}>
             {stuffing.map((ing, index) => (
-              <DragbleElement key={`${ing._id}${index}`} index={index}>
+              <DragbleElement key={ing.createdAt} index={index}>
                 <ConstructorElement
                   text={ing.name}
                   price={ing.price}
@@ -85,13 +87,7 @@ export const BurgerConstructor = () => {
         </div>
         <div className={clsx(cls.total, 'pr-4')}>
           <TotalPrice />
-          <Button
-            htmlType='button'
-            type='primary'
-            size='large'
-            onClick={makeOrder}
-            disabled={selectedIngredientsIds.length === 0}
-          >
+          <Button htmlType='button' type='primary' size='large' onClick={makeOrder} disabled={stuffing.length === 0}>
             Оформить заказ
           </Button>
         </div>

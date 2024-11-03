@@ -1,26 +1,18 @@
 import { createSelector } from '@reduxjs/toolkit';
-import { selectIngredients } from './normaApiSelectors';
 
 export const selectSelectedIngredients = (state) => state.selectedIngredients;
 
-export const selectIds = createSelector(selectSelectedIngredients, ({ bun, stuffing }) => {
-  const ids = [];
-  if (bun) {
-    ids.push(bun);
-  }
-  return ids.concat(stuffing);
-});
+export const selectBun = (state) => state.selectedIngredients.bun;
+export const selectStuffing = (state) => state.selectedIngredients.stuffing;
 
-export const selectIngredientCounts = createSelector(selectSelectedIngredients, (selectedIngredients) => {
+export const selectIngredientCounts = createSelector([selectBun, selectStuffing], (bun, stuffing) => {
   const countedIngredients = {};
-  const bun = selectedIngredients.bun;
-  const stuffing = selectedIngredients.stuffing;
 
   if (bun) {
-    countedIngredients[bun] = 2;
+    countedIngredients[bun.id] = 2;
   }
 
-  stuffing.reduce((result, id) => {
+  stuffing.reduce((result, { id }) => {
     result[id] = (result[id] ?? 0) + 1;
     return result;
   }, countedIngredients);
@@ -31,6 +23,10 @@ export const selectIngredientCounts = createSelector(selectSelectedIngredients, 
 export const selectIngredientCountById = (id) =>
   createSelector(selectIngredientCounts, (countedIngredients) => countedIngredients[id] ?? 0);
 
-export const selectTotalPrice = createSelector([selectIds, selectIngredients], (ids, ingredients) =>
-  ids.reduce((acc, id) => acc + ingredients[id].price, 0)
-);
+export const selectTotalPrice = createSelector([selectBun, selectStuffing], (bun, stuffing) => {
+  let totalPrice = 0;
+  if (bun) {
+    totalPrice += bun.price;
+  }
+  return stuffing.reduce((acc, { price }) => acc + price, totalPrice);
+});

@@ -17,7 +17,7 @@ export const IngredientCard = memo(({ activateModal, id }) => {
 
   const [, dragRef] = useDrag({
     type: 'ingredient',
-    item: { id, type: ingredient.type },
+    item: { id, type: ingredient.type, name: ingredient.name, price: ingredient.price, image: ingredient.image },
   });
 
   const openModalHandle = () => {

@@ -12,5 +12,3 @@ export const selectIngredientsByType = (type) =>
 
 export const selectIngredientById = (id) => createSelector(selectIngredients, (ingredients) => ingredients[id]);
 
-export const selectIngredientsByIds = (ids) =>
-  createSelector(selectIngredients, (ingredients) => ids.map((id) => ingredients[id]));

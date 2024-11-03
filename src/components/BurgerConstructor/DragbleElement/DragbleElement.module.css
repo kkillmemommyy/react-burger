@@ -1,11 +1,6 @@
 .constructorElement {
   display: flex;
   max-height: 80px;
-  cursor: grab;
-}
-
-.over {
-  opacity: 0.5;
 }
 
 .drag {
@@ -15,4 +10,5 @@
 .dragIcon {
   display: flex;
   align-items: center;
+  cursor: grab;
 }
