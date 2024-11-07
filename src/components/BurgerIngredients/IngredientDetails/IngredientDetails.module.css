@@ -3,6 +3,10 @@
   height: 240px;
 }
 
+.name {
+  text-align: center;
+}
+
 .details {
   width: 516px;
   height: 56px;
