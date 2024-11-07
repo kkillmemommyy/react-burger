@@ -5,7 +5,7 @@ export const IngredientDetails = ({ proteins, fat, carbohydrates, calories, imag
   return (
     <>
       <img src={image} alt={name} className={clsx(cls.img, 'mb-4')} />
-      <p className='text text_type_main-medium mb-8'>{name}</p>
+      <p className={clsx(cls.name, 'text text_type_main-medium mb-8')}>{name}</p>
       <div className={clsx(cls.details, 'mb-15')}>
         <div className={cls.detail}>
           <p className='text text_type_main-default text_color_inactive mb-2'>Калории,ккал</p>

@@ -4,9 +4,11 @@ import { DragIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import { useDrag, useDrop } from 'react-dnd';
 import { selectedIngredientsActions } from '../../../services/slices/selectedIngredientsSlice';
 import { useDispatch } from 'react-redux';
+import { useRef, useEffect } from 'react';
 
 export const DragbleElement = ({ index, children }) => {
   const dispatch = useDispatch();
+  const ref = useRef(null);
 
   const [{ isDragging }, dragRef, previewRef] = useDrag({
     type: 'selectedIng',
@@ -33,8 +35,12 @@ export const DragbleElement = ({ index, children }) => {
     },
   });
 
+  useEffect(() => {
+    previewRef(dropRef(ref));
+  }, [dragRef, dropRef, previewRef, ref]);
+
   return (
-    <div className={clsx(cls.constructorElement, { [cls.drag]: isDragging })} ref={(node) => previewRef(dropRef(node))}>
+    <div className={clsx(cls.constructorElement, { [cls.drag]: isDragging })} ref={ref}>
       <div className={clsx(cls.dragIcon, 'mr-2')} ref={dragRef}>
         <DragIcon type='primary' />
       </div>
