@@ -1,25 +1,28 @@
-import { useState, memo } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { memo } from 'react';
+import { useTypedSelector, useTypedDispatch } from '@/services';
 import clsx from 'clsx';
 import cls from './BurgerConstructor.module.css';
 import { ConstructorElement as CE, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import { Modal } from '../Modal/Modal';
-import { OrderDetails } from './OrderDetails';
-import { TotalPrice } from './TotalPrice';
-import { selectBun, selectStuffing } from '../../services/selectors/selectedIngredientsSelectors';
-import { useMakeOrderMutation } from '../../services/api/normaApi';
+import { OrderDetails } from './OrderDetails/OrderDetails';
+import { TotalPrice } from './TotalPrice/TotalPrice';
+import { selectBun, selectStuffing } from '@/services/selectors/selectedIngredientsSelectors';
+import { useMakeOrderMutation } from '@/services/api/normaApi';
 import { useDrop } from 'react-dnd';
-import { selectedIngredientsActions } from '../../services/slices/selectedIngredientsSlice';
-import { DragbleElement } from './DragbleElement';
+import { selectedIngredientsActions } from '@/services/slices/selectedIngredientsSlice/selectedIngredientsSlice';
+import { DragbleElement } from './DragbleElement/DragbleElement';
+import { selectModal } from '@/services/selectors/modalSelectors';
+import { openModal } from '@/services/slices/modalSlice/modalSlice';
+import { AddIngredientPayload } from '@/services/slices/selectedIngredientsSlice/types';
 
 const ConstructorElement = memo(CE);
 
 export const BurgerConstructor = () => {
-  const [isModalActive, setIsModalActive] = useState(false);
+  const { isModalOpen, modalType, modalContent } = useTypedSelector(selectModal);
 
-  const dispatch = useDispatch();
+  const dispatch = useTypedDispatch();
 
-  const [{ isOver }, dropRef] = useDrop({
+  const [{ isOver }, dropRef] = useDrop<AddIngredientPayload, unknown, {isOver: boolean}>({
     accept: 'ingredient',
     drop: ({ id, type, name, price, image }) => {
       dispatch(selectedIngredientsActions.addIngredient({ id, type, name, price, image }));
@@ -29,23 +32,23 @@ export const BurgerConstructor = () => {
     }),
   });
 
-  const [orderRequest, { data, isLoading, error }] = useMakeOrderMutation();
+  const [orderRequest, { isLoading, error }] = useMakeOrderMutation();
 
-  const bun = useSelector(selectBun);
-  const stuffing = useSelector(selectStuffing);
+  const bun = useTypedSelector(selectBun);
+  const stuffing = useTypedSelector(selectStuffing);
 
   const makeOrder = async () => {
     if (!bun) {
       return;
     }
     const ids = [bun.id, ...stuffing.map((s) => s.id)];
-    setIsModalActive(true);
-    await orderRequest(ids);
+    dispatch(openModal({ modalType: 'OrderDetails', modalContent: null }));
+    const response = await orderRequest(ids);
+    const orderId = response?.data?.order?.number;
+    if (orderId) {
+      dispatch(openModal({ modalType: 'OrderDetails', modalContent: orderId }));
+    }
   };
-
-  const deactivateModal = () => setIsModalActive(false);
-
-  const orderId = data?.order?.number;
 
   return (
     <>
@@ -92,9 +95,9 @@ export const BurgerConstructor = () => {
           </Button>
         </div>
       </section>
-      {isModalActive && (
-        <Modal deactivateModal={deactivateModal}>
-          <OrderDetails orderId={orderId} isLoading={isLoading} error={error} />
+      {isModalOpen && modalType === 'OrderDetails' && (
+        <Modal>
+          <OrderDetails orderId={modalContent} isLoading={isLoading} error={error} />
         </Modal>
       )}
     </>

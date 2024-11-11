@@ -1,10 +1,12 @@
-import { useState, memo } from 'react';
+import { useState } from 'react';
 import clsx from 'clsx';
 import cls from './AppHeader.module.css';
 import { Logo, BurgerIcon, ListIcon, ProfileIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 
-export const AppHeader = memo(() => {
-  const [activeTab, setActiveTab] = useState('constructor');
+type Tab = 'constructor' | 'orders' | 'profile';
+
+export const AppHeader = () => {
+  const [activeTab, setActiveTab] = useState<Tab>('constructor');
 
   return (
     <header className={clsx(cls.header, 'pt-4 pb-4')}>
@@ -39,4 +41,4 @@ export const AppHeader = memo(() => {
       </nav>
     </header>
   );
-});
+};

@@ -1,7 +1,7 @@
 import './App.css';
-import { AppHeader } from '../AppHeader/AppHeader';
-import { MainPage } from '../../pages/MainPage/MainPage';
-import { useGetIngredientsQuery } from '../../services/api/normaApi';
+import { MainPage } from '@/pages/MainPage/MainPage';
+import { useGetIngredientsQuery } from '@/services/api/normaApi';
+import { Layout } from '../Layout/Layout';
 
 export const App = () => {
   const { error, isLoading } = useGetIngredientsQuery();
@@ -19,9 +19,8 @@ export const App = () => {
   }
 
   return (
-    <>
-      <AppHeader />
+    <Layout>
       <MainPage />
-    </>
+    </Layout>
   );
 };

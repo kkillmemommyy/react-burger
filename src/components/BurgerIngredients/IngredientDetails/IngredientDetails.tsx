@@ -1,7 +1,10 @@
 import clsx from 'clsx';
 import cls from './IngredientDetails.module.css';
+import { IngredientDetails as IngredientDetailsType} from '@/services/slices/modalSlice/types';
 
-export const IngredientDetails = ({ proteins, fat, carbohydrates, calories, image, name }) => {
+type Props = IngredientDetailsType;
+
+export const IngredientDetails = ({ proteins, fat, carbohydrates, calories, image, name }: Props) => {
   return (
     <>
       <img src={image} alt={name} className={clsx(cls.img, 'mb-4')} />

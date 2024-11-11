@@ -1,8 +1,16 @@
-import doneImg from '../../../images/done.png';
+import doneImg from '@/images/done.png';
 import cls from './OrderDetails.module.css';
 import clsx from 'clsx';
+import { FetchBaseQueryError } from '@reduxjs/toolkit/query';
+import { SerializedError } from '@reduxjs/toolkit';
 
-export const OrderDetails = ({ orderId, isLoading, error }) => {
+interface Props {
+  error: FetchBaseQueryError | SerializedError | undefined;
+  orderId: number | null;
+  isLoading: boolean;
+}
+
+export const OrderDetails = ({ orderId, isLoading, error }: Props) => {
   if (isLoading) {
     return <div className={cls.loader}></div>;
   }

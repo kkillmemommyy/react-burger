@@ -2,12 +2,17 @@ import clsx from 'clsx';
 import cls from './DragbleElement.module.css';
 import { DragIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import { useDrag, useDrop } from 'react-dnd';
-import { selectedIngredientsActions } from '../../../services/slices/selectedIngredientsSlice';
-import { useDispatch } from 'react-redux';
-import { useRef, useEffect } from 'react';
+import { selectedIngredientsActions } from '@/services/slices/selectedIngredientsSlice/selectedIngredientsSlice';
+import { useTypedDispatch } from '@/services';
+import { useRef, useEffect, ReactNode } from 'react';
 
-export const DragbleElement = ({ index, children }) => {
-  const dispatch = useDispatch();
+interface Props {
+  index: number;
+  children: ReactNode;
+}
+
+export const DragbleElement = ({ index, children }: Props) => {
+  const dispatch = useTypedDispatch();
   const ref = useRef(null);
 
   const [{ isDragging }, dragRef, previewRef] = useDrag({
@@ -22,7 +27,7 @@ export const DragbleElement = ({ index, children }) => {
 
   const [, dropRef] = useDrop({
     accept: 'selectedIng',
-    hover: (item) => {
+    hover: (item: { index: number }) => {
       const { index: dragIndex } = item;
       const dropIndex = index;
 

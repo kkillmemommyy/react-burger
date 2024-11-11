@@ -1,5 +1,5 @@
-import { modalReducer } from './modalSlice';
-import { selectedIngredientsReducer } from './selectedIngredientsSlice';
+import { modalReducer } from './modalSlice/modalSlice';
+import { selectedIngredientsReducer } from './selectedIngredientsSlice/selectedIngredientsSlice';
 import { normaApi } from '../api/normaApi';
 
 export const rootReducer = {

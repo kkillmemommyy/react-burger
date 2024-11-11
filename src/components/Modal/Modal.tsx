@@ -1,39 +1,41 @@
-import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useEffect, ReactNode } from 'react';
+import { useTypedDispatch } from '@/services';
 import { createPortal } from 'react-dom';
-
 import clsx from 'clsx';
 import cls from './Modal.module.css';
-
 import { CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import { ModalOverlay } from '../ModalOverlay/ModalOverlay';
-
-import { closeModal } from '../../services/slices/modalSlice';
+import { closeModal } from '@/services/slices/modalSlice/modalSlice';
 
 const modalRoot = document.getElementById('modal');
 
-export const Modal = ({ children, title, deactivateModal }) => {
-  const dispatch = useDispatch();
+interface Props {
+  children: ReactNode;
+  title?: string;
+}
+
+export const Modal = ({ children, title }: Props) => {
+  const dispatch = useTypedDispatch();
 
   useEffect(() => {
-    const closeModalOnEsc = (e) => {
+    const closeModalOnEsc = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
-        deactivateModal();
         dispatch(closeModal());
       }
     };
 
     document.addEventListener('keyup', closeModalOnEsc);
     return () => document.removeEventListener('keyup', closeModalOnEsc);
-  }, [dispatch, deactivateModal]);
+  }, [dispatch]);
 
-  const closeModalHandler = () => {
-    deactivateModal();
-    dispatch(closeModal());
-  };
+  const closeModalHandler = () => dispatch(closeModal());
+
+  if (!modalRoot) {
+    return null;
+  }
 
   return createPortal(
-    <ModalOverlay deactivateModal={deactivateModal}>
+    <ModalOverlay>
       <div className={clsx(cls.modalWindow, 'pt-10')}>
         <div className={clsx(cls.modalWindow_head, 'pl-10 pr-10')}>
           <h2 className='text text_type_main-large'>{title}</h2>

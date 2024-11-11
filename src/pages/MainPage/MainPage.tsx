@@ -1,7 +1,7 @@
 import cls from './MainPage.module.css';
 import clsx from 'clsx';
-import { BurgerIngredients } from '../../components/BurgerIngredients';
-import { BurgerConstructor } from '../../components/BurgerConstructor';
+import { BurgerIngredients } from '@/components/BurgerIngredients/BurgerIngredients';
+import { BurgerConstructor } from '@/components/BurgerConstructor/BurgerConstructor';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 

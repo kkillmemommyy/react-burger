@@ -1,19 +1,22 @@
 import { memo } from 'react';
-import { useDispatch } from 'react-redux';
+import { useTypedDispatch, useTypedSelector } from '@/services';
 import clsx from 'clsx';
 import cls from './IngredientCard.module.css';
 import { CurrencyIcon, Counter } from '@ya.praktikum/react-developer-burger-ui-components';
-import { openModal } from '../../../services/slices/modalSlice';
-import { useSelector } from 'react-redux';
-import { selectIngredientById } from '../../../services/selectors/normaApiSelectors';
-import { selectIngredientCountById } from '../../../services/selectors/selectedIngredientsSelectors';
+import { openModal } from '@/services/slices/modalSlice/modalSlice';
+import { selectIngredientById } from '@/services/selectors/normaApiSelectors';
+import { selectIngredientCountById } from '@/services/selectors/selectedIngredientsSelectors';
 import { useDrag } from 'react-dnd';
 
-export const IngredientCard = memo(({ activateModal, id }) => {
-  const dispatch = useDispatch();
+interface Props {
+  id: string;
+}
 
-  const ingredient = useSelector(selectIngredientById(id));
-  const count = useSelector(selectIngredientCountById(id));
+export const IngredientCard = memo(({ id }: Props) => {
+  const dispatch = useTypedDispatch();
+
+  const ingredient = useTypedSelector(selectIngredientById(id));
+  const count = useTypedSelector(selectIngredientCountById(id));
 
   const [, dragRef] = useDrag({
     type: 'ingredient',
@@ -29,8 +32,7 @@ export const IngredientCard = memo(({ activateModal, id }) => {
       calories: ingredient.calories,
       image: ingredient.image_large,
     };
-    dispatch(openModal(dataForModal));
-    activateModal();
+    dispatch(openModal({ modalContent: dataForModal, modalType: 'IngredientDetails' }));
   };
 
   return (
