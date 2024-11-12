@@ -13,7 +13,7 @@ export const Tabs = memo(({ currentTab }: Props) => {
       <ul className={cls.nav_list}>
         <li className={cls.nav_item}>
           <a href='#bun'>
-            {/* TODO: type problem */}
+            {/* @ts-expect-error onClick is required */}
             <Tab value='bun' active={currentTab === 'bun'}>
               Булки
             </Tab>
@@ -21,7 +21,7 @@ export const Tabs = memo(({ currentTab }: Props) => {
         </li>
         <li className={cls.nav_item}>
           <a href='#sauce'>
-            {/* TODO: type problem */}
+            {/* @ts-expect-error onClick is required */}
             <Tab value='sauce' active={currentTab === 'sauce'}>
               Соусы
             </Tab>
@@ -29,7 +29,7 @@ export const Tabs = memo(({ currentTab }: Props) => {
         </li>
         <li className={cls.nav_item}>
           <a href='#main'>
-            {/* TODO: type problem */}
+            {/* @ts-expect-error onClick is required */}
             <Tab value='main' active={currentTab === 'main'}>
               Начинки
             </Tab>

@@ -50,7 +50,7 @@ export const BurgerIngredients = () => {
         </div>
       </section>
       {/* TODO: research proteins */}
-      {isModalOpen && modalType === 'IngredientDetails' && modalContent?.proteins && (
+      {isModalOpen && modalType === 'IngredientDetails' && modalContent && (
         <Modal title='Детали ингредиента'>
           <IngredientDetails {...modalContent} />
         </Modal>
