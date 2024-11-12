@@ -8,10 +8,11 @@ import { selectModal } from '../../services/selectors/modalSelectors';
 import { Tabs } from './Tabs/Tabs';
 import { IngredientsSection } from './IngredientsSection/IngredientsSection';
 import { IngredientType } from '@/shared/types/api';
+import { Titles } from '@/shared/types/api';
 
 interface ingredientsSectionType {
   type: IngredientType;
-  title: 'Булки' | 'Соусы' | 'Начинки';
+  title: Titles;
   ref: (node?: Element | null) => void;
 }
 
@@ -34,9 +35,9 @@ export const BurgerIngredients = () => {
   }, [bunsInView, saucesInView, mainInView]);
 
   const ingredientsSections: ingredientsSectionType[] = [
-    { type: 'bun', title: 'Булки', ref: bunsRef },
-    { type: 'sauce', title: 'Соусы', ref: saucesRef },
-    { type: 'main', title: 'Начинки', ref: mainRef },
+    { type: 'bun', title: Titles.BUN, ref: bunsRef },
+    { type: 'sauce', title: Titles.SAUCE, ref: saucesRef },
+    { type: 'main', title: Titles.MAIN, ref: mainRef },
   ];
 
   return (

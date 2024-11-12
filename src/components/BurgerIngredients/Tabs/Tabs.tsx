@@ -1,11 +1,12 @@
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 import { memo } from 'react';
 import cls from './Tabs.module.css';
-import { IngredientType } from '@/shared/types/api';
+import { IngredientType, Titles } from '@/shared/types/api';
 
 interface Tab {
-  name: IngredientType;
+  type: IngredientType;
   href: string;
+  title: Titles;
 }
 
 interface Props {
@@ -14,20 +15,20 @@ interface Props {
 
 export const Tabs = memo(({ currentTab }: Props) => {
   const tabs: Tab[] = [
-    { name: 'bun', href: '#bun' },
-    { name: 'sauce', href: '#sauce' },
-    { name: 'main', href: '#main' },
+    { type: 'bun', href: '#bun', title: Titles.BUN },
+    { type: 'sauce', href: '#sauce', title: Titles.SAUCE },
+    { type: 'main', href: '#main', title: Titles.MAIN },
   ];
 
   return (
     <nav className='mb-10'>
       <ul className={cls.nav_list}>
-        {tabs.map(({ name, href }) => (
+        {tabs.map(({ type, href, title }) => (
           <li className={cls.nav_item}>
             <a href={href}>
               {/* @ts-expect-error onClick is required */}
-              <Tab value={name} active={currentTab === name}>
-                Булки
+              <Tab type={type} active={currentTab === type}>
+                {title}
               </Tab>
             </a>
           </li>
