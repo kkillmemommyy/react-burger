@@ -1,7 +1,8 @@
 import './App.css';
-import { MainPage } from '@/pages/MainPage/MainPage';
 import { useGetIngredientsQuery } from '@/services/api/normaApi';
-import { Layout } from '../Layout/Layout';
+import { AppHeader } from '../AppHeader/AppHeader';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { routes } from '@/router';
 
 export const App = () => {
   const { error, isLoading } = useGetIngredientsQuery();
@@ -19,8 +20,15 @@ export const App = () => {
   }
 
   return (
-    <Layout>
-      <MainPage />
-    </Layout>
+    <>
+      <BrowserRouter>
+        <AppHeader />
+        <Routes>
+          {routes.map((r) => (
+            <Route path={r.path} element={r.element} key={r.path} />
+          ))}
+        </Routes>
+      </BrowserRouter>
+    </>
   );
 };

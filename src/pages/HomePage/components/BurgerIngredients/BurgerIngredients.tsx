@@ -2,17 +2,17 @@ import { useEffect, useState } from 'react';
 import { useTypedSelector } from '@/services';
 import { useInView } from 'react-intersection-observer';
 import cls from './BurgerIngredients.module.css';
-import { Modal } from '../Modal/Modal';
+import { Modal } from '@/components/Modal/Modal';
 import { IngredientDetails } from './IngredientDetails/IngredientDetails';
-import { selectModal } from '../../services/selectors/modalSelectors';
+import { selectModal } from '@/services/selectors/modalSelectors';
 import { Tabs } from './Tabs/Tabs';
 import { IngredientsSection } from './IngredientsSection/IngredientsSection';
 import { IngredientType } from '@/shared/types/api';
-import { Titles } from '@/shared/types/api';
+import { IngredientTitles } from '@/shared/types/api';
 
 interface ingredientsSectionType {
   type: IngredientType;
-  title: Titles;
+  title: IngredientTitles;
   ref: (node?: Element | null) => void;
 }
 
@@ -35,9 +35,9 @@ export const BurgerIngredients = () => {
   }, [bunsInView, saucesInView, mainInView]);
 
   const ingredientsSections: ingredientsSectionType[] = [
-    { type: 'bun', title: Titles.BUN, ref: bunsRef },
-    { type: 'sauce', title: Titles.SAUCE, ref: saucesRef },
-    { type: 'main', title: Titles.MAIN, ref: mainRef },
+    { type: 'bun', title: IngredientTitles.BUN, ref: bunsRef },
+    { type: 'sauce', title: IngredientTitles.SAUCE, ref: saucesRef },
+    { type: 'main', title: IngredientTitles.MAIN, ref: mainRef },
   ];
 
   return (
@@ -50,7 +50,6 @@ export const BurgerIngredients = () => {
           ))}
         </div>
       </section>
-      {/* TODO: research proteins */}
       {isModalOpen && modalType === 'IngredientDetails' && modalContent && (
         <Modal title='Детали ингредиента'>
           <IngredientDetails {...modalContent} />

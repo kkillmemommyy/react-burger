@@ -1,0 +1,13 @@
+.main {
+  margin: 120px auto 0;
+  max-width: 1240px;
+  display: flex;
+}
+
+.li {
+  padding: 17px 0;
+}
+
+.wrap {
+  width: 320px;
+}

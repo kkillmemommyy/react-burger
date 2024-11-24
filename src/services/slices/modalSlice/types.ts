@@ -18,6 +18,26 @@ export interface ModalStateOrderDetails {
 
 export type ModalState = ModalStateIngredientDetails | ModalStateOrderDetails;
 
+// export interface ModalStateEmpty {
+//   isModalOpen: false;
+//   modalType: null;
+//   modalContent: null;
+// }
+
+// export interface ModalStateIngredientDetails {
+//   isModalOpen: true;
+//   modalType: 'IngredientDetails';
+//   modalContent: IngredientDetails;
+// }
+
+// export interface ModalStateOrderDetails {
+//   isModalOpen: true;
+//   modalType: 'OrderDetails';
+//   modalContent: OrderNumber | null;
+// }
+
+// export type ModalState = ModalStateIngredientDetails | ModalStateOrderDetails | ModalStateEmpty;
+
 export type OpenModalPayload =
   | { modalType: 'IngredientDetails'; modalContent: IngredientDetails }
   | { modalType: 'OrderDetails'; modalContent: OrderNumber | null };

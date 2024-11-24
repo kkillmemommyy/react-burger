@@ -3,7 +3,7 @@ import { useTypedSelector, useTypedDispatch } from '@/services';
 import clsx from 'clsx';
 import cls from './BurgerConstructor.module.css';
 import { ConstructorElement as CE, Button } from '@ya.praktikum/react-developer-burger-ui-components';
-import { Modal } from '../Modal/Modal';
+import { Modal } from '@/components/Modal/Modal';
 import { OrderDetails } from './OrderDetails/OrderDetails';
 import { TotalPrice } from './TotalPrice/TotalPrice';
 import { selectBun, selectStuffing } from '@/services/selectors/selectedIngredientsSelectors';
@@ -22,7 +22,7 @@ export const BurgerConstructor = () => {
 
   const dispatch = useTypedDispatch();
 
-  const [{ isOver }, dropRef] = useDrop<AddIngredientPayload, unknown, {isOver: boolean}>({
+  const [{ isOver }, dropRef] = useDrop<AddIngredientPayload, unknown, { isOver: boolean }>({
     accept: 'ingredient',
     drop: ({ id, type, name, price, image }) => {
       dispatch(selectedIngredientsActions.addIngredient({ id, type, name, price, image }));
@@ -59,12 +59,12 @@ export const BurgerConstructor = () => {
           })}
           ref={dropRef}
         >
-          <div className={clsx(cls.constructorElement, 'pl-8 mb-4')}>
+          <div className={clsx(cls.constructorElement, bun && 'pl-8 mb-4')}>
             {bun && (
               <ConstructorElement type='top' isLocked={true} text={bun.name} price={bun.price} thumbnail={bun.image} />
             )}
           </div>
-          <div className={cls.withScroll}>
+          <div className={bun ? cls.withScroll : cls.withScrollNotBun}>
             {stuffing.map((ing, index) => (
               <DragbleElement key={ing.createdAt} index={index}>
                 <ConstructorElement
@@ -76,7 +76,7 @@ export const BurgerConstructor = () => {
               </DragbleElement>
             ))}
           </div>
-          <div className={clsx(cls.constructorElement, 'pl-8 mt-4')}>
+          <div className={clsx(cls.constructorElement,  bun && 'pl-8 mt-4')}>
             {bun && (
               <ConstructorElement
                 type='bottom'

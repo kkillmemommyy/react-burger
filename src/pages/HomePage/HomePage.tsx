@@ -1,11 +1,11 @@
-import cls from './MainPage.module.css';
+import cls from './HomePage.module.css';
 import clsx from 'clsx';
-import { BurgerIngredients } from '@/components/BurgerIngredients/BurgerIngredients';
-import { BurgerConstructor } from '@/components/BurgerConstructor/BurgerConstructor';
+import { BurgerIngredients } from './components/BurgerIngredients/BurgerIngredients';
+import { BurgerConstructor } from './components/BurgerConstructor/BurgerConstructor';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 
-export const MainPage = () => {
+const MainPage = () => {
   return (
     <main className={clsx(cls.main, 'pt-10')}>
       <h1 className={clsx(cls.h1, 'mb-5 text text_type_main-large')}>Соберите бургер</h1>
@@ -18,3 +18,5 @@ export const MainPage = () => {
     </main>
   );
 };
+
+export default MainPage;

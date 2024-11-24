@@ -1,6 +1,6 @@
 export type IngredientType = 'main' | 'bun' | 'sauce';
 
-export enum Titles {
+export enum IngredientTitles {
   BUN = 'Булки',
   SAUCE = 'Соусы',
   MAIN = 'Начинки',
