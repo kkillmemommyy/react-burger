@@ -1,11 +1,10 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { GetIngredientsResponse, NormalizedIngredients, MakeOrderRequest, MakeOrderResponse } from './types';
+import { NORMA_API_BASE_URL } from '../routes';
 
-const BASE_URL = 'https://norma.nomoreparties.space/api';
-
-export const normaApi = createApi({
-  reducerPath: 'normaApi',
-  baseQuery: fetchBaseQuery({ baseUrl: BASE_URL }),
+export const ingredientsApi = createApi({
+  reducerPath: 'ingredientsApi',
+  baseQuery: fetchBaseQuery({ baseUrl: NORMA_API_BASE_URL }),
   endpoints: (builder) => ({
     getIngredients: builder.query<NormalizedIngredients, void>({
       query: () => ({
@@ -22,13 +21,13 @@ export const normaApi = createApi({
         ),
     }),
     makeOrder: builder.mutation<MakeOrderResponse, MakeOrderRequest>({
-      query: (ids) => ({
+      query: (data) => ({
         url: 'orders',
         method: 'POST',
-        body: { ingredients: ids },
+        body: data,
       }),
     }),
   }),
 });
 
-export const { useGetIngredientsQuery, useMakeOrderMutation } = normaApi;
+export const { useGetIngredientsQuery, useMakeOrderMutation } = ingredientsApi;

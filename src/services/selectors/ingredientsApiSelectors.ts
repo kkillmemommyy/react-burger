@@ -1,10 +1,10 @@
-import { normaApi } from '../api/normaApi';
+import { ingredientsApi } from '../api/ingredientsApi/ingredientsApi';
 import { createSelector } from '@reduxjs/toolkit';
 import { AppState } from '..';
 import { IngredientType } from '@/shared/types/api';
 
 export const selectAll = (state: AppState) =>
-  normaApi.endpoints.getIngredients.select()(state).data ?? { entities: {}, ids: [] };
+  ingredientsApi.endpoints.getIngredients.select()(state).data ?? { entities: {}, ids: [] };
 
 export const selectIngredients = createSelector(selectAll, (state) => state.entities);
 

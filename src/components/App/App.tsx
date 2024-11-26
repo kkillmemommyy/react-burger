@@ -1,5 +1,5 @@
 import './App.css';
-import { useGetIngredientsQuery } from '@/services/api/normaApi';
+import { useGetIngredientsQuery } from '@/services/api/ingredientsApi/ingredientsApi';
 import { AppHeader } from '../AppHeader/AppHeader';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { routes } from '@/router';

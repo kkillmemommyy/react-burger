@@ -3,7 +3,7 @@ import cls from './IngredientSection.module.css';
 import clsx from 'clsx';
 import { IngredientCard } from '../IngredientCard/IngredientCard';
 import { useTypedSelector } from '@/services';
-import { selectIngredientsByType } from '@/services/selectors/normaApiSelectors'; 
+import { selectIngredientsByType } from '@/services/selectors/ingredientsApiSelectors'; 
 import { IngredientType } from '@/shared/types/api';
 
 interface Props {

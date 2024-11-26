@@ -12,7 +12,7 @@ const NotFound404Page = () => {
       </p>
       <p className='text text_type_main-medium text_color_inactive'>
         Проверьте введённый адрес или вернитесь на{' '}
-        <Link to={Paths.HOME_PAGE} className={cls.link}>
+        <Link to={Paths.HOME_PAGE} className={cls.link} replace>
           главную
         </Link>
       </p>

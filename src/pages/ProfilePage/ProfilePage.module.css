@@ -1,13 +1,51 @@
+:root {
+  --hover-color: #f2f2f3;
+}
+
 .main {
   margin: 120px auto 0;
   max-width: 1240px;
   display: flex;
 }
 
-.li {
-  padding: 17px 0;
-}
-
 .wrap {
   width: 320px;
+}
+
+.link {
+  padding: 17px 0;
+  display: inline-block;
+  cursor: pointer;
+  transition: color 0.2s linear;
+  &:hover {
+    color: var(--hover-color);
+    transition: color 0.2s linear;
+  }
+}
+
+.btn {
+  background-color: transparent;
+  padding: 17px 0;
+  cursor: pointer;
+  transition: color 0.2s linear;
+  &:hover {
+    color: var(--hover-color);
+    transition: color 0.2s linear;
+  }
+}
+
+.active {
+  color: var(--hover-color);
+}
+
+.p {
+  opacity: 70%;
+}
+
+.input {
+  & svg:active {
+    transition: transform 0.2s ease, opacity 0.2s ease;
+    transform: scale(0.7);
+    opacity: 0.8;
+  }
 }

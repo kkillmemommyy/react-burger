@@ -10,7 +10,7 @@ export interface NormalizedIngredients {
   ids: string[];
 }
 
-export type MakeOrderRequest = string[];
+export type MakeOrderRequest = { ingredients: string[] };
 
 export interface MakeOrderResponse {
   name: string;

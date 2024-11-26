@@ -7,7 +7,7 @@ import { Modal } from '@/components/Modal/Modal';
 import { OrderDetails } from './OrderDetails/OrderDetails';
 import { TotalPrice } from './TotalPrice/TotalPrice';
 import { selectBun, selectStuffing } from '@/services/selectors/selectedIngredientsSelectors';
-import { useMakeOrderMutation } from '@/services/api/normaApi';
+import { useMakeOrderMutation } from '@/services/api/ingredientsApi/ingredientsApi';
 import { useDrop } from 'react-dnd';
 import { selectedIngredientsActions } from '@/services/slices/selectedIngredientsSlice/selectedIngredientsSlice';
 import { DragbleElement } from './DragbleElement/DragbleElement';
@@ -43,7 +43,7 @@ export const BurgerConstructor = () => {
     }
     const ids = [bun.id, ...stuffing.map((s) => s.id)];
     dispatch(openModal({ modalType: 'OrderDetails', modalContent: null }));
-    const response = await orderRequest(ids);
+    const response = await orderRequest({ ingredients: ids });
     const orderId = response?.data?.order?.number;
     if (orderId) {
       dispatch(openModal({ modalType: 'OrderDetails', modalContent: orderId }));
@@ -76,7 +76,7 @@ export const BurgerConstructor = () => {
               </DragbleElement>
             ))}
           </div>
-          <div className={clsx(cls.constructorElement,  bun && 'pl-8 mt-4')}>
+          <div className={clsx(cls.constructorElement, bun && 'pl-8 mt-4')}>
             {bun && (
               <ConstructorElement
                 type='bottom'
