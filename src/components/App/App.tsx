@@ -1,8 +1,8 @@
 import './App.css';
 import { useGetIngredientsQuery } from '@/services/api/ingredientsApi/ingredientsApi';
-import { AppHeader } from '../AppHeader/AppHeader';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import { routes } from '@/router';
+import { RouterProvider } from 'react-router-dom';
+import { router } from '@/router';
+
 
 export const App = () => {
   const { error, isLoading } = useGetIngredientsQuery();
@@ -20,15 +20,6 @@ export const App = () => {
   }
 
   return (
-    <>
-      <BrowserRouter>
-        <AppHeader />
-        <Routes>
-          {routes.map((r) => (
-            <Route path={r.path} element={r.element} key={r.path} />
-          ))}
-        </Routes>
-      </BrowserRouter>
-    </>
+    <RouterProvider router={router}/>
   );
 };

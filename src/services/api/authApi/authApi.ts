@@ -8,7 +8,7 @@ import {
   SuccessRegistrationAndLoginResponse,
   LoginRequest,
   SuccessRefreshTokenResponse,
-  RefreshTokenRequest
+  RefreshTokenRequest,
 } from './types';
 
 export const authApi = createApi({
@@ -23,6 +23,13 @@ export const authApi = createApi({
       }),
     }),
     login: builder.mutation<SuccessRegistrationAndLoginResponse, LoginRequest>({
+      query: (data) => ({
+        url: 'auth/login',
+        method: 'POST',
+        body: data,
+      }),
+    }),
+    logout: builder.mutation<SuccessResponse, RefreshTokenRequest>({
       query: (data) => ({
         url: 'auth/login',
         method: 'POST',

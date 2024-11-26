@@ -1,4 +1,5 @@
 import HomePage from './HomePage/HomePage';
+import RootPage from './RootPage/RootPage';
 import { lazy } from 'react';
 
 const LoginPage = lazy(() => import('./LoginPage/LoginPage'));
@@ -8,7 +9,8 @@ const ResetPasswordPage = lazy(() => import('./ResetPasswordPage/ResetPasswordPa
 const NotFound404Page = lazy(() => import('./NotFound404Page/NotFound404Page'));
 const ProfilePage = lazy(() => import('./ProfilePage/ProfilePage'));
 
-export { 
+export {
+  RootPage,
   HomePage,
   LoginPage,
   RegistrationPage,

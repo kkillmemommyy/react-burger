@@ -21,14 +21,13 @@ const RegistrationPage = () => {
     <main className={cls.main}>
       <form className={cls.container}>
         <h1 className='text text_type_main-medium'>Регистрация</h1>
+        {/* @ts-expect-error onPointerEnterCapture, onPointerLeaveCapture is required */}
         <Input
           name='name'
           value={form.name}
           onChange={onChangeForm}
           type='text'
           placeholder='Имя'
-          onPointerEnterCapture={undefined}
-          onPointerLeaveCapture={undefined}
         />
         <EmailInput name='email' value={form.email} onChange={onChangeForm} />
         <PasswordInput name='password' value={form.password} onChange={onChangeForm} />

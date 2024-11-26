@@ -1,5 +1,8 @@
 import { LazyLoad } from './components/LazyLoad/LazyLoad';
+import { createBrowserRouter, RouteObject } from 'react-router-dom';
+
 import {
+  RootPage,
   HomePage,
   LoginPage,
   RegistrationPage,
@@ -22,62 +25,64 @@ export enum Paths {
   NOT_FOUND = '*',
 }
 
-interface Route {
-  path: Paths;
-  element: JSX.Element;
-}
-
-export const routes: Route[] = [
+const routes: RouteObject[] = [
   {
-    path: Paths.HOME_PAGE,
-    element: <HomePage />,
-  },
-  {
-    path: Paths.LOGIN,
-    element: (
-      <LazyLoad>
-        <LoginPage />
-      </LazyLoad>
-    ),
-  },
-  {
-    path: Paths.REGISTRATION,
-    element: (
-      <LazyLoad>
-        <RegistrationPage />
-      </LazyLoad>
-    ),
-  },
-  {
-    path: Paths.FORGOT_PASSWORD,
-    element: (
-      <LazyLoad>
-        <ForgotPasswordPage />
-      </LazyLoad>
-    ),
-  },
-  {
-    path: Paths.RESET_PASSWORD,
-    element: (
-      <LazyLoad>
-        <ResetPasswordPage />
-      </LazyLoad>
-    ),
-  },
-  {
-    path: Paths.NOT_FOUND,
-    element: (
-      <LazyLoad>
-        <NotFound404Page />
-      </LazyLoad>
-    ),
-  },
-  {
-    path: Paths.PROFILE,
-    element: (
-      <LazyLoad>
-        <ProfilePage />
-      </LazyLoad>
-    ),
+    element: <RootPage />,
+    children: [
+      {
+        path: Paths.HOME_PAGE,
+        element: <HomePage />,
+      },
+      {
+        path: Paths.LOGIN,
+        element: (
+          <LazyLoad>
+            <LoginPage />
+          </LazyLoad>
+        ),
+      },
+      {
+        path: Paths.REGISTRATION,
+        element: (
+          <LazyLoad>
+            <RegistrationPage />
+          </LazyLoad>
+        ),
+      },
+      {
+        path: Paths.FORGOT_PASSWORD,
+        element: (
+          <LazyLoad>
+            <ForgotPasswordPage />
+          </LazyLoad>
+        ),
+      },
+      {
+        path: Paths.RESET_PASSWORD,
+        element: (
+          <LazyLoad>
+            <ResetPasswordPage />
+          </LazyLoad>
+        ),
+      },
+      {
+        path: Paths.NOT_FOUND,
+        element: (
+          <LazyLoad>
+            <NotFound404Page />
+          </LazyLoad>
+        ),
+      },
+      {
+        path: Paths.PROFILE,
+        element: (
+          <LazyLoad>
+            <ProfilePage />
+          </LazyLoad>
+        ),
+      },
+    ],
   },
 ];
+
+export const router = createBrowserRouter(routes);

@@ -19,6 +19,7 @@ const ResetPasswordPage = () => {
   };
 
   const onSubmit: FormEventHandler = (e) => {
+    console.log('sadf');
     e.preventDefault();
     if (form.password.length >= 6) {
       resetPassword(form);
@@ -35,7 +36,10 @@ const ResetPasswordPage = () => {
           value={form.password}
           onChange={onChangeForm}
           required
+          errorText='Длина пароля должна быть от 6 символов'
+          minLength={6}
         />
+        {/* @ts-expect-error onPointerEnterCapture, onPointerLeaveCapture is required */}
         <Input
           name='token'
           value={form.token}
@@ -46,8 +50,6 @@ const ResetPasswordPage = () => {
           autoFocus
           error={isError}
           errorText='Неверный код'
-          onPointerEnterCapture={undefined}
-          onPointerLeaveCapture={undefined}
         />
         <Button htmlType='submit' type='primary' size='medium' disabled={isLoading}>
           Сохранить

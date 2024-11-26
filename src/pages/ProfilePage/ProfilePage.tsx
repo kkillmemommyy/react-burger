@@ -62,7 +62,7 @@ const ProfilePage = () => {
         <nav className='mb-15' aria-label='Меню профиля'>
           <ul role='menu'>
             {tabs.map((tab) => (
-              <li>
+              <li key={tab.path} role='menuitem'>
                 <NavLink
                   to={tab.path}
                   className={({ isActive }) =>
@@ -90,6 +90,7 @@ const ProfilePage = () => {
       </aside>
 
       <div>
+        {/* @ts-expect-error onPointerEnterCapture, onPointerLeaveCapture is required */}
         <Input
           placeholder='Имя'
           name='name'
@@ -101,10 +102,9 @@ const ProfilePage = () => {
           onBlur={() => setIsEditing({ ...isEditing, name: false })}
           disabled={!isEditing.name}
           ref={nameImputRef}
-          onPointerEnterCapture={undefined}
-          onPointerLeaveCapture={undefined}
           extraClass={clsx('mb-6', cls.input)}
         />
+        {/* @ts-expect-error onPointerEnterCapture, onPointerLeaveCapture is required */}
         <Input
           placeholder='Логин'
           name='email'
@@ -116,10 +116,9 @@ const ProfilePage = () => {
           onBlur={() => setIsEditing({ ...isEditing, email: false })}
           disabled={!isEditing.email}
           ref={emailImputRef}
-          onPointerEnterCapture={undefined}
-          onPointerLeaveCapture={undefined}
           extraClass={clsx('mb-6', cls.input)}
         />
+        {/* @ts-expect-error onPointerEnterCapture, onPointerLeaveCapture is required */}
         <Input
           placeholder='Пароль'
           name='password'
@@ -132,8 +131,6 @@ const ProfilePage = () => {
           disabled={!isEditing.password}
           ref={passwordImputRef}
           extraClass={cls.input}
-          onPointerEnterCapture={undefined}
-          onPointerLeaveCapture={undefined}
         />
       </div>
     </main>
