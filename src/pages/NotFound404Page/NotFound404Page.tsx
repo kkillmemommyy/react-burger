@@ -1,6 +1,6 @@
 import cls from './NotFound404Page.module.css';
 import { Link } from 'react-router-dom';
-import notFoundImg from '@/images/notFound.png';
+import notFoundImg from '@/shared/images/notFound.png';
 import { Paths } from '@/router';
 
 const NotFound404Page = () => {

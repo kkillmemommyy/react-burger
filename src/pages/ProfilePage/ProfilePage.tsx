@@ -4,6 +4,11 @@ import { Input } from '@ya.praktikum/react-developer-burger-ui-components';
 import { Paths } from '@/router';
 import { NavLink } from 'react-router-dom';
 import { useState, ChangeEventHandler, useRef } from 'react';
+import { useLogoutMutation } from '@/services/api/authApi/authApi';
+import { localStorageRemoveItem } from '@/shared/utils/localStorage';
+import { useNavigate } from 'react-router-dom';
+import { useTypedDispatch } from '@/services';
+import { userActions } from '@/services/slices/userSlice/userSlice';
 
 interface Tab {
   name: string;
@@ -25,6 +30,13 @@ interface Editable {
 const ProfilePage = () => {
   const [form, setForm] = useState<Form>({ name: '', email: '', password: '' });
   const [isEditing, setIsEditing] = useState<Editable>({ name: false, email: false, password: false });
+  const [logoutRequest] = useLogoutMutation();
+  const navigate = useNavigate();
+
+  const logout = () => {
+    logoutRequest();
+    navigate(Paths.HOME_PAGE, { replace: true });
+  };
 
   const nameImputRef = useRef<HTMLInputElement | null>(null);
   const emailImputRef = useRef<HTMLInputElement | null>(null);
@@ -77,6 +89,7 @@ const ProfilePage = () => {
           <button
             className={clsx('text text_type_main-medium text_color_inactive', cls.btn)}
             aria-label='Выйти из аккаунта'
+            onClick={() => logout()}
           >
             Выход
           </button>

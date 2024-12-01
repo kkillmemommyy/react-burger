@@ -15,10 +15,6 @@ export interface RegistrationRequest {
 
 export type LoginRequest = Pick<RegistrationRequest, 'email' | 'password'>;
 
-export interface RefreshTokenRequest {
-  token: string;
-}
-
 export interface SuccessResponse {
   success: true;
   message: string;
@@ -39,3 +35,5 @@ export interface SuccessRefreshTokenResponse {
   accessToken: `Bearer ${string}`;
   refreshToken: string;
 }
+
+export type SuccessGetUserResponse = Omit<SuccessRegistrationAndLoginResponse, 'accessToken' | 'refreshToken'>

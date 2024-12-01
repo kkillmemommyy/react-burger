@@ -1,4 +1,4 @@
-import { LazyLoad } from './components/LazyLoad/LazyLoad';
+import { LazyLoad, ProtectedRouteElement } from './components';
 import { createBrowserRouter, RouteObject } from 'react-router-dom';
 
 import {
@@ -76,9 +76,11 @@ const routes: RouteObject[] = [
       {
         path: Paths.PROFILE,
         element: (
-          <LazyLoad>
-            <ProfilePage />
-          </LazyLoad>
+          <ProtectedRouteElement>
+            <LazyLoad>
+              <ProfilePage />
+            </LazyLoad>
+          </ProtectedRouteElement>
         ),
       },
     ],

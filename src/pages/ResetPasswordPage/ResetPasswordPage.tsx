@@ -19,7 +19,6 @@ const ResetPasswordPage = () => {
   };
 
   const onSubmit: FormEventHandler = (e) => {
-    console.log('sadf');
     e.preventDefault();
     if (form.password.length >= 6) {
       resetPassword(form);
@@ -36,8 +35,7 @@ const ResetPasswordPage = () => {
           value={form.password}
           onChange={onChangeForm}
           required
-          errorText='Длина пароля должна быть от 6 символов'
-          minLength={6}
+          errorText='Пароль должен содержать не менее 6 символов'
         />
         {/* @ts-expect-error onPointerEnterCapture, onPointerLeaveCapture is required */}
         <Input

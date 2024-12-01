@@ -8,19 +8,32 @@ import {
   SuccessRegistrationAndLoginResponse,
   LoginRequest,
   SuccessRefreshTokenResponse,
-  RefreshTokenRequest,
 } from './types';
+import { localStorageGetItem, localStorageRemoveItem, localStorageSetItem } from '@/shared/utils/localStorage';
+import { userActions } from '@/services/slices/userSlice/userSlice';
+
+const baseQuery = fetchBaseQuery({
+  baseUrl: NORMA_API_BASE_URL,
+});
 
 export const authApi = createApi({
   reducerPath: 'authApi',
-  baseQuery: fetchBaseQuery({ baseUrl: NORMA_API_BASE_URL }),
+  baseQuery,
   endpoints: (builder) => ({
-    refreshToken: builder.mutation<SuccessRefreshTokenResponse, RefreshTokenRequest>({
-      query: (data) => ({
+    refreshToken: builder.mutation<SuccessRefreshTokenResponse, void>({
+      query: () => ({
         url: 'auth/token',
         method: 'POST',
-        body: data,
+        body: { token: localStorageGetItem('refreshToken') ?? '' },
       }),
+      onQueryStarted: async (_, { queryFulfilled, dispatch }) => {
+        const {
+          data: { accessToken, refreshToken },
+        } = await queryFulfilled;
+
+        localStorageSetItem('refreshToken', refreshToken);
+        dispatch(userActions.setAccessToken({ accessToken }));
+      },
     }),
     login: builder.mutation<SuccessRegistrationAndLoginResponse, LoginRequest>({
       query: (data) => ({
@@ -28,13 +41,28 @@ export const authApi = createApi({
         method: 'POST',
         body: data,
       }),
+      onQueryStarted: async (_, { queryFulfilled, dispatch }) => {
+        const {
+          data: { accessToken, refreshToken, user },
+        } = await queryFulfilled;
+
+        localStorageSetItem('refreshToken', refreshToken);
+        dispatch(userActions.setUser({ user }));
+        dispatch(userActions.setAccessToken({ accessToken }));
+      },
     }),
-    logout: builder.mutation<SuccessResponse, RefreshTokenRequest>({
-      query: (data) => ({
-        url: 'auth/login',
+    logout: builder.mutation<SuccessResponse, void>({
+      query: () => ({
+        url: 'auth/logout',
         method: 'POST',
-        body: data,
+        body: { token: localStorageGetItem('refreshToken') ?? '' },
       }),
+      onQueryStarted: async (_, { queryFulfilled, dispatch }) => {
+        //Тут надо разобраться
+        localStorageRemoveItem('refreshToken');
+        dispatch(userActions.logout());
+        await queryFulfilled;
+      },
     }),
     registration: builder.mutation<SuccessRegistrationAndLoginResponse, RegistrationRequest>({
       query: (data) => ({
@@ -42,6 +70,15 @@ export const authApi = createApi({
         method: 'POST',
         body: data,
       }),
+      onQueryStarted: async (_, { queryFulfilled, dispatch }) => {
+        const {
+          data: { accessToken, refreshToken, user },
+        } = await queryFulfilled;
+
+        localStorageSetItem('refreshToken', refreshToken);
+        dispatch(userActions.setUser({ user }));
+        dispatch(userActions.setAccessToken({ accessToken }));
+      },
     }),
     forgotPassword: builder.mutation<SuccessResponse, ForgotPasswordRequest>({
       query: (data) => ({
@@ -60,4 +97,11 @@ export const authApi = createApi({
   }),
 });
 
-export const { useForgotPasswordMutation, useResetPasswordMutation } = authApi;
+export const {
+  useRefreshTokenMutation,
+  useLoginMutation,
+  useLogoutMutation,
+  useRegistrationMutation,
+  useForgotPasswordMutation,
+  useResetPasswordMutation,
+} = authApi;
