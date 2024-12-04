@@ -4,9 +4,6 @@ import { EmailInput, PasswordInput, Button } from '@ya.praktikum/react-developer
 import { Link } from 'react-router-dom';
 import { Paths } from '@/router';
 import { useLoginMutation } from '@/services/api/authApi/authApi';
-import { useTypedSelector } from '@/services';
-import { selectUser } from '@/services/selectors/userSelectors';
-import { Navigate } from 'react-router-dom';
 
 interface Form {
   password: string;
@@ -15,12 +12,7 @@ interface Form {
 
 const LoginPage = () => {
   const [form, setForm] = useState<Form>({ password: '', email: '' });
-  const [loginRequest, { isError, isLoading }] = useLoginMutation();
-  const user = useTypedSelector(selectUser);
-
-  if (user) {
-    return <Navigate to={Paths.HOME_PAGE} replace />;
-  }
+  const [loginRequest, { isLoading }] = useLoginMutation();
 
   const onChangeForm: ChangeEventHandler<HTMLInputElement> = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });

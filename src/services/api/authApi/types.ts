@@ -13,6 +13,12 @@ export interface RegistrationRequest {
   name: string;
 }
 
+export interface PatchUserRequest {
+  name?: string;
+  email?: string;
+  password?: string;
+}
+
 export type LoginRequest = Pick<RegistrationRequest, 'email' | 'password'>;
 
 export interface SuccessResponse {
@@ -36,4 +42,4 @@ export interface SuccessRefreshTokenResponse {
   refreshToken: string;
 }
 
-export type SuccessGetUserResponse = Omit<SuccessRegistrationAndLoginResponse, 'accessToken' | 'refreshToken'>
+export type SuccessGetUserResponse = Omit<SuccessRegistrationAndLoginResponse, 'accessToken' | 'refreshToken'>;

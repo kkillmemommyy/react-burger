@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { NORMA_API_BASE_URL } from '../routes';
-import { SuccessGetUserResponse } from './types';
+import { SuccessGetUserResponse, PatchUserRequest } from './types';
 import { AppState } from '@/services';
 import { localStorageGetItem, localStorageSetItem } from '@/shared/utils/localStorage';
 import { authApi } from './authApi';
@@ -17,6 +17,7 @@ const baseQuery = fetchBaseQuery({
   },
 });
 
+//Можно упростить ?
 const baseQueryWithReauth: typeof baseQuery = async (args, api, extraOptions) => {
   let result = await baseQuery(args, api, extraOptions);
 
@@ -65,7 +66,21 @@ export const accessAuthApi = createApi({
         dispatch(userActions.setUser({ user }));
       },
     }),
+    patchUser: builder.mutation<SuccessGetUserResponse, PatchUserRequest>({
+      query: (form) => ({
+        url: 'auth/user',
+        method: 'PATCH',
+        body: form,
+      }),
+      onQueryStarted: async (_, { queryFulfilled, dispatch }) => {
+        const {
+          data: { user },
+        } = await queryFulfilled;
+
+        dispatch(userActions.setUser({ user }));
+      },
+    })
   }),
 });
 
-export const { useGetUserQuery } = accessAuthApi;
+export const { useGetUserQuery, usePatchUserMutation } = accessAuthApi;

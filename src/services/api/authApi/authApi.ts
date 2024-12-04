@@ -58,7 +58,6 @@ export const authApi = createApi({
         body: { token: localStorageGetItem('refreshToken') ?? '' },
       }),
       onQueryStarted: async (_, { queryFulfilled, dispatch }) => {
-        //Тут надо разобраться
         localStorageRemoveItem('refreshToken');
         dispatch(userActions.logout());
         await queryFulfilled;
