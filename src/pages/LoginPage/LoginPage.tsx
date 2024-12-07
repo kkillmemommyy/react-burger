@@ -1,9 +1,18 @@
-import { useState, ChangeEventHandler, FormEventHandler } from 'react';
 import cls from './LoginPage.module.css';
-import { EmailInput, PasswordInput, Button } from '@ya.praktikum/react-developer-burger-ui-components';
+import { Button, Input } from '@ya.praktikum/react-developer-burger-ui-components';
 import { Link } from 'react-router-dom';
 import { Paths } from '@/router';
 import { useLoginMutation } from '@/services/api/authApi/authApi';
+import { z } from 'zod';
+import { Controller, useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useState } from 'react';
+import clsx from 'clsx';
+
+const schema = z.object({
+  email: z.string().min(1, 'Введите email').email('Некорректный email'),
+  password: z.string().min(1, 'Введите пароль'),
+});
 
 interface Form {
   password: string;
@@ -11,25 +20,94 @@ interface Form {
 }
 
 const LoginPage = () => {
-  const [form, setForm] = useState<Form>({ password: '', email: '' });
-  const [loginRequest, { isLoading }] = useLoginMutation();
+  const [showPassword, setShowPassword] = useState(false);
+  const [loginRequest] = useLoginMutation();
 
-  const onChangeForm: ChangeEventHandler<HTMLInputElement> = (e) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
+  const toggleShowPassword = () => setShowPassword((prev) => !prev);
+
+  const {
+    control,
+    handleSubmit,
+    formState: { isSubmitting, errors, isSubmitted },
+    setError,
+    clearErrors,
+  } = useForm({
+    defaultValues: { email: '', password: '' },
+    resolver: zodResolver(schema),
+    mode: 'onSubmit',
+    delayError: 600,
+  });
+
+  const onSubmit = async (data: Form) => {
+    const response = await loginRequest(data);
+    if (response.error && 'status' in response.error) {
+      switch (response.error.status) {
+        case 401:
+          setError('root.serverError', { message: 'Неверный логин или пароль' });
+          break;
+      }
+    }
   };
 
-  const onSubmit: FormEventHandler = async (e) => {
-    e.preventDefault();
-    await loginRequest(form);
+  const clearErrorsField = (field: keyof Form, invalid: boolean) => {
+    if (isSubmitted) {
+      if (errors.root?.serverError) {
+        clearErrors('root');
+      }
+      if (invalid) {
+        clearErrors(field);
+      }
+    }
   };
 
   return (
     <main className={cls.main}>
-      <form className={cls.container} onSubmit={onSubmit}>
+      <form className={cls.container} onSubmit={handleSubmit(onSubmit)}>
         <h1 className='text text_type_main-medium'>Вход</h1>
-        <EmailInput name='email' value={form.email} onChange={onChangeForm} required />
-        <PasswordInput name='password' value={form.password} onChange={onChangeForm} required />
-        <Button htmlType='submit' type='primary' size='medium' disabled={isLoading}>
+        {errors.root?.serverError && (
+          <p className={clsx(cls.authError, 'text text_type_main-default')}>{errors.root.serverError.message}</p>
+        )}
+
+        <Controller
+          name='email'
+          control={control}
+          render={({ field, fieldState: { error, invalid } }) => (
+            // @ts-expect-error onPointerEnterCapture, onPointerLeaveCapture is required
+            <Input
+              {...field}
+              type='text'
+              placeholder='E-mail'
+              errorText={error?.message}
+              error={invalid}
+              onChange={(e) => {
+                clearErrorsField('email', invalid);
+                field.onChange(e);
+              }}
+            />
+          )}
+        />
+        <Controller
+          name='password'
+          control={control}
+          render={({ field, fieldState: { error, invalid } }) => (
+            // @ts-expect-error onPointerEnterCapture, onPointerLeaveCapture is required
+            <Input
+              {...field}
+              placeholder='Пароль'
+              icon={showPassword ? 'HideIcon' : 'ShowIcon'}
+              type={showPassword ? 'text' : 'password'}
+              onIconClick={toggleShowPassword}
+              errorText={error?.message}
+              error={invalid}
+              onChange={(e) => {
+                clearErrorsField('email', invalid);
+                field.onChange(e);
+              }}
+            />
+          )}
+        />
+
+        <Button htmlType='submit' type='primary' size='medium' disabled={isSubmitting}>
           Войти
         </Button>
       </form>

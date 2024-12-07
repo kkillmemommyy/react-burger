@@ -1,11 +1,10 @@
 import { ReactElement, Suspense } from 'react';
+import { Loader } from '../Loader/Loader';
 
 interface Props {
   children: ReactElement;
 }
 
 export const LazyLoad = ({ children }: Props) => {
-  const Loader = <div className='prerender loading text text_type_main-large'>LOADING</div>;
-
-  return <Suspense fallback={Loader}>{children}</Suspense>;
+  return <Suspense fallback={<Loader />}>{children}</Suspense>;
 };

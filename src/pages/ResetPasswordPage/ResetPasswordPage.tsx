@@ -1,9 +1,17 @@
-import { useState, ChangeEventHandler, FormEventHandler } from 'react';
 import cls from './ResetPasswordPage.module.css';
-import { Input, PasswordInput, Button } from '@ya.praktikum/react-developer-burger-ui-components';
-import { Link } from 'react-router-dom';
+import { Input, Button } from '@ya.praktikum/react-developer-burger-ui-components';
+import { Link, useNavigate } from 'react-router-dom';
 import { Paths } from '@/router';
 import { useResetPasswordMutation } from '@/services/api/authApi/authApi';
+import { z } from 'zod';
+import { Controller, useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useState } from 'react';
+
+const schema = z.object({
+  token: z.string().min(1, 'Введите код из сообщения'),
+  password: z.string().min(1, 'Введите новый пароль').min(6, 'Пароль должен содержать не менее 6 символов'),
+});
 
 interface Form {
   password: string;
@@ -11,45 +19,86 @@ interface Form {
 }
 
 const ResetPasswordPage = () => {
-  const [form, setForm] = useState<Form>({ password: '', token: '' });
-  const [resetPassword, { isLoading, isError }] = useResetPasswordMutation();
+  const [showPassword, setShowPassword] = useState(false);
+  const toggleShowPassword = () => setShowPassword((prev) => !prev);
 
-  const onChangeForm: ChangeEventHandler<HTMLInputElement> = (e) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
-  };
+  const navigate = useNavigate();
 
-  const onSubmit: FormEventHandler = (e) => {
-    e.preventDefault();
-    if (form.password.length >= 6) {
-      resetPassword(form);
+  const {
+    control,
+    handleSubmit,
+    formState: { isSubmitting },
+    clearErrors,
+    setError,
+  } = useForm({
+    defaultValues: { password: '', token: '' },
+    resolver: zodResolver(schema),
+    mode: 'onSubmit',
+    reValidateMode: 'onSubmit',
+  });
+
+  const [resetPassword] = useResetPasswordMutation();
+
+  const onSubmit = async (form: Form) => {
+    const response = await resetPassword(form);
+    if (response.error && 'status' in response.error) {
+      switch (response.error.status) {
+        case 404:
+          setError('token', { message: 'Неверный код' });
+          break;
+      }
+    } else {
+      navigate(Paths.LOGIN, { replace: true });
     }
   };
 
   return (
     <main className={cls.main}>
-      <form className={cls.container} onSubmit={onSubmit}>
+      <form className={cls.container} onSubmit={handleSubmit(onSubmit)}>
         <h1 className='text text_type_main-medium'>Восстановление пароля</h1>
-        <PasswordInput
-          placeholder='Введите новый пароль'
+        <Controller
           name='password'
-          value={form.password}
-          onChange={onChangeForm}
-          required
-          errorText='Пароль должен содержать не менее 6 символов'
+          control={control}
+          render={({ field, fieldState: { error, invalid } }) => (
+            // @ts-expect-error onPointerEnterCapture, onPointerLeaveCapture is required
+            <Input
+              {...field}
+              placeholder='Введите новый пароль'
+              icon={showPassword ? 'HideIcon' : 'ShowIcon'}
+              type={showPassword ? 'text' : 'password'}
+              onIconClick={toggleShowPassword}
+              errorText={error?.message}
+              error={invalid}
+              onChange={(e) => {
+                if (invalid) {
+                  clearErrors('password');
+                }
+                field.onChange(e);
+              }}
+            />
+          )}
         />
-        {/* @ts-expect-error onPointerEnterCapture, onPointerLeaveCapture is required */}
-        <Input
+        <Controller
           name='token'
-          value={form.token}
-          onChange={onChangeForm}
-          type='text'
-          placeholder='Введите код из письма'
-          required
-          autoFocus
-          error={isError}
-          errorText='Неверный код'
+          control={control}
+          render={({ field, fieldState: { error, invalid } }) => (
+            // @ts-expect-error onPointerEnterCapture, onPointerLeaveCapture is required
+            <Input
+              {...field}
+              placeholder='Введите код из письма'
+              type='text'
+              errorText={error?.message}
+              error={invalid}
+              onChange={(e) => {
+                if (invalid) {
+                  clearErrors('token');
+                }
+                field.onChange(e);
+              }}
+            />
+          )}
         />
-        <Button htmlType='submit' type='primary' size='medium' disabled={isLoading}>
+        <Button htmlType='submit' type='primary' size='medium' disabled={isSubmitting}>
           Сохранить
         </Button>
       </form>

@@ -74,14 +74,6 @@ const routes: RouteObject[] = [
         ),
       },
       {
-        path: Paths.NOT_FOUND,
-        element: (
-          <LazyLoad>
-            <NotFound404Page />
-          </LazyLoad>
-        ),
-      },
-      {
         path: Paths.PROFILE,
         element: (
           <ProtectedRouteElement>
@@ -89,6 +81,14 @@ const routes: RouteObject[] = [
               <ProfilePage />
             </LazyLoad>
           </ProtectedRouteElement>
+        ),
+      },
+      {
+        path: Paths.NOT_FOUND,
+        element: (
+          <LazyLoad>
+            <NotFound404Page />
+          </LazyLoad>
         ),
       },
     ],

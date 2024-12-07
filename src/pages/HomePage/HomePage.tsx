@@ -5,7 +5,7 @@ import { BurgerConstructor } from './components/BurgerConstructor/BurgerConstruc
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 
-const MainPage = () => {
+const HomePage = () => {
   return (
     <main className={clsx(cls.main, 'pt-10')}>
       <h1 className={clsx(cls.h1, 'mb-5 text text_type_main-large')}>Соберите бургер</h1>
@@ -19,4 +19,4 @@ const MainPage = () => {
   );
 };
 
-export default MainPage;
+export default HomePage;

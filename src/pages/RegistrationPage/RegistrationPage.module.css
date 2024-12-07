@@ -13,7 +13,10 @@
   margin-bottom: 80px;
 }
 
-
 .link {
   color: #4c4cff;
+}
+
+.authError {
+  color: var(--colors-interface-error);
 }

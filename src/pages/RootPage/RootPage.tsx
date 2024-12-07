@@ -2,13 +2,14 @@ import { AppHeader } from '@/components/AppHeader/AppHeader';
 import { useGetUserQuery } from '@/services/api/authApi/accessAuthApi';
 import { useGetIngredientsQuery } from '@/services/api/ingredientsApi/ingredientsApi';
 import { Outlet } from 'react-router-dom';
+import { Loader } from '@/components/Loader/Loader';
 
 const RootPage = () => {
   const { error: isIngredientsError, isLoading: isIngredientsLoading } = useGetIngredientsQuery();
   const { isLoading: isUserLoading } = useGetUserQuery();
 
   if (isIngredientsLoading || isUserLoading) {
-    return <div className='prerender loading text text_type_main-large'>LOADING</div>;
+    return <Loader />;
   }
 
   if (isIngredientsError) {

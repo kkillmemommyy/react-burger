@@ -18,14 +18,8 @@ interface Editable {
 
 const schema = z.object({
   name: z.string().min(1, 'Имя обязательно'),
-  email: z.string().email('Некорректный email').min(1, 'Email обязателен'),
-  password: z
-    .string()
-    .optional()
-    .or(z.literal(''))
-    .refine((val) => val === '' || (val && val.length >= 6), {
-      message: 'Пароль должен содержать не менее 6 символов',
-    }),
+  email: z.string().min(1, 'Email обязателен').email('Некорректный email'),
+  password: z.string().min(6, 'Пароль должен содержать не менее 6 символов').or(z.literal('')),
 });
 
 export const EditProfile = () => {
@@ -35,35 +29,22 @@ export const EditProfile = () => {
   const {
     control,
     handleSubmit,
-    formState: { errors, isDirty, isValid, isSubmitting },
+    formState: { isDirty, isValid, isSubmitting },
     reset,
-    trigger,
     clearErrors,
   } = useForm({
     defaultValues: { name: user.name, email: user.email, password: '' },
     resolver: zodResolver(schema),
+    mode: 'onChange',
+    delayError: 400,
   });
 
-  const isDisabledResetBtn = !isDirty || isSubmitting;
-  const isDisabledSubmitBtn = !isDirty || isSubmitting || !isValid;
+  const isResetBtnDisabled = !isDirty || isSubmitting;
+  const isSubmitBtnDisabled = !isDirty || isSubmitting || !isValid;
 
   const nameInputRef = useRef<HTMLInputElement | null>(null);
   const emailInputRef = useRef<HTMLInputElement | null>(null);
   const passwordInputRef = useRef<HTMLInputElement | null>(null);
-
-  const timers = useRef<Record<keyof Editable, number | null>>({ name: null, password: null, email: null });
-
-  const errorsTimeout = (field: keyof Editable) => {
-    if (timers.current[field]) {
-      clearTimeout(timers.current[field]);
-    }
-
-    clearErrors(field);
-
-    timers.current[field] = setTimeout(() => {
-      trigger(field);
-    }, 1000);
-  };
 
   const [isEditing, setIsEditing] = useState<Editable>({
     name: false,
@@ -97,7 +78,7 @@ export const EditProfile = () => {
     }, 0);
   };
 
-  const onSubmit = async (data: { name: string; email: string; password?: string }) => {
+  const onSubmit = async (data: { name: string; email: string; password: string }) => {
     const { password, ...rest } = data;
     const formToSubmit = password ? data : rest;
     setIsEditing({
@@ -122,7 +103,7 @@ export const EditProfile = () => {
       <Controller
         name='name'
         control={control}
-        render={({ field }) => (
+        render={({ field, fieldState: { invalid, error } }) => (
           // @ts-expect-error onPointerEnterCapture, onPointerLeaveCapture is required
           <Input
             {...field}
@@ -132,43 +113,47 @@ export const EditProfile = () => {
             ref={nameInputRef}
             disabled={!isEditing.name}
             onIconClick={() => onIconClick('name')}
-            onChange={(e) => {
-              field.onChange(e);
-              errorsTimeout(field.name);
-            }}
-            error={!!errors.name}
-            errorText={errors.name?.message}
+            error={invalid}
+            errorText={error?.message}
             extraClass={clsx('mb-6', cls.input)}
+            onChange={(e) => {
+              if (invalid) {
+                clearErrors('name');
+              }
+              field.onChange(e);
+            }}
           />
         )}
       />
       <Controller
         name='email'
         control={control}
-        render={({ field }) => (
+        render={({ field, fieldState: { invalid, error } }) => (
           // @ts-expect-error onPointerEnterCapture, onPointerLeaveCapture is required
           <Input
             {...field}
             placeholder='Логин'
-            type='email'
+            type='text'
             icon='EditIcon'
             ref={emailInputRef}
             disabled={!isEditing.email}
             onIconClick={() => onIconClick('email')}
-            onChange={(e) => {
-              field.onChange(e);
-              errorsTimeout(field.name);
-            }}
-            error={!!errors.email}
-            errorText={errors.email?.message}
+            error={invalid}
+            errorText={error?.message}
             extraClass={clsx('mb-6', cls.input)}
+            onChange={(e) => {
+              if (invalid) {
+                clearErrors('email');
+              }
+              field.onChange(e);
+            }}
           />
         )}
       />
       <Controller
         name='password'
         control={control}
-        render={({ field }) => (
+        render={({ field, fieldState: { invalid, error } }) => (
           // @ts-expect-error onPointerEnterCapture, onPointerLeaveCapture is required
           <Input
             {...field}
@@ -178,28 +163,28 @@ export const EditProfile = () => {
             ref={passwordInputRef}
             disabled={!isEditing.password}
             onIconClick={() => onIconClick('password')}
-            onChange={(e) => {
-              field.onChange(e);
-              errorsTimeout(field.name);
-            }}
-            error={!!errors.password}
-            errorText={errors.password?.message}
+            error={invalid}
+            errorText={error?.message}
             extraClass={clsx('mb-6', cls.input)}
+            onChange={(e) => {
+              if (invalid) {
+                clearErrors('password');
+              }
+              field.onChange(e);
+            }}
           />
         )}
       />
       <div className={cls.container}>
         <div className={clsx('mr-5', cls.btnWrap)}>
-          <Button htmlType='reset' onClick={onClickReset} disabled={isDisabledResetBtn}>
+          <Button htmlType='reset' onClick={onClickReset} disabled={isResetBtnDisabled}>
             Отменить
           </Button>
         </div>
-        <Button htmlType='submit' disabled={isDisabledSubmitBtn}>
+        <Button htmlType='submit' disabled={isSubmitBtnDisabled}>
           Сохранить
         </Button>
       </div>
     </form>
   );
 };
-
-export default EditProfile;
