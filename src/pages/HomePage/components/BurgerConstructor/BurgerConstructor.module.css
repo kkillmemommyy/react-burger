@@ -1,0 +1,39 @@
+.wrap {
+  flex: 1;
+}
+
+.total {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.constructorContainer {
+  height: calc(100vh - 342px);
+  border: 1px solid #131316;
+}
+
+.overConstructorContainer {
+  border: 1px dashed #c5c5c5;
+}
+
+.withScroll {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  height: calc(100vh - 536px);
+  overflow-y: auto;
+  scroll-behavior: smooth;
+  scrollbar-width: thin;
+}
+
+.withScrollNotBun {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  height: 528px;
+  margin-bottom: 40px;
+  overflow-y: auto;
+  scroll-behavior: smooth;
+  scrollbar-width: thin;
+}
+

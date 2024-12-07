@@ -1,9 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { normaApi } from './api/normaApi';
-import { rootReducer } from './slices';
+import { rootSlicesReducer } from './slices';
+import { rootApiReducer, apiMiddlewares } from './api';
 
+const rootReducer = { ...rootApiReducer, ...rootSlicesReducer };
 
 export const store = configureStore({
   reducer: rootReducer,
-  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(normaApi.middleware),
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(apiMiddlewares),
 });
