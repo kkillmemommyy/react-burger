@@ -1,14 +1,11 @@
 import { useEffect, useState } from 'react';
-import { useTypedSelector } from '@/services';
 import { useInView } from 'react-intersection-observer';
 import cls from './BurgerIngredients.module.css';
-import { Modal } from '@/components/Modal/Modal';
-import { IngredientDetails } from './IngredientDetails/IngredientDetails';
-import { selectModal } from '@/services/selectors/modalSelectors';
 import { Tabs } from './Tabs/Tabs';
 import { IngredientsSection } from './IngredientsSection/IngredientsSection';
 import { IngredientType } from '@/shared/types/api';
 import { IngredientTitles } from '@/shared/types/api';
+import { Outlet } from 'react-router-dom';
 
 interface ingredientsSectionType {
   type: IngredientType;
@@ -18,7 +15,6 @@ interface ingredientsSectionType {
 
 export const BurgerIngredients = () => {
   const [currentTab, setCurrentTab] = useState<IngredientType>('bun');
-  const { isModalOpen, modalType, modalContent } = useTypedSelector(selectModal);
 
   const { ref: bunsRef, inView: bunsInView } = useInView();
   const { ref: saucesRef, inView: saucesInView } = useInView();
@@ -50,11 +46,7 @@ export const BurgerIngredients = () => {
           ))}
         </div>
       </section>
-      {isModalOpen && modalType === 'IngredientDetails' && modalContent && (
-        <Modal title='Детали ингредиента'>
-          <IngredientDetails {...modalContent} />
-        </Modal>
-      )}
+      <Outlet />
     </>
   );
 };

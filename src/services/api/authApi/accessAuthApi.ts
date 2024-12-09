@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { NORMA_API_BASE_URL } from '../routes';
-import { SuccessGetUserResponse, PatchUserRequest } from './types';
+import { SuccessGetUserResponse, PatchUserRequest, MakeOrderResponse, MakeOrderRequest } from './types';
 import { AppState } from '@/services';
 import { localStorageGetItem, localStorageSetItem } from '@/shared/utils/localStorage';
 import { authApi } from './authApi';
@@ -79,8 +79,15 @@ export const accessAuthApi = createApi({
 
         dispatch(userActions.setUser({ user }));
       },
-    })
+    }),
+    makeOrder: builder.mutation<MakeOrderResponse, MakeOrderRequest>({
+      query: (data) => ({
+        url: 'orders',
+        method: 'POST',
+        body: data,
+      }),
+    }),
   }),
 });
 
-export const { useGetUserQuery, usePatchUserMutation } = accessAuthApi;
+export const { useGetUserQuery, usePatchUserMutation, useMakeOrderMutation } = accessAuthApi;

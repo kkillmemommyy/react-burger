@@ -10,12 +10,15 @@ import {
   ResetPasswordPage,
   NotFound404Page,
   ProfilePage,
+  IngredientInModalPage,
+  IngredientPage,
 } from './pages';
 
 export enum Paths {
   HOME_PAGE = '/',
   FEED = '/feed',
   LOGIN = '/login',
+  INGREDIENT = '/ingredient/:id',
   REGISTRATION = '/registration',
   FORGOT_PASSWORD = '/forgot-password',
   RESET_PASSWORD = '/reset-password',
@@ -32,6 +35,24 @@ const routes: RouteObject[] = [
       {
         path: Paths.HOME_PAGE,
         element: <HomePage />,
+        children: [
+          {
+            path: Paths.INGREDIENT,
+            element: (
+              <LazyLoad>
+                <IngredientInModalPage />
+              </LazyLoad>
+            ),
+          },
+        ],
+      },
+      {
+        path: Paths.INGREDIENT,
+        element: (
+          <LazyLoad>
+            <IngredientPage />
+          </LazyLoad>
+        ),
       },
       {
         path: Paths.LOGIN,

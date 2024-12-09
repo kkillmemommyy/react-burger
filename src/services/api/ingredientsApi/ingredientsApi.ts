@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { GetIngredientsResponse, NormalizedIngredients, MakeOrderRequest, MakeOrderResponse } from './types';
+import { GetIngredientsResponse, NormalizedIngredients } from './types';
 import { NORMA_API_BASE_URL } from '../routes';
 
 export const ingredientsApi = createApi({
@@ -20,14 +20,7 @@ export const ingredientsApi = createApi({
           { entities: {}, ids: [] }
         ),
     }),
-    makeOrder: builder.mutation<MakeOrderResponse, MakeOrderRequest>({
-      query: (data) => ({
-        url: 'orders',
-        method: 'POST',
-        body: data,
-      }),
-    }),
   }),
 });
 
-export const { useGetIngredientsQuery, useMakeOrderMutation } = ingredientsApi;
+export const { useGetIngredientsQuery } = ingredientsApi;

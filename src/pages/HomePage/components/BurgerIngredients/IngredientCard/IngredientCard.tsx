@@ -7,6 +7,8 @@ import { openModal } from '@/services/slices/modalSlice/modalSlice';
 import { selectIngredientById } from '@/services/selectors/ingredientsApiSelectors';
 import { selectIngredientCountById } from '@/services/selectors/selectedIngredientsSelectors';
 import { useDrag } from 'react-dnd';
+import { useNavigate } from 'react-router-dom';
+import { Paths } from '@/router';
 
 interface Props {
   id: string;
@@ -14,6 +16,7 @@ interface Props {
 
 export const IngredientCard = memo(({ id }: Props) => {
   const dispatch = useTypedDispatch();
+  const navigate = useNavigate();
 
   const ingredient = useTypedSelector(selectIngredientById(id));
   const count = useTypedSelector(selectIngredientCountById(id));
@@ -33,6 +36,7 @@ export const IngredientCard = memo(({ id }: Props) => {
       image: ingredient.image_large,
     };
     dispatch(openModal({ modalContent: dataForModal, modalType: 'IngredientDetails' }));
+    navigate(Paths.INGREDIENT.replace(':id', id), { replace: true });
   };
 
   return (

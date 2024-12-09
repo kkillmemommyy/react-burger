@@ -7,20 +7,30 @@ import { Modal } from '@/components/Modal/Modal';
 import { OrderDetails } from './OrderDetails/OrderDetails';
 import { TotalPrice } from './TotalPrice/TotalPrice';
 import { selectBun, selectStuffing } from '@/services/selectors/selectedIngredientsSelectors';
-import { useMakeOrderMutation } from '@/services/api/ingredientsApi/ingredientsApi';
+import { useMakeOrderMutation } from '@/services/api/authApi/accessAuthApi';
 import { useDrop } from 'react-dnd';
 import { selectedIngredientsActions } from '@/services/slices/selectedIngredientsSlice/selectedIngredientsSlice';
 import { DragbleElement } from './DragbleElement/DragbleElement';
 import { selectModal } from '@/services/selectors/modalSelectors';
 import { openModal } from '@/services/slices/modalSlice/modalSlice';
 import { AddIngredientPayload } from '@/services/slices/selectedIngredientsSlice/types';
+import { selectUser } from '@/services/selectors/userSelectors';
+import { createSearchParams, useNavigate } from 'react-router-dom';
+import { Paths } from '@/router';
 
 const ConstructorElement = memo(CE);
 
 export const BurgerConstructor = () => {
-  const { isModalOpen, modalType, modalContent } = useTypedSelector(selectModal);
-
+  const navigate = useNavigate();
   const dispatch = useTypedDispatch();
+  const [orderRequest, { isLoading, error }] = useMakeOrderMutation();
+
+  const { isModalOpen, modalType, modalContent } = useTypedSelector(selectModal);
+  const user = useTypedSelector(selectUser);
+
+  const bun = useTypedSelector(selectBun);
+  const stuffing = useTypedSelector(selectStuffing);
+  const isMakeOrderBtnDisabled = !bun || stuffing.length === 0;
 
   const [{ isOver }, dropRef] = useDrop<AddIngredientPayload, unknown, { isOver: boolean }>({
     accept: 'ingredient',
@@ -32,19 +42,20 @@ export const BurgerConstructor = () => {
     }),
   });
 
-  const [orderRequest, { isLoading, error }] = useMakeOrderMutation();
-
-  const bun = useTypedSelector(selectBun);
-  const stuffing = useTypedSelector(selectStuffing);
-
   const makeOrder = async () => {
-    if (!bun) {
+    if (!user) {
+      const searchParams = createSearchParams({ redirect: Paths.HOME_PAGE });
+      navigate(`${Paths.LOGIN}?${searchParams}`);
       return;
     }
-    const ids = [bun.id, ...stuffing.map((s) => s.id)];
+
+    //bun is not null because isMakeOrderBtnDisabled checked it
+    const ids = [bun!.id, ...stuffing.map((s) => s.id)];
     dispatch(openModal({ modalType: 'OrderDetails', modalContent: null }));
+
     const response = await orderRequest({ ingredients: ids });
     const orderId = response?.data?.order?.number;
+
     if (orderId) {
       dispatch(openModal({ modalType: 'OrderDetails', modalContent: orderId }));
     }
@@ -90,7 +101,7 @@ export const BurgerConstructor = () => {
         </div>
         <div className={clsx(cls.total, 'pr-4')}>
           <TotalPrice />
-          <Button htmlType='button' type='primary' size='large' onClick={makeOrder} disabled={stuffing.length === 0}>
+          <Button htmlType='button' type='primary' size='large' onClick={makeOrder} disabled={isMakeOrderBtnDisabled}>
             Оформить заказ
           </Button>
         </div>

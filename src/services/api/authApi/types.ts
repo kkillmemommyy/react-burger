@@ -19,6 +19,8 @@ export interface PatchUserRequest {
   password?: string;
 }
 
+export type MakeOrderRequest = { ingredients: string[] };
+
 export type LoginRequest = Pick<RegistrationRequest, 'email' | 'password'>;
 
 export interface SuccessResponse {
@@ -43,3 +45,11 @@ export interface SuccessRefreshTokenResponse {
 }
 
 export type SuccessGetUserResponse = Omit<SuccessRegistrationAndLoginResponse, 'accessToken' | 'refreshToken'>;
+
+export interface MakeOrderResponse {
+  name: string;
+  order: {
+    number: number;
+  };
+  success: boolean;
+}
