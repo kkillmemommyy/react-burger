@@ -18,7 +18,7 @@ const ForgotPasswordPage = () => {
 
   const onSubmit = (form: { email: string }) => {
     forgotPasswordReauest(form);
-    navigate(Paths.RESET_PASSWORD);
+    navigate(Paths.RESET_PASSWORD, { state: { prevPage: Paths.FORGOT_PASSWORD }, replace: true });
   };
 
   const { control, handleSubmit, clearErrors } = useForm({

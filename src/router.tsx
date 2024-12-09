@@ -1,4 +1,4 @@
-import { LazyLoad, ProtectedRouteElement, ProtectedAuthRouteElement } from './components';
+import { LazyLoad, ProtectedRoute, ProtectedAuthRoute } from './components';
 import { createBrowserRouter, RouteObject } from 'react-router-dom';
 
 import {
@@ -36,51 +36,51 @@ const routes: RouteObject[] = [
       {
         path: Paths.LOGIN,
         element: (
-          <ProtectedAuthRouteElement>
+          <ProtectedAuthRoute>
             <LazyLoad>
               <LoginPage />
             </LazyLoad>
-          </ProtectedAuthRouteElement>
+          </ProtectedAuthRoute>
         ),
       },
       {
         path: Paths.REGISTRATION,
         element: (
-          <ProtectedAuthRouteElement>
+          <ProtectedAuthRoute>
             <LazyLoad>
               <RegistrationPage />
             </LazyLoad>
-          </ProtectedAuthRouteElement>
+          </ProtectedAuthRoute>
         ),
       },
       {
         path: Paths.FORGOT_PASSWORD,
         element: (
-          <ProtectedAuthRouteElement>
+          <ProtectedAuthRoute>
             <LazyLoad>
               <ForgotPasswordPage />
             </LazyLoad>
-          </ProtectedAuthRouteElement>
+          </ProtectedAuthRoute>
         ),
       },
       {
         path: Paths.RESET_PASSWORD,
         element: (
-          <ProtectedAuthRouteElement>
+          <ProtectedAuthRoute>
             <LazyLoad>
               <ResetPasswordPage />
             </LazyLoad>
-          </ProtectedAuthRouteElement>
+          </ProtectedAuthRoute>
         ),
       },
       {
         path: Paths.PROFILE,
         element: (
-          <ProtectedRouteElement>
+          <ProtectedRoute>
             <LazyLoad>
               <ProfilePage />
             </LazyLoad>
-          </ProtectedRouteElement>
+          </ProtectedRoute>
         ),
       },
       {

@@ -3,7 +3,6 @@ import clsx from 'clsx';
 import { Paths } from '@/router';
 import { NavLink } from 'react-router-dom';
 import { useLogoutMutation } from '@/services/api/authApi/authApi';
-import { useNavigate } from 'react-router-dom';
 import { EditProfile } from './components/EditProfile/EditProfile';
 
 interface Tab {
@@ -13,12 +12,6 @@ interface Tab {
 
 const ProfilePage = () => {
   const [logoutRequest] = useLogoutMutation();
-  const navigate = useNavigate();
-
-  const logout = () => {
-    logoutRequest();
-    navigate(Paths.HOME_PAGE, { replace: true });
-  };
 
   const tabs: Tab[] = [
     { name: 'Профиль', path: Paths.PROFILE },
@@ -46,7 +39,7 @@ const ProfilePage = () => {
           <button
             className={clsx('text text_type_main-medium text_color_inactive', cls.btn)}
             aria-label='Выйти из аккаунта'
-            onClick={() => logout()}
+            onClick={() => logoutRequest()}
           >
             Выход
           </button>

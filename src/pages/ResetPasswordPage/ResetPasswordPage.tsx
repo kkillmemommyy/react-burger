@@ -1,15 +1,16 @@
 import cls from './ResetPasswordPage.module.css';
 import { Input, Button } from '@ya.praktikum/react-developer-burger-ui-components';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Paths } from '@/router';
 import { useResetPasswordMutation } from '@/services/api/authApi/authApi';
 import { z } from 'zod';
 import { Controller, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useState } from 'react';
+import { Navigate } from 'react-router-dom';
 
 const schema = z.object({
-  token: z.string().min(1, 'Введите код из сообщения'),
+  token: z.string().min(1, 'Введите код из сообщения').uuid('Код не соответствует ожидаемому формату'),
   password: z.string().min(1, 'Введите новый пароль').min(6, 'Пароль должен содержать не менее 6 символов'),
 });
 
@@ -22,6 +23,7 @@ const ResetPasswordPage = () => {
   const [showPassword, setShowPassword] = useState(false);
   const toggleShowPassword = () => setShowPassword((prev) => !prev);
 
+  const location = useLocation();
   const navigate = useNavigate();
 
   const {
@@ -51,6 +53,10 @@ const ResetPasswordPage = () => {
       navigate(Paths.LOGIN, { replace: true });
     }
   };
+
+  if (location.state?.prevPage !== Paths.FORGOT_PASSWORD) {
+    return <Navigate to={Paths.FORGOT_PASSWORD} replace />;
+  }
 
   return (
     <main className={cls.main}>

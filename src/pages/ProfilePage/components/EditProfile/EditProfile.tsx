@@ -7,8 +7,8 @@ import { Input, Button } from '@ya.praktikum/react-developer-burger-ui-component
 import clsx from 'clsx';
 import { useTypedSelector } from '@/services';
 import { selectUser } from '@/services/selectors/userSelectors';
-import { User } from '@/services/slices/userSlice/types';
 import { usePatchUserMutation } from '@/services/api/authApi/accessAuthApi';
+import { User } from '@/services/slices/userSlice/types';
 
 interface Editable {
   name: boolean;
@@ -23,6 +23,7 @@ const schema = z.object({
 });
 
 export const EditProfile = () => {
+  //user exists because ProtectedRoute checked it
   const user = useTypedSelector(selectUser) as User;
   const [patchUserRequest] = usePatchUserMutation();
 
@@ -32,7 +33,7 @@ export const EditProfile = () => {
     formState: { isDirty, isValid, isSubmitting },
     reset,
     clearErrors,
-  } = useForm({
+  } = useForm<{name: string, email: string, password: string}>({
     defaultValues: { name: user.name, email: user.email, password: '' },
     resolver: zodResolver(schema),
     mode: 'onChange',

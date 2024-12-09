@@ -7,7 +7,7 @@ import { useTypedSelector } from '@/services';
 import { selectUser } from '@/services/selectors/userSelectors';
 
 export const AppHeader = () => {
-  const user = useTypedSelector(selectUser)
+  const user = useTypedSelector(selectUser);
 
   return (
     <header className={clsx(cls.header, 'pt-4 pb-4')}>
@@ -30,7 +30,7 @@ export const AppHeader = () => {
           <span className='text text_type_main-default text_color_inactive ml-2'>Лента заказов</span>
         </NavLink>
         <NavLink
-          to={user ? Paths.PROFILE : Paths.LOGIN}
+          to={Paths.PROFILE}
           className={({ isActive }) => clsx('pr-5 pb-4 pt-4', cls.nav_item, { [cls.active]: isActive })}
         >
           <ProfileIcon type='secondary' />
