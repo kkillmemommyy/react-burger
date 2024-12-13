@@ -10,7 +10,6 @@ import {
   ResetPasswordPage,
   NotFound404Page,
   ProfilePage,
-  IngredientInModalPage,
   IngredientPage,
 } from './pages';
 
@@ -35,16 +34,6 @@ const routes: RouteObject[] = [
       {
         path: Paths.HOME_PAGE,
         element: <HomePage />,
-        children: [
-          {
-            path: Paths.INGREDIENT,
-            element: (
-              <LazyLoad>
-                <IngredientInModalPage />
-              </LazyLoad>
-            ),
-          },
-        ],
       },
       {
         path: Paths.INGREDIENT,

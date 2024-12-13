@@ -17,7 +17,6 @@ const baseQuery = fetchBaseQuery({
   },
 });
 
-//Можно упростить ?
 const baseQueryWithReauth: typeof baseQuery = async (args, api, extraOptions) => {
   let result = await baseQuery(args, api, extraOptions);
 

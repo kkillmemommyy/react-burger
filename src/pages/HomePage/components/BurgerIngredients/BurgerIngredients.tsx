@@ -5,7 +5,9 @@ import { Tabs } from './Tabs/Tabs';
 import { IngredientsSection } from './IngredientsSection/IngredientsSection';
 import { IngredientType } from '@/shared/types/api';
 import { IngredientTitles } from '@/shared/types/api';
-import { Outlet } from 'react-router-dom';
+import { IngredientModal } from './IngredientModal/IngredientModal';
+import { useTypedSelector } from '@/services';
+import { selectModal } from '@/services/selectors/modalSelectors';
 
 interface ingredientsSectionType {
   type: IngredientType;
@@ -15,6 +17,7 @@ interface ingredientsSectionType {
 
 export const BurgerIngredients = () => {
   const [currentTab, setCurrentTab] = useState<IngredientType>('bun');
+  const { isModalOpen, modalType, modalContent } = useTypedSelector(selectModal);
 
   const { ref: bunsRef, inView: bunsInView } = useInView();
   const { ref: saucesRef, inView: saucesInView } = useInView();
@@ -46,7 +49,9 @@ export const BurgerIngredients = () => {
           ))}
         </div>
       </section>
-      <Outlet />
+      {isModalOpen && modalType === 'IngredientDetails' && modalContent && (
+        <IngredientModal modalContent={modalContent} />
+      )}
     </>
   );
 };

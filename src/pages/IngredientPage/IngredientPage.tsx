@@ -11,7 +11,7 @@ const IngredientPage = () => {
   const ingredient = useTypedSelector(selectIngredientById(id ?? ''));
 
   if (!ingredient) {
-    <Navigate to={Paths.NOT_FOUND} />;
+    return <Navigate to={Paths.NOT_FOUND} replace/>;
   }
 
   return (

@@ -1,3 +1,5 @@
+import { Ingredient } from '@/shared/types/api';
+
 export type ForgotPasswordRequest = {
   email: string;
 };
@@ -48,8 +50,21 @@ export type SuccessGetUserResponse = Omit<SuccessRegistrationAndLoginResponse, '
 
 export interface MakeOrderResponse {
   name: string;
-  order: {
-    number: number;
-  };
   success: boolean;
+  order: {
+    createdAt: string;
+    updatedAt: string;
+    number: number;
+    name: string;
+    price: number;
+    status: string;
+    _id: string;
+    ingredients: Ingredient[];
+    owner: {
+      createdAt: string;
+      updatedAt: string;
+      email: string;
+      name: string;
+    };
+  };
 }

@@ -106,6 +106,7 @@ export const BurgerConstructor = () => {
           </Button>
         </div>
       </section>
+      
       {isModalOpen && modalType === 'OrderDetails' && (
         <Modal>
           <OrderDetails orderId={modalContent} isLoading={isLoading} error={error} />

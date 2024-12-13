@@ -8,13 +8,11 @@ const ForgotPasswordPage = lazy(() => import('./ForgotPasswordPage/ForgotPasswor
 const ResetPasswordPage = lazy(() => import('./ResetPasswordPage/ResetPasswordPage'));
 const NotFound404Page = lazy(() => import('./NotFound404Page/NotFound404Page'));
 const ProfilePage = lazy(() => import('./ProfilePage/ProfilePage'));
-const IngredientInModalPage = lazy(() => import('./HomePage/pages/IngredientInModalPage'))
 const IngredientPage = lazy(() => import('./IngredientPage/IngredientPage'))
 
 export {
   RootPage,
   HomePage,
-  IngredientInModalPage,
   IngredientPage,
   LoginPage,
   RegistrationPage,

@@ -2,7 +2,7 @@ import clsx from 'clsx';
 import cls from './IngredientDetails.module.css';
 import { IngredientDetails as IngredientDetailsType} from '@/services/slices/modalSlice/types';
 
-type Props = IngredientDetailsType;
+type Props = Omit<IngredientDetailsType, 'id'>;
 
 export const IngredientDetails = ({ proteins, fat, carbohydrates, calories, image, name }: Props) => {
   return (
