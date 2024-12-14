@@ -1,4 +1,3 @@
-import HomePage from './HomePage/HomePage';
 import RootPage from './RootPage/RootPage';
 import { lazy } from 'react';
 
@@ -8,7 +7,8 @@ const ForgotPasswordPage = lazy(() => import('./ForgotPasswordPage/ForgotPasswor
 const ResetPasswordPage = lazy(() => import('./ResetPasswordPage/ResetPasswordPage'));
 const NotFound404Page = lazy(() => import('./NotFound404Page/NotFound404Page'));
 const ProfilePage = lazy(() => import('./ProfilePage/ProfilePage'));
-const IngredientPage = lazy(() => import('./IngredientPage/IngredientPage'))
+const IngredientPage = lazy(() => import('./IngredientPage/IngredientPage'));
+const HomePage = lazy(() => import('./HomePage/HomePage'));
 
 export {
   RootPage,

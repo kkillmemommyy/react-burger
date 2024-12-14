@@ -4,14 +4,13 @@ import cls from './BurgerIngredients.module.css';
 import { Tabs } from './Tabs/Tabs';
 import { IngredientsSection } from './IngredientsSection/IngredientsSection';
 import { IngredientType } from '@/shared/types/api';
-import { IngredientTitles } from '@/shared/types/api';
 import { IngredientModal } from './IngredientModal/IngredientModal';
 import { useTypedSelector } from '@/services';
 import { selectModal } from '@/services/selectors/modalSelectors';
 
 interface ingredientsSectionType {
   type: IngredientType;
-  title: IngredientTitles;
+  title: 'Булки' | 'Соусы' | 'Начинки';
   ref: (node?: Element | null) => void;
 }
 
@@ -34,9 +33,9 @@ export const BurgerIngredients = () => {
   }, [bunsInView, saucesInView, mainInView]);
 
   const ingredientsSections: ingredientsSectionType[] = [
-    { type: 'bun', title: IngredientTitles.BUN, ref: bunsRef },
-    { type: 'sauce', title: IngredientTitles.SAUCE, ref: saucesRef },
-    { type: 'main', title: IngredientTitles.MAIN, ref: mainRef },
+    { type: 'bun', title: 'Булки', ref: bunsRef },
+    { type: 'sauce', title: 'Соусы', ref: saucesRef },
+    { type: 'main', title: 'Начинки', ref: mainRef },
   ];
 
   return (

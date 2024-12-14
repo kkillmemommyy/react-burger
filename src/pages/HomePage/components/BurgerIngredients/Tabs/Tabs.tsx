@@ -1,12 +1,12 @@
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 import { memo } from 'react';
 import cls from './Tabs.module.css';
-import { IngredientType, IngredientTitles } from '@/shared/types/api';
+import { IngredientType  } from '@/shared/types/api';
 
 interface Tab {
   type: IngredientType;
   href: string;
-  title: IngredientTitles;
+  title: 'Булки' | 'Соусы' | 'Начинки';
 }
 
 interface Props {
@@ -15,9 +15,9 @@ interface Props {
 
 export const Tabs = memo(({ currentTab }: Props) => {
   const tabs: Tab[] = [
-    { type: 'bun', href: '#bun', title: IngredientTitles.BUN },
-    { type: 'sauce', href: '#sauce', title: IngredientTitles.SAUCE },
-    { type: 'main', href: '#main', title: IngredientTitles.MAIN },
+    { type: 'bun', href: '#bun', title: 'Булки' },
+    { type: 'sauce', href: '#sauce', title: 'Соусы' },
+    { type: 'main', href: '#main', title: 'Начинки'},
   ];
 
   return (

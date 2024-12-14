@@ -3,7 +3,7 @@ import { useTypedDispatch, useTypedSelector } from '@/services';
 import clsx from 'clsx';
 import cls from './IngredientCard.module.css';
 import { CurrencyIcon, Counter } from '@ya.praktikum/react-developer-burger-ui-components';
-import { openModal } from '@/services/slices/modalSlice/modalSlice';
+import { modalActions } from '@/services/slices/modalSlice/modalSlice';
 import { selectIngredientById } from '@/services/selectors/ingredientsApiSelectors';
 import { selectIngredientCountById } from '@/services/selectors/selectedIngredientsSelectors';
 import { useDrag } from 'react-dnd';
@@ -30,7 +30,7 @@ export const IngredientCard = memo(({ id }: Props) => {
   });
 
   const openModalHandle = () => {
-    const dataForModal = {
+    const modalContent = {
       id: ingredient._id,
       name: ingredient.name,
       proteins: ingredient.proteins,
@@ -39,7 +39,7 @@ export const IngredientCard = memo(({ id }: Props) => {
       calories: ingredient.calories,
       image: ingredient.image_large,
     };
-    dispatch(openModal({ modalContent: dataForModal, modalType: 'IngredientDetails' }));
+    dispatch(modalActions.openModal({ modalContent, modalType: 'IngredientDetails' }));
   };
 
   return (

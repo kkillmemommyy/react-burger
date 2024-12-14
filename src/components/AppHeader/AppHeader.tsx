@@ -30,7 +30,7 @@ export const AppHeader = () => {
           <span className='text text_type_main-default text_color_inactive ml-2'>Лента заказов</span>
         </NavLink>
         <NavLink
-          to={Paths.PROFILE}
+          to={user ? Paths.PROFILE : Paths.LOGIN}
           className={({ isActive }) => clsx('pr-5 pb-4 pt-4', cls.nav_item, { [cls.active]: isActive })}
         >
           <ProfileIcon type='secondary' />

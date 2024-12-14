@@ -32,74 +32,51 @@ const routes: RouteObject[] = [
     element: <RootPage />,
     children: [
       {
-        path: Paths.HOME_PAGE,
-        element: <HomePage />,
-      },
-      {
-        path: Paths.INGREDIENT,
-        element: (
-          <LazyLoad>
-            <IngredientPage />
-          </LazyLoad>
-        ),
-      },
-      {
-        path: Paths.LOGIN,
-        element: (
-          <ProtectedAuthRoute>
-            <LazyLoad>
-              <LoginPage />
-            </LazyLoad>
-          </ProtectedAuthRoute>
-        ),
-      },
-      {
-        path: Paths.REGISTRATION,
-        element: (
-          <ProtectedAuthRoute>
-            <LazyLoad>
-              <RegistrationPage />
-            </LazyLoad>
-          </ProtectedAuthRoute>
-        ),
-      },
-      {
-        path: Paths.FORGOT_PASSWORD,
-        element: (
-          <ProtectedAuthRoute>
-            <LazyLoad>
-              <ForgotPasswordPage />
-            </LazyLoad>
-          </ProtectedAuthRoute>
-        ),
-      },
-      {
-        path: Paths.RESET_PASSWORD,
-        element: (
-          <ProtectedAuthRoute>
-            <LazyLoad>
-              <ResetPasswordPage />
-            </LazyLoad>
-          </ProtectedAuthRoute>
-        ),
-      },
-      {
-        path: Paths.PROFILE,
-        element: (
-          <ProtectedRoute>
-            <LazyLoad>
-              <ProfilePage />
-            </LazyLoad>
-          </ProtectedRoute>
-        ),
-      },
-      {
-        path: Paths.NOT_FOUND,
-        element: (
-          <LazyLoad>
-            <NotFound404Page />
-          </LazyLoad>
-        ),
+        element: <LazyLoad />,
+        children: [
+          {
+            path: Paths.HOME_PAGE,
+            element: <HomePage />,
+          },
+          {
+            path: Paths.INGREDIENT,
+            element: <IngredientPage />,
+          },
+          {
+            element: <ProtectedAuthRoute />,
+            children: [
+              {
+                path: Paths.LOGIN,
+                element: <LoginPage />,
+              },
+              {
+                path: Paths.REGISTRATION,
+                element: <RegistrationPage />,
+              },
+              {
+                path: Paths.FORGOT_PASSWORD,
+                element: <ForgotPasswordPage />,
+              },
+              {
+                path: Paths.RESET_PASSWORD,
+                element: <ResetPasswordPage />,
+              },
+            ],
+          },
+          {
+            element: <ProtectedRoute />,
+            children: [
+              {
+                path: Paths.PROFILE,
+                element: <ProfilePage />,
+              },
+            ],
+          },
+          {
+            path: Paths.NOT_FOUND,
+            element: <NotFound404Page />,
+          },
+        ],
       },
     ],
   },

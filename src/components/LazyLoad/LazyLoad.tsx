@@ -1,10 +1,11 @@
-import { ReactElement, Suspense } from 'react';
+import { Suspense } from 'react';
 import { Loader } from '../Loader/Loader';
+import { Outlet } from 'react-router-dom';
 
-interface Props {
-  children: ReactElement;
-}
-
-export const LazyLoad = ({ children }: Props) => {
-  return <Suspense fallback={<Loader />}>{children}</Suspense>;
+export const LazyLoad = () => {
+  return (
+    <Suspense fallback={<Loader />}>
+      <Outlet />
+    </Suspense>
+  );
 };

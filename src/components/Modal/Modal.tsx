@@ -5,7 +5,7 @@ import clsx from 'clsx';
 import cls from './Modal.module.css';
 import { CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import { ModalOverlay } from '../ModalOverlay/ModalOverlay';
-import { closeModal } from '@/services/slices/modalSlice/modalSlice';
+import { modalActions } from '@/services/slices/modalSlice/modalSlice';
 
 const modalRoot = document.getElementById('modal');
 
@@ -20,7 +20,7 @@ export const Modal = ({ children, title }: Props) => {
   useEffect(() => {
     const closeModalOnEsc = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
-        dispatch(closeModal());
+        dispatch(modalActions.closeModal());
       }
     };
 
@@ -28,7 +28,7 @@ export const Modal = ({ children, title }: Props) => {
     return () => document.removeEventListener('keyup', closeModalOnEsc);
   }, [dispatch]);
 
-  const closeModalHandler = () => dispatch(closeModal());
+  const closeModalHandler = () => dispatch(modalActions.closeModal());
 
   if (!modalRoot) {
     return null;

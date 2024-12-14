@@ -12,7 +12,7 @@ import { useDrop } from 'react-dnd';
 import { selectedIngredientsActions } from '@/services/slices/selectedIngredientsSlice/selectedIngredientsSlice';
 import { DragbleElement } from './DragbleElement/DragbleElement';
 import { selectModal } from '@/services/selectors/modalSelectors';
-import { openModal } from '@/services/slices/modalSlice/modalSlice';
+import { modalActions } from '@/services/slices/modalSlice/modalSlice';
 import { AddIngredientPayload } from '@/services/slices/selectedIngredientsSlice/types';
 import { selectUser } from '@/services/selectors/userSelectors';
 import { createSearchParams, useNavigate } from 'react-router-dom';
@@ -51,13 +51,13 @@ export const BurgerConstructor = () => {
 
     //bun is not null because isMakeOrderBtnDisabled checked it
     const ids = [bun!.id, ...stuffing.map((s) => s.id)];
-    dispatch(openModal({ modalType: 'OrderDetails', modalContent: null }));
+    dispatch(modalActions.openModal({ modalType: 'OrderDetails', modalContent: null }));
 
     const response = await orderRequest({ ingredients: ids });
     const orderId = response?.data?.order?.number;
 
     if (orderId) {
-      dispatch(openModal({ modalType: 'OrderDetails', modalContent: orderId }));
+      dispatch(modalActions.openModal({ modalType: 'OrderDetails', modalContent: orderId }));
     }
   };
 
