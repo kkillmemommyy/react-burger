@@ -1,43 +1,41 @@
-import { useState } from 'react';
 import clsx from 'clsx';
 import cls from './AppHeader.module.css';
 import { Logo, BurgerIcon, ListIcon, ProfileIcon } from '@ya.praktikum/react-developer-burger-ui-components';
-
-type Tab = 'constructor' | 'orders' | 'profile';
+import { NavLink } from 'react-router-dom';
+import { Paths } from '@/router';
+import { useTypedSelector } from '@/services';
+import { selectUser } from '@/services/selectors/userSelectors';
 
 export const AppHeader = () => {
-  const [activeTab, setActiveTab] = useState<Tab>('constructor');
+  const user = useTypedSelector(selectUser);
 
   return (
     <header className={clsx(cls.header, 'pt-4 pb-4')}>
       <nav className={cls.nav}>
-        <a onClick={() => setActiveTab('constructor')} className={cls.logo} href='#'>
+        <NavLink to={Paths.HOME_PAGE} className={cls.logo}>
           <Logo />
-        </a>
-        <a
-          href='#'
-          onClick={() => setActiveTab('constructor')}
-          className={clsx(cls.nav_item, activeTab === 'constructor' && cls.active, 'pr-5 pb-4 pt-4 mr-2')}
+        </NavLink>
+        <NavLink
+          to={Paths.HOME_PAGE}
+          className={({ isActive }) => clsx('pr-5 pb-4 pt-4 mr-2', cls.nav_item, { [cls.active]: isActive })}
         >
           <BurgerIcon type='secondary' />
           <span className='text text_type_main-default text_color_inactive ml-2'>Конструктор</span>
-        </a>
-        <a
-          href='#'
-          onClick={() => setActiveTab('orders')}
-          className={clsx(cls.nav_item, activeTab === 'orders' && cls.active, 'pl-5 pr-5 pb-4 pt-4')}
+        </NavLink>
+        <NavLink
+          to={Paths.FEED}
+          className={({ isActive }) => clsx('pr-5 pb-4 pt-4 mr-2', cls.nav_item, { [cls.active]: isActive })}
         >
           <ListIcon type='secondary' />
           <span className='text text_type_main-default text_color_inactive ml-2'>Лента заказов</span>
-        </a>
-        <a
-          href='#'
-          onClick={() => setActiveTab('profile')}
-          className={clsx(cls.nav_item, activeTab === 'profile' && cls.active, 'pl-5 pb-4 pt-4')}
+        </NavLink>
+        <NavLink
+          to={user ? Paths.PROFILE : Paths.LOGIN}
+          className={({ isActive }) => clsx('pr-5 pb-4 pt-4', cls.nav_item, { [cls.active]: isActive })}
         >
           <ProfileIcon type='secondary' />
-          <span className='text text_type_main-default text_color_inactive ml-2'>Личные кабинет</span>
-        </a>
+          <span className='text text_type_main-default text_color_inactive ml-2'>{user ? user.name : 'Войти'}</span>
+        </NavLink>
       </nav>
     </header>
   );

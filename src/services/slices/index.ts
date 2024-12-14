@@ -1,9 +1,9 @@
 import { modalReducer } from './modalSlice/modalSlice';
 import { selectedIngredientsReducer } from './selectedIngredientsSlice/selectedIngredientsSlice';
-import { normaApi } from '../api/normaApi';
+import { userReducer } from './userSlice/userSlice';
 
-export const rootReducer = {
-  [normaApi.reducerPath]: normaApi.reducer,
+export const rootSlicesReducer = {
   modal: modalReducer,
   selectedIngredients: selectedIngredientsReducer,
+  user: userReducer,
 };

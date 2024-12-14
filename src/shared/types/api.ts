@@ -1,11 +1,5 @@
 export type IngredientType = 'main' | 'bun' | 'sauce';
 
-export enum Titles {
-  BUN = 'Булки',
-  SAUCE = 'Соусы',
-  MAIN = 'Начинки',
-}
-
 export interface Ingredient {
   _id: string;
   name: string;
