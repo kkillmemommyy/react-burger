@@ -1,6 +1,6 @@
 import { Ingredient } from '@/shared/types/api';
 
-type IngredientDetails = Pick<Ingredient, 'proteins' | 'fat' | 'carbohydrates' | 'calories' | 'image' | 'name'> & {
+export type IngredientDetails = Pick<Ingredient, 'proteins' | 'fat' | 'carbohydrates' | 'calories' | 'image' | 'name'> & {
   id: string;
 };
 

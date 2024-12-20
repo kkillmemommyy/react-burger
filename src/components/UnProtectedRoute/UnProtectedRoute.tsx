@@ -3,7 +3,7 @@ import { Navigate, Outlet, useSearchParams } from 'react-router-dom';
 import { useTypedSelector } from '@/services';
 import { selectUser } from '@/services/selectors/userSelectors';
 
-export const ProtectedAuthRoute = () => {
+export const UnProtectedRoute = () => {
   const user = useTypedSelector(selectUser);
   const [searchParams] = useSearchParams();
 

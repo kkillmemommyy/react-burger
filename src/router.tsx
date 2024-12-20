@@ -1,4 +1,4 @@
-import { LazyLoad, ProtectedRoute, ProtectedAuthRoute } from './components';
+import { LazyLoad, ProtectedRoute, UnProtectedRoute } from './components';
 import { createBrowserRouter, RouteObject } from 'react-router-dom';
 
 import {
@@ -43,7 +43,7 @@ const routes: RouteObject[] = [
             element: <IngredientPage />,
           },
           {
-            element: <ProtectedAuthRoute />,
+            element: <UnProtectedRoute />,
             children: [
               {
                 path: Paths.LOGIN,
