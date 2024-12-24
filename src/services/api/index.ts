@@ -1,11 +1,11 @@
-import { ingredientsApi } from './ingredientsApi/ingredientsApi';
-import { authApi } from './authApi/authApi';
-import { accessAuthApi } from './authApi/accessAuthApi';
+import { refreshTokenApi } from './refreshTokenApi/refreshTokenApi';
+import { baseApiWithReauth } from './baseApiWithReauth';
+import { baseApi } from './baseApi';
 
 export const rootApiReducer = {
-  [ingredientsApi.reducerPath]: ingredientsApi.reducer,
-  [authApi.reducerPath]: authApi.reducer,
-  [accessAuthApi.reducerPath]: accessAuthApi.reducer,
+  [baseApi.reducerPath]: baseApi.reducer,
+  [baseApiWithReauth.reducerPath]: baseApiWithReauth.reducer,
+  [refreshTokenApi.reducerPath]: refreshTokenApi.reducer,
 };
 
-export const apiMiddlewares = [ingredientsApi.middleware, authApi.middleware, accessAuthApi.middleware];
+export const apiMiddlewares = [baseApi.middleware, baseApiWithReauth.middleware, refreshTokenApi.middleware];

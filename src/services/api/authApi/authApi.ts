@@ -1,5 +1,3 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { NORMA_API_BASE_URL } from '../routes';
 import {
   SuccessResponse,
   ForgotPasswordRequest,
@@ -7,34 +5,13 @@ import {
   RegistrationRequest,
   SuccessRegistrationAndLoginResponse,
   LoginRequest,
-  SuccessRefreshTokenResponse,
 } from './types';
 import { localStorageGetItem, localStorageRemoveItem, localStorageSetItem } from '@/shared/utils/localStorage';
 import { userActions } from '@/services/slices/userSlice/userSlice';
+import { baseApi } from '../baseApi';
 
-const baseQuery = fetchBaseQuery({
-  baseUrl: NORMA_API_BASE_URL,
-});
-
-export const authApi = createApi({
-  reducerPath: 'authApi',
-  baseQuery,
+export const authApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
-    refreshToken: builder.mutation<SuccessRefreshTokenResponse, void>({
-      query: () => ({
-        url: 'auth/token',
-        method: 'POST',
-        body: { token: localStorageGetItem('refreshToken') ?? '' },
-      }),
-      onQueryStarted: async (_, { queryFulfilled, dispatch }) => {
-        const {
-          data: { accessToken, refreshToken },
-        } = await queryFulfilled;
-
-        localStorageSetItem('refreshToken', refreshToken);
-        dispatch(userActions.setAccessToken({ accessToken }));
-      },
-    }),
     login: builder.mutation<SuccessRegistrationAndLoginResponse, LoginRequest>({
       query: (data) => ({
         url: 'auth/login',
@@ -94,10 +71,10 @@ export const authApi = createApi({
       }),
     }),
   }),
+  overrideExisting: false,
 });
 
 export const {
-  useRefreshTokenMutation,
   useLoginMutation,
   useLogoutMutation,
   useRegistrationMutation,

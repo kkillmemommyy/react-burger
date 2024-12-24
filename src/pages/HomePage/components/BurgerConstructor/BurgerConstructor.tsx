@@ -7,7 +7,7 @@ import { Modal } from '@/components/Modal/Modal';
 import { OrderDetails } from './OrderDetails/OrderDetails';
 import { TotalPrice } from './TotalPrice/TotalPrice';
 import { selectBun, selectStuffing } from '@/services/selectors/selectedIngredientsSelectors';
-import { useMakeOrderMutation } from '@/services/api/authApi/accessAuthApi';
+import { useMakeOrderMutation } from '@/services/api/userApi/userApi';
 import { useDrop } from 'react-dnd';
 import { selectedIngredientsActions } from '@/services/slices/selectedIngredientsSlice/selectedIngredientsSlice';
 import { DragbleElement } from './DragbleElement/DragbleElement';
@@ -106,7 +106,7 @@ export const BurgerConstructor = () => {
           </Button>
         </div>
       </section>
-      
+
       {isModalOpen && modalType === 'OrderDetails' && (
         <Modal>
           <OrderDetails orderId={modalContent} isLoading={isLoading} error={error} />

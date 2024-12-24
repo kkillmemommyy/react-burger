@@ -1,15 +1,10 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { baseApi } from '../baseApi';
 import { GetIngredientsResponse, NormalizedIngredients } from './types';
-import { NORMA_API_BASE_URL } from '../routes';
 
-export const ingredientsApi = createApi({
-  reducerPath: 'ingredientsApi',
-  baseQuery: fetchBaseQuery({ baseUrl: NORMA_API_BASE_URL }),
+export const ingredientsApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     getIngredients: builder.query<NormalizedIngredients, void>({
-      query: () => ({
-        url: 'ingredients',
-      }),
+      query: () => 'ingredients',
       transformResponse: (response: GetIngredientsResponse) =>
         response.data.reduce<NormalizedIngredients>(
           (acc, item) => {
@@ -21,6 +16,7 @@ export const ingredientsApi = createApi({
         ),
     }),
   }),
+  overrideExisting: false,
 });
 
 export const { useGetIngredientsQuery } = ingredientsApi;

@@ -1,5 +1,5 @@
 import { AppHeader } from '@/components/AppHeader/AppHeader';
-import { useGetUserQuery } from '@/services/api/authApi/accessAuthApi';
+import { useGetUserQuery } from '@/services/api/userApi/userApi';
 import { useGetIngredientsQuery } from '@/services/api/ingredientsApi/ingredientsApi';
 import { Outlet } from 'react-router-dom';
 import { Loader } from '@/components/Loader/Loader';

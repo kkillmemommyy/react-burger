@@ -7,7 +7,7 @@ import { Input, Button } from '@ya.praktikum/react-developer-burger-ui-component
 import clsx from 'clsx';
 import { useTypedSelector } from '@/services';
 import { selectUser } from '@/services/selectors/userSelectors';
-import { usePatchUserMutation } from '@/services/api/authApi/accessAuthApi';
+import { usePatchUserMutation } from '@/services/api/userApi/userApi';
 import { User } from '@/services/slices/userSlice/types';
 
 interface Editable {
@@ -33,7 +33,7 @@ export const EditProfile = () => {
     formState: { isDirty, isValid, isSubmitting },
     reset,
     clearErrors,
-  } = useForm<{name: string, email: string, password: string}>({
+  } = useForm<{ name: string; email: string; password: string }>({
     defaultValues: { name: user.name, email: user.email, password: '' },
     resolver: zodResolver(schema),
     mode: 'onChange',
