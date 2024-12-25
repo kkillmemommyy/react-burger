@@ -1,4 +1,3 @@
-import { userActions } from '@/services/slices/userSlice/userSlice';
 import { baseApiWithReauth } from '../baseApiWithReauth';
 import { MakeOrderRequest, MakeOrderResponse, PatchUserRequest, SuccessGetUserResponse } from './types';
 
@@ -9,13 +8,6 @@ export const userApi = baseApiWithReauth.injectEndpoints({
         url: 'auth/user',
         method: 'GET',
       }),
-      onQueryStarted: async (_, { queryFulfilled, dispatch }) => {
-        const {
-          data: { user },
-        } = await queryFulfilled;
-
-        dispatch(userActions.setUser({ user }));
-      },
     }),
     patchUser: builder.mutation<SuccessGetUserResponse, PatchUserRequest>({
       query: (form) => ({
@@ -23,13 +15,6 @@ export const userApi = baseApiWithReauth.injectEndpoints({
         method: 'PATCH',
         body: form,
       }),
-      onQueryStarted: async (_, { queryFulfilled, dispatch }) => {
-        const {
-          data: { user },
-        } = await queryFulfilled;
-
-        dispatch(userActions.setUser({ user }));
-      },
     }),
     makeOrder: builder.mutation<MakeOrderResponse, MakeOrderRequest>({
       query: (data) => ({

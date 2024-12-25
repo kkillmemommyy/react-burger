@@ -6,8 +6,7 @@ import {
   SuccessRegistrationAndLoginResponse,
   LoginRequest,
 } from './types';
-import { localStorageGetItem, localStorageRemoveItem, localStorageSetItem } from '@/shared/utils/localStorage';
-import { userActions } from '@/services/slices/userSlice/userSlice';
+import { localStorageGetItem } from '@/shared/utils/localStorage';
 import { baseApi } from '../baseApi';
 
 export const authApi = baseApi.injectEndpoints({
@@ -18,15 +17,6 @@ export const authApi = baseApi.injectEndpoints({
         method: 'POST',
         body: data,
       }),
-      onQueryStarted: async (_, { queryFulfilled, dispatch }) => {
-        const {
-          data: { accessToken, refreshToken, user },
-        } = await queryFulfilled;
-
-        localStorageSetItem('refreshToken', refreshToken);
-        dispatch(userActions.setUser({ user }));
-        dispatch(userActions.setAccessToken({ accessToken }));
-      },
     }),
     logout: builder.mutation<SuccessResponse, void>({
       query: () => ({
@@ -34,11 +24,6 @@ export const authApi = baseApi.injectEndpoints({
         method: 'POST',
         body: { token: localStorageGetItem('refreshToken') ?? '' },
       }),
-      onQueryStarted: async (_, { queryFulfilled, dispatch }) => {
-        localStorageRemoveItem('refreshToken');
-        dispatch(userActions.logout());
-        await queryFulfilled;
-      },
     }),
     registration: builder.mutation<SuccessRegistrationAndLoginResponse, RegistrationRequest>({
       query: (data) => ({
@@ -46,15 +31,6 @@ export const authApi = baseApi.injectEndpoints({
         method: 'POST',
         body: data,
       }),
-      onQueryStarted: async (_, { queryFulfilled, dispatch }) => {
-        const {
-          data: { accessToken, refreshToken, user },
-        } = await queryFulfilled;
-
-        localStorageSetItem('refreshToken', refreshToken);
-        dispatch(userActions.setUser({ user }));
-        dispatch(userActions.setAccessToken({ accessToken }));
-      },
     }),
     forgotPassword: builder.mutation<SuccessResponse, ForgotPasswordRequest>({
       query: (data) => ({

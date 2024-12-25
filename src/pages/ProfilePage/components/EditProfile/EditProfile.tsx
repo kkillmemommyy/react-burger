@@ -8,7 +8,6 @@ import clsx from 'clsx';
 import { useTypedSelector } from '@/services';
 import { selectUser } from '@/services/selectors/userSelectors';
 import { usePatchUserMutation } from '@/services/api/userApi/userApi';
-import { User } from '@/services/slices/userSlice/types';
 
 interface Editable {
   name: boolean;
@@ -23,8 +22,7 @@ const schema = z.object({
 });
 
 export const EditProfile = () => {
-  //user exists because ProtectedRoute checked it
-  const user = useTypedSelector(selectUser) as User;
+  const user = useTypedSelector(selectUser);
   const [patchUserRequest] = usePatchUserMutation();
 
   const {
@@ -34,7 +32,8 @@ export const EditProfile = () => {
     reset,
     clearErrors,
   } = useForm<{ name: string; email: string; password: string }>({
-    defaultValues: { name: user.name, email: user.email, password: '' },
+    defaultValues: { name: '', email: '', password: '' },
+    values: user ? { ...user, password: '' } : undefined,
     resolver: zodResolver(schema),
     mode: 'onChange',
     delayError: 400,

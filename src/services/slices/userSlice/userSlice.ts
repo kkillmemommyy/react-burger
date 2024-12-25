@@ -1,5 +1,9 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { AccessToken, User, userState } from './types';
+import { createSlice, isAnyOf } from '@reduxjs/toolkit';
+import { userState } from './types';
+import { authApi } from '@/services/api/authApi/authApi';
+import { localStorageRemoveItem, localStorageSetItem } from '@/shared/utils/localStorage';
+import { refreshTokenApi } from '@/services/api/refreshTokenApi/refreshTokenApi';
+import { userApi } from '@/services/api/userApi/userApi';
 
 const initialState: userState = {
   user: null,
@@ -10,18 +14,43 @@ const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
-    setUser: (state, { payload: { user } }: PayloadAction<{ user: User }>) => {
-      state.user = user;
-    },
-    setAccessToken: (state, { payload: { accessToken } }: PayloadAction<{ accessToken: AccessToken }>) => {
-      state.accessToken = accessToken;
-    },
     logout: (state) => {
       state.accessToken = null;
       state.user = null;
     },
   },
+  extraReducers: (builder) => {
+    builder
+      .addMatcher(
+        isAnyOf(refreshTokenApi.endpoints.refreshToken.matchRejected, authApi.endpoints.logout.matchPending),
+        (state) => {
+          state.user = null;
+          state.accessToken = null;
+          localStorageRemoveItem('refreshToken');
+        }
+      )
+      .addMatcher(
+        isAnyOf(userApi.endpoints.getUser.matchFulfilled, userApi.endpoints.patchUser.matchFulfilled),
+        (state, { payload: { user } }) => {
+          state.user = user;
+        }
+      )
+      .addMatcher(
+        refreshTokenApi.endpoints.refreshToken.matchFulfilled,
+        (state, { payload: { accessToken, refreshToken } }) => {
+          localStorageSetItem('refreshToken', refreshToken);
+          state.accessToken = accessToken;
+        }
+      )
+      .addMatcher(
+        isAnyOf(authApi.endpoints.login.matchFulfilled, authApi.endpoints.registration.matchFulfilled),
+        (state, { payload: { accessToken, refreshToken, user } }) => {
+          localStorageSetItem('refreshToken', refreshToken);
+          state.user = user;
+          state.accessToken = accessToken;
+        }
+      );
+  },
 });
 
 export const userReducer = userSlice.reducer;
-export const userActions = userSlice.actions;
