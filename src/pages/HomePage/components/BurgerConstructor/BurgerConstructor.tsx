@@ -6,17 +6,17 @@ import { ConstructorElement as CE, Button } from '@ya.praktikum/react-developer-
 import { Modal } from '@/components/Modal/Modal';
 import { OrderDetails } from './OrderDetails/OrderDetails';
 import { TotalPrice } from './TotalPrice/TotalPrice';
-import { selectBun, selectStuffing } from '@/services/selectors/selectedIngredientsSelectors';
+import { selectBun, selectStuffing } from '@/services/slices/selectedIngredientsSlice/selectedIngredientsSelectors';
 import { useMakeOrderMutation } from '@/services/api/userApi/userApi';
 import { useDrop } from 'react-dnd';
 import { selectedIngredientsActions } from '@/services/slices/selectedIngredientsSlice/selectedIngredientsSlice';
 import { DragbleElement } from './DragbleElement/DragbleElement';
-import { selectModal } from '@/services/selectors/modalSelectors';
+import { selectModal } from '@/services/slices/modalSlice/modalSelectors';
 import { modalActions } from '@/services/slices/modalSlice/modalSlice';
 import { AddIngredientPayload } from '@/services/slices/selectedIngredientsSlice/types';
-import { selectUser } from '@/services/selectors/userSelectors';
+import { selectUser } from '@/services/slices/userSlice/userSelectors';
 import { createSearchParams, useNavigate } from 'react-router-dom';
-import { Paths } from '@/router';
+import { Paths } from '@/shared/router';
 
 const ConstructorElement = memo(CE);
 
@@ -52,6 +52,7 @@ export const BurgerConstructor = () => {
     //bun is not null because isMakeOrderBtnDisabled checked it
     const ids = [bun!.id, ...stuffing.map((s) => s.id)];
     dispatch(modalActions.openModal({ modalType: 'OrderDetails', modalContent: null }));
+    dispatch(selectedIngredientsActions.rest());
 
     const response = await orderRequest({ ingredients: ids });
     const orderId = response?.data?.order?.number;

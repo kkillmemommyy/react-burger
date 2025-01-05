@@ -4,8 +4,8 @@ import clsx from 'clsx';
 import cls from './IngredientCard.module.css';
 import { CurrencyIcon, Counter } from '@ya.praktikum/react-developer-burger-ui-components';
 import { modalActions } from '@/services/slices/modalSlice/modalSlice';
-import { selectIngredientById } from '@/services/selectors/ingredientsApiSelectors';
-import { selectIngredientCountById } from '@/services/selectors/selectedIngredientsSelectors';
+import { selectIngredientById } from '@/services/api/ingredientsApi/ingredientsApiSelectors';
+import { selectIngredientCountById } from '@/services/slices/selectedIngredientsSlice/selectedIngredientsSelectors';
 import { useDrag } from 'react-dnd';
 
 interface Props {

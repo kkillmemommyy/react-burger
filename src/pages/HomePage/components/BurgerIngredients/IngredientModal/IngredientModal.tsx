@@ -1,6 +1,6 @@
 import { Modal } from '@/components';
 import { IngredientDetails } from '../IngredientDetails/IngredientDetails';
-import { Paths } from '@/router';
+import { Paths } from '@/shared/router';
 import { useEffect } from 'react';
 import { IngredientDetails as IngredientDetailsType } from '@/services/slices/modalSlice/types';
 

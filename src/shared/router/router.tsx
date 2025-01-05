@@ -1,4 +1,4 @@
-import { LazyLoad, ProtectedRoute, UnProtectedRoute } from './components';
+import { LazyLoad, ProtectedRoute, UnProtectedRoute } from '../../components';
 import { createBrowserRouter, RouteObject } from 'react-router-dom';
 
 import {
@@ -11,7 +11,8 @@ import {
   NotFound404Page,
   ProfilePage,
   IngredientPage,
-} from './pages';
+  FeedPage,
+} from '../../pages';
 
 export enum Paths {
   HOME_PAGE = '/',
@@ -43,6 +44,19 @@ const routes: RouteObject[] = [
             element: <IngredientPage />,
           },
           {
+            path: Paths.FEED,
+            element: <FeedPage />,
+          },
+          {
+            element: <ProtectedRoute />,
+            children: [
+              {
+                path: Paths.PROFILE,
+                element: <ProfilePage />,
+              },
+            ],
+          },
+          {
             element: <UnProtectedRoute />,
             children: [
               {
@@ -60,15 +74,6 @@ const routes: RouteObject[] = [
               {
                 path: Paths.RESET_PASSWORD,
                 element: <ResetPasswordPage />,
-              },
-            ],
-          },
-          {
-            element: <ProtectedRoute />,
-            children: [
-              {
-                path: Paths.PROFILE,
-                element: <ProfilePage />,
               },
             ],
           },

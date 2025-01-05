@@ -30,16 +30,16 @@ const userSlice = createSlice({
         }
       )
       .addMatcher(
-        isAnyOf(userApi.endpoints.getUser.matchFulfilled, userApi.endpoints.patchUser.matchFulfilled),
-        (state, { payload: { user } }) => {
-          state.user = user;
-        }
-      )
-      .addMatcher(
         refreshTokenApi.endpoints.refreshToken.matchFulfilled,
         (state, { payload: { accessToken, refreshToken } }) => {
           localStorageSetItem('refreshToken', refreshToken);
           state.accessToken = accessToken;
+        }
+      )
+      .addMatcher(
+        isAnyOf(userApi.endpoints.getUser.matchFulfilled, userApi.endpoints.patchUser.matchFulfilled),
+        (state, { payload: { user } }) => {
+          state.user = user;
         }
       )
       .addMatcher(

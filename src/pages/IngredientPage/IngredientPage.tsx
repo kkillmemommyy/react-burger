@@ -1,8 +1,8 @@
 import { Navigate, useParams } from 'react-router-dom';
 import { IngredientDetails } from '../HomePage/components/BurgerIngredients/IngredientDetails/IngredientDetails';
 import { useTypedSelector } from '@/services';
-import { selectIngredientById } from '@/services/selectors/ingredientsApiSelectors';
-import { Paths } from '@/router';
+import { selectIngredientById } from '@/services/api/ingredientsApi/ingredientsApiSelectors';
+import { Paths } from '@/shared/router';
 import cls from './IngredientPage.module.css';
 
 const IngredientPage = () => {

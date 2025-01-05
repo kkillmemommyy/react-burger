@@ -6,7 +6,7 @@ import cls from './EditProfile.module.css';
 import { Input, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import clsx from 'clsx';
 import { useTypedSelector } from '@/services';
-import { selectUser } from '@/services/selectors/userSelectors';
+import { selectUser } from '@/services/slices/userSlice/userSelectors';
 import { usePatchUserMutation } from '@/services/api/userApi/userApi';
 
 interface Editable {

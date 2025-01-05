@@ -27,6 +27,10 @@ const selectedIngredientsSlice = createSlice({
       const [movedCard] = stuffing.splice(dragIndex, 1);
       stuffing.splice(dropIndex, 0, movedCard);
     },
+    rest: (state) => {
+      state.bun = null;
+      state.stuffing = [];
+    },
   },
 });
 

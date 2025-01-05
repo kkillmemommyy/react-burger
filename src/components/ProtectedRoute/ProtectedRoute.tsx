@@ -1,7 +1,7 @@
-import { Paths } from '@/router';
+import { Paths } from '@/shared/router';
 import { createSearchParams, Navigate, Outlet, useLocation } from 'react-router-dom';
 import { useTypedSelector } from '@/services';
-import { selectUser } from '@/services/selectors/userSelectors';
+import { selectUser } from '@/services/slices/userSlice/userSelectors';
 
 export const ProtectedRoute = () => {
   const user = useTypedSelector(selectUser);

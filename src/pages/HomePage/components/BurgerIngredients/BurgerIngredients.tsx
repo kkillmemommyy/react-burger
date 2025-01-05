@@ -6,7 +6,7 @@ import { IngredientsSection } from './IngredientsSection/IngredientsSection';
 import { IngredientType } from '@/shared/types/api';
 import { IngredientModal } from './IngredientModal/IngredientModal';
 import { useTypedSelector } from '@/services';
-import { selectModal } from '@/services/selectors/modalSelectors';
+import { selectModal } from '@/services/slices/modalSlice/modalSelectors';
 
 interface ingredientsSectionType {
   type: IngredientType;

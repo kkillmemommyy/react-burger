@@ -1,6 +1,6 @@
-import { ingredientsApi } from '../api/ingredientsApi/ingredientsApi';
+import { ingredientsApi } from './ingredientsApi';
 import { createSelector } from '@reduxjs/toolkit';
-import { AppState } from '..';
+import { AppState } from '../..';
 import { IngredientType } from '@/shared/types/api';
 
 export const selectAll = (state: AppState) =>
@@ -14,3 +14,4 @@ export const selectIngredientsByType = (type: IngredientType) =>
   createSelector(selectIngredients, (ingredients) => Object.values(ingredients).filter((ing) => ing.type === type));
 
 export const selectIngredientById = (id: string) => createSelector(selectIngredients, (ingredients) => ingredients[id]);
+

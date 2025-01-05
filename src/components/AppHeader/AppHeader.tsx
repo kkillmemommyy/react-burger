@@ -2,9 +2,9 @@ import clsx from 'clsx';
 import cls from './AppHeader.module.css';
 import { Logo, BurgerIcon, ListIcon, ProfileIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import { NavLink } from 'react-router-dom';
-import { Paths } from '@/router';
+import { Paths } from '@/shared/router';
 import { useTypedSelector } from '@/services';
-import { selectUser } from '@/services/selectors/userSelectors';
+import { selectUser } from '@/services/slices/userSlice/userSelectors';
 
 export const AppHeader = () => {
   const user = useTypedSelector(selectUser);

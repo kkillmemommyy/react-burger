@@ -15,17 +15,17 @@ const baseQuery = fetchBaseQuery({
 });
 
 const baseQueryWithReauth: typeof baseQuery = async (args, api, extraOptions) => {
-  let result = await baseQuery(args, api, extraOptions);
+  let baseQueryResponse = await baseQuery(args, api, extraOptions);
 
-  if (result.error && result.error.status === 401) {
-    const refreshResponse = await api.dispatch(refreshTokenApi.endpoints.refreshToken.initiate());
+  if (baseQueryResponse.error && baseQueryResponse.error.status === 401) {
+    const refreshTokenResponse = await api.dispatch(refreshTokenApi.endpoints.refreshToken.initiate());
 
-    if (refreshResponse.data) {
-      result = await baseQuery(args, api, extraOptions);
+    if (refreshTokenResponse.data) {
+      baseQueryResponse = await baseQuery(args, api, extraOptions);
     }
   }
 
-  return result;
+  return baseQueryResponse;
 };
 
 export const baseApiWithReauth = createApi({

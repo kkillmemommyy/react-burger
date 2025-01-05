@@ -1,6 +1,6 @@
 import cls from './ProfilePage.module.css';
 import clsx from 'clsx';
-import { Paths } from '@/router';
+import { Paths } from '@/shared/router';
 import { NavLink } from 'react-router-dom';
 import { useLogoutMutation } from '@/services/api/authApi/authApi';
 import { EditProfile } from './components/EditProfile/EditProfile';

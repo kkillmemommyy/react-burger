@@ -1,12 +1,12 @@
 import { createSelector } from '@reduxjs/toolkit';
-import { AppState } from '..';
+import { AppState } from '../..';
 
 export const selectSelectedIngredients = (state: AppState) => state.selectedIngredients;
 
 export const selectBun = (state: AppState) => state.selectedIngredients.bun;
 export const selectStuffing = (state: AppState) => state.selectedIngredients.stuffing;
 
-export const selectIngredientCounts = createSelector([selectBun, selectStuffing], (bun, stuffing) => {
+export const selectCountedIngredients = createSelector([selectBun, selectStuffing], (bun, stuffing) => {
   const countedIngredients: Record<string, number> = {};
 
   if (bun) {
@@ -22,7 +22,7 @@ export const selectIngredientCounts = createSelector([selectBun, selectStuffing]
 });
 
 export const selectIngredientCountById = (id: string) =>
-  createSelector(selectIngredientCounts, (countedIngredients) => countedIngredients[id] ?? 0);
+  createSelector(selectCountedIngredients, (countedIngredients) => countedIngredients[id] ?? 0);
 
 export const selectTotalPrice = createSelector([selectBun, selectStuffing], (bun, stuffing) => {
   let totalPrice = 0;

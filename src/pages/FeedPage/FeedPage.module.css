@@ -6,11 +6,11 @@
   }
 }
 
-.wrap {
-  display: flex;
-  gap: 40px;
-}
-
 .h1 {
   line-height: 40px;
+}
+
+.wrap {
+  display: flex;
+  gap: 60px;
 }

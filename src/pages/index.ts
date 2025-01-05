@@ -9,6 +9,7 @@ const NotFound404Page = lazy(() => import('./NotFound404Page/NotFound404Page'));
 const ProfilePage = lazy(() => import('./ProfilePage/ProfilePage'));
 const IngredientPage = lazy(() => import('./IngredientPage/IngredientPage'));
 const HomePage = lazy(() => import('./HomePage/HomePage'));
+const FeedPage = lazy(() => import('./FeedPage/FeedPage'));
 
 export {
   RootPage,
@@ -20,4 +21,5 @@ export {
   ResetPasswordPage,
   NotFound404Page,
   ProfilePage,
+  FeedPage,
 };

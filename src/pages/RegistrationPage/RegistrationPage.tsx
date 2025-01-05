@@ -1,7 +1,7 @@
 import cls from './RegistrationPage.module.css';
 import { Input, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import { Link } from 'react-router-dom';
-import { Paths } from '@/router';
+import { Paths } from '@/shared/router';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm, Controller } from 'react-hook-form';

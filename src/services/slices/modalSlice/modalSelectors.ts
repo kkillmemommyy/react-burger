@@ -1,4 +1,4 @@
-import { AppState } from '..';
+import { AppState } from "@/services";
 
 export const selectModal = (state: AppState) => state.modal;
 
