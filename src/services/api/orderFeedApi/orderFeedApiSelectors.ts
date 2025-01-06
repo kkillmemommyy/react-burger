@@ -13,22 +13,26 @@ const selectEnhancedOrderFeed = createSelector([selectIngredients, selectOrderFe
 
   return orderFeed.orders.reduce<Omit<EnhancedOrderFeed, 'success'>>(
     (acc, order) => {
+      const { ingredients: ingredientIds, ...other } = order;
+
+      const mappedIngredients = ingredientIds
+        .map((id) => ingredients[id])
+        .filter(Boolean);
+
+      const bun = mappedIngredients.find((ing) => ing.type === 'bun');
+      const otherIngredients = mappedIngredients.filter((ing) => ing.type !== 'bun');
+
+      const transformedIngredients = bun ? [bun, ...otherIngredients] : otherIngredients;
+
+      const totalPrice = (bun?.price ?? 0) + otherIngredients.reduce((acc, ing) => acc + ing.price, 0);
+
       if (order.status === 'done') {
         acc.completed.push(order.number);
       } else if (order.status === 'pending') {
         acc.pending.push(order.number);
       }
 
-      const { ingredients: ingredientsIds, ...other } = order;
-
-      let totalPrice = 0;
-      const mappeddIngredients = ingredientsIds.filter(Boolean).map((id) => {
-        const ing = ingredients[id];
-        totalPrice += ing.price;
-        return ing;
-      });
-
-      acc.orders.push({ totalPrice, ingredients: mappeddIngredients, ...other });
+      acc.orders.push({ totalPrice, ingredients: transformedIngredients, ...other });
 
       return acc;
     },
@@ -51,7 +55,7 @@ export const selectTotalToday = createSelector(selectEnhancedOrderFeed, (orderFe
 export const selectOrderById = (id: string) =>
   createSelector(selectEnhancedOrderFeed, (orderFeed) => orderFeed.orders.find((o) => o._id === id));
 
-export const selectOrdersIds = createSelector(
+export const selectOrderIds = createSelector(
   selectOrderFeed,
   (orderFeed) => orderFeed?.orders.map((order) => order._id) ?? []
 );

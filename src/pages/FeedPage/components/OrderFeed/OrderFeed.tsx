@@ -1,10 +1,10 @@
 import cls from './OrderFeed.module.css';
 import { OrderCard } from './OrderCard/OrderCard';
 import { useTypedSelector } from '@/services';
-import { selectOrdersIds } from '@/services/api/orderFeedApi/orderFeedApiSelectors';
+import { selectOrderIds } from '@/services/api/orderFeedApi/orderFeedApiSelectors';
 
 export const OrderFeed = () => {
-  const ordersIds = useTypedSelector(selectOrdersIds);
+  const ordersIds = useTypedSelector(selectOrderIds);
 
   return (
     <div className={cls.orderFeed}>
