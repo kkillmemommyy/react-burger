@@ -3,14 +3,15 @@ import cls from './OrderCard.module.css';
 import { selectOrderById } from '@/services/api/orderFeedApi/orderFeedApiSelectors';
 import { FormattedDate, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import clsx from 'clsx';
+import { memo } from 'react';
+
+const LIMIT_IMAGES_PER_LINE = 6;
 
 interface OrderCardProps {
   id: string;
 }
 
-const LIMIT_IMAGES_PER_LINE = 6;
-
-export const OrderCard = ({ id }: OrderCardProps) => {
+export const OrderCard = memo(({ id }: OrderCardProps) => {
   const order = useTypedSelector(selectOrderById(id));
 
   if (!order) {
@@ -21,13 +22,20 @@ export const OrderCard = ({ id }: OrderCardProps) => {
   const orderDate = new Date(order.createdAt);
   const orderName = order.name;
   const totalPrice = order.totalPrice;
-  const images = order.ingredients
-    .slice(0, LIMIT_IMAGES_PER_LINE - 1)
+  const overflowCount = order.ingredients.length - LIMIT_IMAGES_PER_LINE;
+  const isOverflowItem = (index: number) => index === 0 && overflowCount > 0;
+
+  const ingredientImages = order.ingredients
+    .slice(0, LIMIT_IMAGES_PER_LINE)
     .map((ing) => ing.image)
     .reverse();
-  const numberOfRestIngredients = order.ingredients.length - LIMIT_IMAGES_PER_LINE;
-  const lastImage = numberOfRestIngredients > 0 ? order.ingredients[LIMIT_IMAGES_PER_LINE].image : null;
-  const status = order.status === 'created' ? 'Создан' : order.status === 'pending' ? 'Готовится' : 'Выполнен';
+
+  const statusLabels: Record<typeof order.status, string> = {
+    created: 'Создан',
+    pending: 'Готовится',
+    done: 'Выполнен',
+  };
+  const status = statusLabels[order.status];
 
   return (
     <li className={cls.orderCard}>
@@ -40,15 +48,10 @@ export const OrderCard = ({ id }: OrderCardProps) => {
         <div className='text text_type_main-default text_color_success'>{status}</div>
       </div>
       <div className={cls.flexContainer}>
-        <ul className={cls.imgsContainer}>
-          {lastImage && (
-            <li className={cls.imgWrap}>
-              <span>{numberOfRestIngredients}</span>
-              <img className={clsx(cls.img, cls.lastImg)} src={lastImage} alt='ingredient' />
-            </li>
-          )}
-          {images.map((source, index) => (
-            <li className={cls.imgWrap} key={index}>
+        <ul className={cls.ingredientImagesList}>
+          {ingredientImages.map((source, index) => (
+            <li className={clsx(cls.ingredientImage, { [cls.overflow]: isOverflowItem(index) })} key={index}>
+              <span className={clsx(cls.overflowCount, 'text text_type_main-default')}>{`+${overflowCount}`}</span>
               <img className={cls.img} src={source} alt='ingredient' />
             </li>
           ))}
@@ -60,4 +63,4 @@ export const OrderCard = ({ id }: OrderCardProps) => {
       </div>
     </li>
   );
-};
+});

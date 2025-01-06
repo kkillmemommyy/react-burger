@@ -13,12 +13,12 @@
   align-items: center;
 }
 
-.imgsContainer {
+.ingredientImagesList {
   display: flex;
   flex-direction: row-reverse;
 }
 
-.imgWrap {
+.ingredientImage {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -31,7 +31,7 @@
   z-index: 1;
 }
 
-.imgWrap:last-child {
+.ingredientImage:last-child {
   margin: 0;
 }
 
@@ -41,7 +41,21 @@
   object-fit: cover;
 }
 
-.lastImg {
-  opacity: 60%;
+.overflowCount {
+  display: none;
+  z-index: 2;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
+.overflow {
+  position: relative;
+  & > img {
+    opacity: 60%;
+  }
+  & > .overflowCount {
+    display: inline;
+  }
+}
