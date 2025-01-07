@@ -1,11 +1,11 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { ModalState, OpenModalPayload } from './types';
 
-const initialState: ModalState = {
+const initialState = {
   isModalOpen: false,
   modalType: null,
   modalContent: null,
-};
+} satisfies ModalState as ModalState;
 
 const modalSlice = createSlice({
   name: 'modal',

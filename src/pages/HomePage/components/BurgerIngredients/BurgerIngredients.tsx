@@ -48,7 +48,7 @@ export const BurgerIngredients = () => {
           ))}
         </div>
       </section>
-      {isModalOpen && modalType === 'IngredientDetails' && modalContent && (
+      {isModalOpen && modalType === 'IngredientDetails' && (
         <IngredientModal modalContent={modalContent} />
       )}
     </>
