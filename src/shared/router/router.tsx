@@ -17,6 +17,7 @@ import {
 export enum Paths {
   HOME_PAGE = '/',
   FEED = '/feed',
+  FEED_ORDER = '/feed/:id',
   LOGIN = '/login',
   INGREDIENT = '/ingredient/:id',
   REGISTRATION = '/registration',

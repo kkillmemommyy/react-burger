@@ -1,9 +1,9 @@
 import clsx from 'clsx';
 import cls from './FeedPage.module.css';
-import { AggregateInfo } from './components/AggregateInfo/AggregateInfo';
+import { AggregateInfo } from './ui/AggregateInfo/AggregateInfo';
 import { useGetOrderFeedQuery } from '@/services/api/orderFeedApi/orderFeedApi';
 import { Loader } from '@/components/Loader/Loader';
-import { OrderFeed } from './components/OrderFeed/OrderFeed';
+import { OrderFeed } from './ui/OrderFeed/OrderFeed';
 
 const FeedPage = () => {
   const { isLoading, isError } = useGetOrderFeedQuery();

@@ -12,10 +12,13 @@ const modalRoot = document.getElementById('modal');
 interface Props {
   children: ReactNode;
   title?: string;
+  titleType?: 'text' | 'digit';
 }
 
-export const Modal = ({ children, title }: Props) => {
+export const Modal = ({ children, title, titleType = 'text' }: Props) => {
   const dispatch = useTypedDispatch();
+
+  const titleClass = titleType === 'text' ? 'text text_type_main-large' : 'text text_type_digits-default';
 
   useEffect(() => {
     const closeModalOnEsc = (e: KeyboardEvent) => {
@@ -38,7 +41,7 @@ export const Modal = ({ children, title }: Props) => {
     <ModalOverlay>
       <div className={clsx(cls.modalWindow, 'pt-10')}>
         <div className={clsx(cls.modalWindow_head, 'pl-10 pr-10')}>
-          <h2 className='text text_type_main-large'>{title}</h2>
+          <h2 className={titleClass}>{title}</h2>
           <button onClick={closeModalHandler} className={cls.closeIcon} aria-label='close'>
             <CloseIcon type='primary' />
           </button>

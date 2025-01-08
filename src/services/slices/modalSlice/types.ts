@@ -1,3 +1,4 @@
+import { EnhancedOrder } from '@/services/api/orderFeedApi/types';
 import { Ingredient } from '@/shared/types/api';
 
 export type IngredientDetails = Pick<
@@ -27,8 +28,16 @@ export interface OrderDetailsState {
   modalContent: OrderDetails;
 }
 
-export type ModalState = EmptyState | IngredientDetailsState | OrderDetailsState;
+export interface OrderInfoState  {
+  isModalOpen: true,
+  modalType: 'OrderInfo'
+  modalContent: EnhancedOrder
+
+}
+
+export type ModalState = EmptyState | IngredientDetailsState | OrderDetailsState | OrderInfoState;
 
 export type OpenModalPayload =
   | { modalType: 'IngredientDetails'; modalContent: IngredientDetails }
-  | { modalType: 'OrderDetails'; modalContent: OrderDetails };
+  | { modalType: 'OrderDetails'; modalContent: OrderDetails }
+  | { modalType: 'OrderInfo'; modalContent: EnhancedOrder };

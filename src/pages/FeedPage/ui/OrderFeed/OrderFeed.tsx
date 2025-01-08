@@ -1,5 +1,5 @@
 import cls from './OrderFeed.module.css';
-import { OrderCard } from './OrderCard/OrderCard';
+import { OrderCard } from './ui/OrderCard/OrderCard';
 import { useTypedSelector } from '@/services';
 import { selectOrderIds } from '@/services/api/orderFeedApi/orderFeedApiSelectors';
 
