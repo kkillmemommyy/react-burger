@@ -1,4 +1,4 @@
-import doneImg from '@/shared/images/done.png';
+import doneImg from '@/shared/assets/images/done.png';
 import cls from './OrderDetails.module.css';
 import clsx from 'clsx';
 import { FetchBaseQueryError } from '@reduxjs/toolkit/query';

@@ -1,3 +1,3 @@
-import { Paths, router } from "./router";
+import { Paths } from "./router";
 
-export { Paths, router }
+export { Paths }

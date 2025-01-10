@@ -1,0 +1,29 @@
+.header {
+  background-color: var(--background);
+  position: relative;
+  padding: 16px 0;
+}
+
+.nav {
+  max-width: var(--container-width);
+  margin: 0 auto;
+  display: flex;
+}
+
+.logo {
+  cursor: pointer;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  /* 1280px is --container-width */
+  @media (width < 1280px) {
+    position: static;
+    transform: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+}

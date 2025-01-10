@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import cls from './OrderInfo.module.css';
+import cls from './OrderDetails.module.css';
 import { EnhancedOrder } from '@/services/api/orderFeedApi/types';
 import { CurrencyIcon, FormattedDate } from '@ya.praktikum/react-developer-burger-ui-components';
 import { Ingredient } from '@/shared/types/api';
@@ -11,7 +11,7 @@ interface Props {
 
 type CountedIngredient = Ingredient & { count: number };
 
-export const OrderInfo = ({ order }: Props) => {
+export const OrderDetails = ({ order }: Props) => {
   const { name, status, totalPrice, createdAt, ingredients } = order;
 
   const countedIngs = ingredients.reduce<Record<string, CountedIngredient>>((acc, ing) => {

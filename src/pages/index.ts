@@ -10,6 +10,7 @@ const ProfilePage = lazy(() => import('./ProfilePage/ProfilePage'));
 const IngredientPage = lazy(() => import('./IngredientPage/IngredientPage'));
 const HomePage = lazy(() => import('./HomePage/HomePage'));
 const FeedPage = lazy(() => import('./FeedPage/FeedPage'));
+const OrderPage = lazy(() => import('./OrderPage/OrderPage'));
 
 export {
   RootPage,
@@ -22,4 +23,5 @@ export {
   NotFound404Page,
   ProfilePage,
   FeedPage,
+  OrderPage,
 };

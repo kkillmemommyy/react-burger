@@ -1,4 +1,4 @@
-import { AppHeader } from '@/components/AppHeader/AppHeader';
+import { AppHeader } from '@/widgets/AppHeader/AppHeader';
 import { useGetUserQuery } from '@/services/api/userApi/userApi';
 import { useGetIngredientsQuery } from '@/services/api/ingredientsApi/ingredientsApi';
 import { Outlet } from 'react-router-dom';

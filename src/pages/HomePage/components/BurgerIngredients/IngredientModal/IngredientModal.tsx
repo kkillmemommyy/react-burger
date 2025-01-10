@@ -3,18 +3,23 @@ import { IngredientDetails } from '../IngredientDetails/IngredientDetails';
 import { Paths } from '@/shared/router';
 import { useEffect } from 'react';
 import { IngredientDetails as IngredientDetailsType } from '@/services/slices/modalSlice/types';
+import { useNavigate } from 'react-router-dom';
 
 type Props = {
   modalContent: IngredientDetailsType;
 };
 
 export const IngredientModal = ({ modalContent }: Props) => {
+  const navigate = useNavigate();
 
   useEffect(() => {
-    window.history.replaceState(null, '', Paths.INGREDIENT.replace(':id', modalContent.id));
+    navigate(Paths.INGREDIENT.replace(':id', modalContent.id), {
+      state: { background: Paths.HOME_PAGE },
+      replace: true,
+    });
 
-    return () => window.history.replaceState(null, '', Paths.HOME_PAGE);
-  }, [modalContent.id]);
+    return () => navigate(Paths.HOME_PAGE, { replace: true });
+  }, [modalContent.id, navigate]);
 
   return (
     <Modal title='Детали ингредиента'>

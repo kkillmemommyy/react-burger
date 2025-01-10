@@ -7,9 +7,8 @@ import { memo } from 'react';
 import { useTypedDispatch } from '@/services';
 import { modalActions } from '@/services/slices/modalSlice/modalSlice';
 import { selectModal } from '@/services/slices/modalSlice/modalSelectors';
-import { Modal } from '@/components';
-import { OrderInfo } from '../../../OrderInfo/OrderInfo';
 import { getStatusLable } from '../../lib/getStatusLable';
+import { OrderModal } from '../../../OrderModal/OrderModal';
 
 const LIMIT_IMAGES_PER_LINE = 6;
 
@@ -70,11 +69,7 @@ export const OrderCard = memo(({ id }: OrderCardProps) => {
           </div>
         </div>
       </li>
-      {isModalOpen && modalType === 'OrderInfo' && modalContent._id === id && (
-        <Modal title={orderNumber} titleType='digit'>
-          <OrderInfo order={order} />
-        </Modal>
-      )}
+      {isModalOpen && modalType === 'OrderInfo' && modalContent._id === id && <OrderModal order={order} />}
     </>
   );
 });

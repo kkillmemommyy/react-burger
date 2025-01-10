@@ -17,7 +17,7 @@ export const ModalOverlay = ({ children }: Props) => {
   };
 
   return (
-    <div className={cls.modalOverlay} onClick={closeModalHandler}>
+    <div className={cls.overlay} onClick={closeModalHandler}>
       {children}
     </div>
   );
