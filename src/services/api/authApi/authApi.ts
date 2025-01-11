@@ -6,7 +6,7 @@ import {
   SuccessRegistrationAndLoginResponse,
   LoginRequest,
 } from './types';
-import { localStorageGetItem } from '@/shared/utils/localStorage';
+import { localStorageGetItem } from '@/shared/lib/localStorage';
 import { baseApi } from '../baseApi';
 
 export const authApi = baseApi.injectEndpoints({

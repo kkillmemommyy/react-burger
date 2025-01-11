@@ -1,4 +1,4 @@
-import { Modal } from '@/components';
+import { Modal } from '@/widgets/Modal';
 import { IngredientDetails } from '../IngredientDetails/IngredientDetails';
 import { ROUTER_PATHS } from '@/shared/constants/routes';
 import { useEffect } from 'react';

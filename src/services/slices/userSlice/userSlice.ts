@@ -1,7 +1,7 @@
 import { createSlice, isAnyOf } from '@reduxjs/toolkit';
 import { userState } from './types';
 import { authApi } from '@/services/api/authApi/authApi';
-import { localStorageRemoveItem, localStorageSetItem } from '@/shared/utils/localStorage';
+import { localStorageRemoveItem, localStorageSetItem } from '@/shared/lib/localStorage';
 import { refreshTokenApi } from '@/services/api/refreshTokenApi/refreshTokenApi';
 import { userApi } from '@/services/api/userApi/userApi';
 

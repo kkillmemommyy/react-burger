@@ -1,18 +1,19 @@
 import cls from './OrderPage.module.css';
-import { OrderDetails } from '@/entities/OrderDetails';
+import { OrderDetails } from '@/widgets/OrderDetails';
 import { useTypedSelector } from '@/services';
 import { useGetOrderFeedQuery } from '@/services/api/orderFeedApi/orderFeedApi';
 import { selectOrderById } from '@/services/api/orderFeedApi/orderFeedApiSelectors';
 import { ROUTER_PATHS } from '@/shared/constants/routes';
 import { Navigate, useParams } from 'react-router-dom';
+import { Loader } from '@/shared/ui/Loader';
 
 const OrderPage = () => {
   const { id } = useParams();
-  const { isLoading } = useGetOrderFeedQuery();
   const order = useTypedSelector(selectOrderById(id || ''));
+  const { isLoading } = useGetOrderFeedQuery(undefined, { skip: !!order });
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <Loader />;
   }
 
   if (!order) {
@@ -21,8 +22,8 @@ const OrderPage = () => {
 
   return (
     <main className={cls.page}>
-      <div className=''>
-        <h2>{order.number}</h2>
+      <div className={cls.wrap}>
+        <h2 className='text text_type_digits-default'>{`#${order.number}`}</h2>
         <OrderDetails order={order} />
       </div>
     </main>

@@ -7,7 +7,7 @@ import { memo } from 'react';
 import { useTypedDispatch } from '@/services';
 import { modalActions } from '@/services/slices/modalSlice/modalSlice';
 import { selectModal } from '@/services/slices/modalSlice/modalSelectors';
-import { getStatusLable } from '@/shared/utils/formatters';
+import { getStatusLable } from '@/shared/lib/formatters';
 import { OrderModal } from '../OrderModal/OrderModal';
 
 const LIMIT_IMAGES_PER_LINE = 6;

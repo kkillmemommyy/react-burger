@@ -14,7 +14,7 @@ const RootPage = () => {
   }
 
   if (isError) {
-    return <PageErrorMessage hasLogo/>;
+    return <PageErrorMessage hasLogo />;
   }
 
   return (

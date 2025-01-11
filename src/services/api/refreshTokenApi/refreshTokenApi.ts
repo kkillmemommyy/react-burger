@@ -1,4 +1,4 @@
-import { localStorageGetItem } from '@/shared/utils/localStorage';
+import { localStorageGetItem } from '@/shared/lib/localStorage';
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query';
 import { NORMA_API_BASE_URL } from '../routes';
 import { SuccessRefreshTokenResponse } from './types';

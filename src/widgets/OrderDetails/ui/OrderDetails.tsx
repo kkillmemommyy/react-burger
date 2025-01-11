@@ -3,7 +3,7 @@ import cls from './OrderDetails.module.css';
 import { EnhancedOrder } from '@/services/api/orderFeedApi/types';
 import { CurrencyIcon, FormattedDate } from '@ya.praktikum/react-developer-burger-ui-components';
 import { Ingredient } from '@/shared/types/api';
-import { getStatusLable } from '@/shared/utils/formatters';
+import { getStatusLable } from '@/shared/lib/formatters';
 
 interface Props {
   order: EnhancedOrder;
@@ -30,7 +30,7 @@ export const OrderDetails = ({ order }: Props) => {
   return (
     <>
       <div className={clsx(cls.flex_wrap, 'mb-15')}>
-        <h2 className='text text_type_main-medium mb-2'>{name}</h2>
+        <h2 className='text text_type_main-medium mb-3'>{name}</h2>
         <p className='text text_type_main-default text_color_success'>{statusLable}</p>
       </div>
       <div className={clsx(cls.flex_wrap, 'mb-10')}>

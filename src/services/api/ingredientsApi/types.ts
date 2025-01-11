@@ -1,7 +1,7 @@
 import { Ingredient } from '@/shared/types/api';
 
 export interface GetIngredientsResponse {
-  success: boolean;
+  success: true;
   data: Ingredient[];
 }
 

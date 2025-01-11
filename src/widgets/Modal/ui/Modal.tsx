@@ -4,7 +4,7 @@ import { createPortal } from 'react-dom';
 import clsx from 'clsx';
 import cls from './Modal.module.css';
 import { CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components';
-import { ModalOverlay } from '../ModalOverlay/ModalOverlay';
+import { ModalOverlay } from './ModalOverlay';
 import { modalActions } from '@/services/slices/modalSlice/modalSlice';
 
 const modalRoot = document.getElementById('modal');
@@ -26,8 +26,8 @@ export const Modal = ({ children, title, titleType = 'text' }: Props) => {
         dispatch(modalActions.closeModal());
       }
     };
-
     document.addEventListener('keyup', closeModalOnEsc);
+    
     return () => document.removeEventListener('keyup', closeModalOnEsc);
   }, [dispatch]);
 

@@ -3,7 +3,7 @@ import { useTypedSelector, useTypedDispatch } from '@/services';
 import clsx from 'clsx';
 import cls from './BurgerConstructor.module.css';
 import { ConstructorElement as CE, Button } from '@ya.praktikum/react-developer-burger-ui-components';
-import { Modal } from '@/components/Modal/Modal';
+import { Modal } from '@/widgets/Modal/ui/Modal';
 import { OrderDetails } from './OrderDetails/OrderDetails';
 import { TotalPrice } from './TotalPrice/TotalPrice';
 import { selectBun, selectStuffing } from '@/services/slices/selectedIngredientsSlice/selectedIngredientsSelectors';
