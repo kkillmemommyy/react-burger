@@ -1,4 +1,4 @@
-import { Paths } from '@/shared/router';
+import { ROUTER_PATHS } from '@/shared/constants/routes';
 import { Navigate, Outlet, useSearchParams } from 'react-router-dom';
 import { useTypedSelector } from '@/services';
 import { selectUser } from '@/services/slices/userSlice/userSelectors';
@@ -9,7 +9,7 @@ export const UnProtectedRoute = () => {
 
   if (user) {
     const redirectPath = searchParams.get('redirect');
-    return <Navigate to={redirectPath || Paths.PROFILE} replace />;
+    return <Navigate to={redirectPath || ROUTER_PATHS.PROFILE} replace />;
   }
 
   return <Outlet />;

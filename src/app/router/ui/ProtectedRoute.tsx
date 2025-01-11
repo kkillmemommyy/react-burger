@@ -1,4 +1,4 @@
-import { Paths } from '@/shared/router';
+import { ROUTER_PATHS } from '@/shared/constants/routes';
 import { createSearchParams, Navigate, Outlet, useLocation } from 'react-router-dom';
 import { useTypedSelector } from '@/services';
 import { selectUser } from '@/services/slices/userSlice/userSelectors';
@@ -9,7 +9,7 @@ export const ProtectedRoute = () => {
 
   if (!user) {
     const searchParams = createSearchParams({ redirect: location.pathname });
-    return <Navigate to={`${Paths.LOGIN}?${searchParams.toString()}`} replace />;
+    return <Navigate to={`${ROUTER_PATHS.LOGIN}?${searchParams.toString()}`} replace />;
   }
 
   return <Outlet />;

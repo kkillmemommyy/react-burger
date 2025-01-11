@@ -1,4 +1,4 @@
-import { AppHeader } from '../widgets/AppHeader/AppHeader';
+import { AppHeader } from '../widgets/AppHeader/ui/AppHeader';
 import { Modal } from './Modal/Modal';
 import { ModalOverlay } from './ModalOverlay/ModalOverlay';
 

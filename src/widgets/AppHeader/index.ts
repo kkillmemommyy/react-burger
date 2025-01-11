@@ -1,3 +1,1 @@
-import { AppHeader } from './AppHeader';
-
-export { AppHeader };
+export { AppHeader } from './ui/AppHeader';

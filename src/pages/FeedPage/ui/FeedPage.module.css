@@ -1,0 +1,14 @@
+.main {
+  max-width: var(--container-width);
+  margin: 0 auto;
+  padding: 40px var(--container-side-padding) 0px;
+}
+
+.h1 {
+  line-height: 40px;
+}
+
+.wrap {
+  display: flex;
+  gap: 60px;
+}

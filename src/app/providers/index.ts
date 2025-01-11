@@ -1,3 +1,1 @@
-import { Providers } from './Providers';
-
-export { Providers };
+export { Providers } from './Providers';
