@@ -1,5 +1,5 @@
 import { Route, Routes, useLocation } from 'react-router-dom';
-import { ROUTER_PATHS } from '@/shared/constants/routes';
+import { ROUTER_PATHS } from '@/shared/models/routes';
 
 import { LazyLoad } from './LazyLoad';
 import { ProtectedRoute } from './ProtectedRoute';

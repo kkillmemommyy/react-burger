@@ -16,7 +16,7 @@ import { modalActions } from '@/services/slices/modalSlice/modalSlice';
 import { AddIngredientPayload } from '@/services/slices/selectedIngredientsSlice/types';
 import { selectUser } from '@/services/slices/userSlice/userSelectors';
 import { createSearchParams, useNavigate } from 'react-router-dom';
-import { ROUTER_PATHS } from '@/shared/constants/routes';
+import { ROUTER_PATHS } from '@/shared/models/routes';
 
 const ConstructorElement = memo(CE);
 

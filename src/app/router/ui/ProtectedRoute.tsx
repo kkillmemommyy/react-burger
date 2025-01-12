@@ -1,4 +1,4 @@
-import { ROUTER_PATHS } from '@/shared/constants/routes';
+import { ROUTER_PATHS } from '@/shared/models/routes';
 import { createSearchParams, Navigate, Outlet, useLocation } from 'react-router-dom';
 import { useTypedSelector } from '@/services';
 import { selectUser } from '@/services/slices/userSlice/userSelectors';

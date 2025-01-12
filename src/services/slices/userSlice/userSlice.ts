@@ -13,12 +13,7 @@ const initialState: userState = {
 const userSlice = createSlice({
   name: 'user',
   initialState,
-  reducers: {
-    logout: (state) => {
-      state.accessToken = null;
-      state.user = null;
-    },
-  },
+  reducers: {},
   extraReducers: (builder) => {
     builder
       .addMatcher(

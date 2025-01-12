@@ -1,5 +1,5 @@
 import { Modal } from '@/widgets/Modal';
-import { ROUTER_PATHS } from '@/shared/constants/routes';
+import { ROUTER_PATHS } from '@/shared/models/routes';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { EnhancedOrder } from '@/services/api/orderFeedApi/types';
