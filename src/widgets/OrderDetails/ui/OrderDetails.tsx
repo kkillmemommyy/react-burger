@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import cls from './OrderDetails.module.css';
-import { EnhancedOrder } from '@/services/api/orderFeedApi/types';
+import { EnhancedOrder } from '@/shared/api/orderFeedApi/types';
 import { CurrencyIcon, FormattedDate } from '@ya.praktikum/react-developer-burger-ui-components';
 import { Ingredient } from '@/shared/types/api';
 import { getStatusLable } from '@/shared/lib/formatters';

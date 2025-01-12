@@ -2,7 +2,7 @@ import cls from './ProfilePage.module.css';
 import clsx from 'clsx';
 import { ROUTER_PATHS } from '@/shared/models/routes';
 import { NavLink } from 'react-router-dom';
-import { useLogoutMutation } from '@/services/api/authApi/authApi';
+import { useLogoutMutation } from '@/shared/api/authApi/authApi';
 import { EditProfile } from './EditProfile/EditProfile';
 
 const ProfilePage = () => {

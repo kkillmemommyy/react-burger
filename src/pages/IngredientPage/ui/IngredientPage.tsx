@@ -1,6 +1,6 @@
 import { Navigate, useParams } from 'react-router-dom';
-import { useTypedSelector } from '@/services';
-import { selectIngredientById } from '@/services/api/ingredientsApi/ingredientsApiSelectors';
+import { useTypedSelector } from '@/shared/lib/typedReduxHooks';
+import { selectIngredientById } from '@/shared/api/ingredientsApi/ingredientsApiSelectors';
 import { ROUTER_PATHS } from '@/shared/models/routes';
 import cls from './IngredientPage.module.css';
 import { clsx } from 'clsx';

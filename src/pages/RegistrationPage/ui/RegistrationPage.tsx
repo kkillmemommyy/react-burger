@@ -6,7 +6,7 @@ import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm, Controller } from 'react-hook-form';
 import { useState } from 'react';
-import { useRegistrationMutation } from '@/services/api/authApi/authApi';
+import { useRegistrationMutation } from '@/shared/api/authApi/authApi';
 import clsx from 'clsx';
 
 const schema = z.object({

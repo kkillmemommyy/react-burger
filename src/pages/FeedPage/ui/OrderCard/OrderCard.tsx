@@ -1,12 +1,12 @@
-import { useTypedSelector } from '@/services';
+import { useTypedSelector } from '@/shared/lib/typedReduxHooks';
 import cls from './OrderCard.module.css';
-import { selectOrderById } from '@/services/api/orderFeedApi/orderFeedApiSelectors';
+import { selectOrderById } from '@/shared/api/orderFeedApi/orderFeedApiSelectors';
 import { FormattedDate, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import clsx from 'clsx';
 import { memo } from 'react';
-import { useTypedDispatch } from '@/services';
-import { modalActions } from '@/services/slices/modalSlice/modalSlice';
-import { selectModal } from '@/services/slices/modalSlice/modalSelectors';
+import { useTypedDispatch } from '@/shared/lib/typedReduxHooks';
+import { modalActions } from '@/shared/models/slices/modalSlice/modalSlice';
+import { selectModal } from '@/shared/models/slices/modalSlice/modalSelectors';
 import { getStatusLable } from '@/shared/lib/formatters';
 import { OrderModal } from '../OrderModal/OrderModal';
 

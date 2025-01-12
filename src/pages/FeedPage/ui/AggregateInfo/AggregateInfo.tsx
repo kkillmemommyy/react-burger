@@ -1,12 +1,12 @@
 import cls from './AggregateInfo.module.css';
 import clsx from 'clsx';
-import { useTypedSelector } from '@/services';
+import { useTypedSelector } from '@/shared/lib/typedReduxHooks';
 import {
   selectCompleted,
   selectPending,
   selectTotal,
   selectTotalToday,
-} from '@/services/api/orderFeedApi/orderFeedApiSelectors';
+} from '@/shared/api/orderFeedApi/orderFeedApiSelectors';
 
 export const AggregateInfo = () => {
   const total = useTypedSelector(selectTotal).toLocaleString('ru-RU');

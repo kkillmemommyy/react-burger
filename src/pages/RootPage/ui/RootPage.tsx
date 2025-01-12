@@ -1,6 +1,6 @@
 import { AppHeader } from '@/widgets/AppHeader/ui/AppHeader';
-import { useGetUserQuery } from '@/services/api/userApi/userApi';
-import { useGetIngredientsQuery } from '@/services/api/ingredientsApi/ingredientsApi';
+import { useGetUserQuery } from '@/shared/api/userApi/userApi';
+import { useGetIngredientsQuery } from '@/shared/api/ingredientsApi/ingredientsApi';
 import { Outlet } from 'react-router-dom';
 import { Loader } from '@/shared/ui/Loader';
 import { PageErrorMessage } from '@/shared/ui/PageErrorMessage';

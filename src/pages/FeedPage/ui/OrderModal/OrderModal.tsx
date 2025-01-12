@@ -1,8 +1,8 @@
-import { Modal } from '@/widgets/Modal';
+import { Modal } from '@/shared/ui/Modal';
 import { ROUTER_PATHS } from '@/shared/models/routes';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { EnhancedOrder } from '@/services/api/orderFeedApi/types';
+import { EnhancedOrder } from '@/shared/api/orderFeedApi/types';
 import { OrderDetails } from '@/widgets/OrderDetails';
 
 type Props = {

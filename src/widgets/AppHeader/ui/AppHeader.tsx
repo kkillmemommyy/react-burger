@@ -2,8 +2,8 @@ import cls from './AppHeader.module.css';
 import { Logo, BurgerIcon, ListIcon, ProfileIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import { NavLink } from 'react-router-dom';
 import { ROUTER_PATHS } from '@/shared/models/routes';
-import { useTypedSelector } from '@/services';
-import { selectUser } from '@/services/slices/userSlice/userSelectors';
+import { useTypedSelector } from '@/shared/lib/typedReduxHooks';
+import { selectUser } from '@/shared/models/slices/userSlice/userSelectors';
 import { NavItem } from './NavItem';
 
 export const AppHeader = () => {

@@ -2,7 +2,7 @@ import cls from './ResetPasswordPage.module.css';
 import { Input, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { ROUTER_PATHS } from '@/shared/models/routes';
-import { useResetPasswordMutation } from '@/services/api/authApi/authApi';
+import { useResetPasswordMutation } from '@/shared/api/authApi/authApi';
 import { z } from 'zod';
 import { Controller, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';

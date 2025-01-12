@@ -2,7 +2,7 @@ import cls from './ForgotPasswordPage.module.css';
 import { Button, Input } from '@ya.praktikum/react-developer-burger-ui-components';
 import { Link } from 'react-router-dom';
 import { ROUTER_PATHS } from '@/shared/models/routes';
-import { useForgotPasswordMutation } from '@/services/api/authApi/authApi';
+import { useForgotPasswordMutation } from '@/shared/api/authApi/authApi';
 import { useNavigate } from 'react-router-dom';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';

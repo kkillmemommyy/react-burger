@@ -5,9 +5,9 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import cls from './EditProfile.module.css';
 import { Input, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import clsx from 'clsx';
-import { useTypedSelector } from '@/services';
-import { selectUser } from '@/services/slices/userSlice/userSelectors';
-import { usePatchUserMutation } from '@/services/api/userApi/userApi';
+import { useTypedSelector } from '@/shared/lib/typedReduxHooks';
+import { selectUser } from '@/shared/models/slices/userSlice/userSelectors';
+import { usePatchUserMutation } from '@/shared/api/userApi/userApi';
 
 interface Editable {
   name: boolean;

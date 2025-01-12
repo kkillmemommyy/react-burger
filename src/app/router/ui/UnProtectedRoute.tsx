@@ -1,7 +1,7 @@
 import { ROUTER_PATHS } from '@/shared/models/routes';
 import { Navigate, Outlet, useSearchParams } from 'react-router-dom';
-import { useTypedSelector } from '@/services';
-import { selectUser } from '@/services/slices/userSlice/userSelectors';
+import { useTypedSelector } from '@/shared/lib/typedReduxHooks';
+import { selectUser } from '@/shared/models/slices/userSlice/userSelectors';
 
 export const UnProtectedRoute = () => {
   const user = useTypedSelector(selectUser);

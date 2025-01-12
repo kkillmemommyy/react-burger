@@ -2,7 +2,7 @@ import cls from './LoginPage.module.css';
 import { Button, Input } from '@ya.praktikum/react-developer-burger-ui-components';
 import { Link } from 'react-router-dom';
 import { ROUTER_PATHS } from '@/shared/models/routes';
-import { useLoginMutation } from '@/services/api/authApi/authApi';
+import { useLoginMutation } from '@/shared/api/authApi/authApi';
 import { z } from 'zod';
 import { Controller, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';

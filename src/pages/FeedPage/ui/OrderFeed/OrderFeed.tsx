@@ -1,7 +1,7 @@
 import cls from './OrderFeed.module.css';
 import { OrderCard } from '../OrderCard/OrderCard';
-import { useTypedSelector } from '@/services';
-import { selectOrderIds } from '@/services/api/orderFeedApi/orderFeedApiSelectors';
+import { useTypedSelector } from '@/shared/lib/typedReduxHooks';
+import { selectOrderIds } from '@/shared/api/orderFeedApi/orderFeedApiSelectors';
 
 export const OrderFeed = () => {
   const ordersIds = useTypedSelector(selectOrderIds);

@@ -1,8 +1,8 @@
 import cls from './OrderPage.module.css';
 import { OrderDetails } from '@/widgets/OrderDetails';
-import { useTypedSelector } from '@/services';
-import { useGetOrderFeedQuery } from '@/services/api/orderFeedApi/orderFeedApi';
-import { selectOrderById } from '@/services/api/orderFeedApi/orderFeedApiSelectors';
+import { useTypedSelector } from '@/shared/lib/typedReduxHooks';
+import { useGetOrderFeedQuery } from '@/shared/api/orderFeedApi/orderFeedApi';
+import { selectOrderById } from '@/shared/api/orderFeedApi/orderFeedApiSelectors';
 import { ROUTER_PATHS } from '@/shared/models/routes';
 import { Navigate, useParams } from 'react-router-dom';
 import { Loader } from '@/shared/ui/Loader';

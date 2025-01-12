@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import cls from './FeedPage.module.css';
 import { AggregateInfo } from './AggregateInfo/AggregateInfo';
-import { useGetOrderFeedQuery } from '@/services/api/orderFeedApi/orderFeedApi';
+import { useGetOrderFeedQuery } from '@/shared/api/orderFeedApi/orderFeedApi';
 import { Loader } from '@/shared/ui/Loader';
 import { OrderFeed } from './OrderFeed/OrderFeed';
 
