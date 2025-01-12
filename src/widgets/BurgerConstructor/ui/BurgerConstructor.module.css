@@ -7,16 +7,16 @@
   justify-content: flex-end;
 }
 
-.constructorContainer {
+.constructor_container {
   height: calc(100vh - 342px);
   border: 1px solid #131316;
 }
 
-.overConstructorContainer {
+.constructor_container_over {
   border: 1px dashed #c5c5c5;
 }
 
-.withScroll {
+.with_scroll {
   display: flex;
   flex-direction: column;
   gap: 16px;
@@ -26,7 +26,7 @@
   scrollbar-width: thin;
 }
 
-.withScrollNotBun {
+.with_scroll_not_bun {
   display: flex;
   flex-direction: column;
   gap: 16px;

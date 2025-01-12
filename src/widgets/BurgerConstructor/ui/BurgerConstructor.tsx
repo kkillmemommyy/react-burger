@@ -6,7 +6,6 @@ import { ConstructorElement as CE, Button } from '@ya.praktikum/react-developer-
 import { Modal } from '@/shared/ui/Modal/ui/Modal';
 import { OrderDetails } from './OrderDetails/OrderDetails';
 import { TotalPrice } from './TotalPrice/TotalPrice';
-import { selectBun, selectStuffing } from '@/shared/models/slices/selectedIngredientsSlice/selectedIngredientsSelectors';
 import { useMakeOrderMutation } from '@/shared/api/userApi/userApi';
 import { useDrop } from 'react-dnd';
 import { selectedIngredientsActions } from '@/shared/models/slices/selectedIngredientsSlice/selectedIngredientsSlice';
@@ -17,13 +16,17 @@ import { AddIngredientPayload } from '@/shared/models/slices/selectedIngredients
 import { selectUser } from '@/shared/models/slices/userSlice/userSelectors';
 import { createSearchParams, useNavigate } from 'react-router-dom';
 import { ROUTER_PATHS } from '@/shared/models/routes';
+import {
+  selectBun,
+  selectStuffing,
+} from '@/shared/models/slices/selectedIngredientsSlice/selectedIngredientsSelectors';
 
 const ConstructorElement = memo(CE);
 
 export const BurgerConstructor = () => {
   const navigate = useNavigate();
   const dispatch = useTypedDispatch();
-  const [orderRequest, { isLoading, error }] = useMakeOrderMutation();
+  const [orderRequest, { isLoading, isError }] = useMakeOrderMutation();
 
   const { isModalOpen, modalType, modalContent } = useTypedSelector(selectModal);
   const user = useTypedSelector(selectUser);
@@ -49,10 +52,10 @@ export const BurgerConstructor = () => {
       return;
     }
 
-    //bun is not null because isMakeOrderBtnDisabled checked it
-    const ids = [bun!.id, ...stuffing.map((s) => s.id)];
+    const ids = bun ? [bun.id, ...stuffing.map((s) => s.id)] : stuffing.map((s) => s.id);
+
     dispatch(modalActions.openModal({ modalType: 'OrderDetails', modalContent: null }));
-    dispatch(selectedIngredientsActions.rest());
+    dispatch(selectedIngredientsActions.reset());
 
     const response = await orderRequest({ ingredients: ids });
     const orderId = response?.data?.order?.number;
@@ -66,17 +69,17 @@ export const BurgerConstructor = () => {
     <>
       <section className={clsx(cls.wrap, 'pl-4')}>
         <div
-          className={clsx('mb-10', cls.constructorContainer, {
-            [cls.overConstructorContainer]: isOver,
+          className={clsx('mb-10', cls.constructor_container, {
+            [cls.constructor_container_over]: isOver,
           })}
           ref={dropRef}
         >
-          <div className={clsx(cls.constructorElement, bun && 'pl-8 mb-4')}>
+          <div className={clsx({ 'pl-8 mb-4': bun })}>
             {bun && (
               <ConstructorElement type='top' isLocked={true} text={bun.name} price={bun.price} thumbnail={bun.image} />
             )}
           </div>
-          <div className={bun ? cls.withScroll : cls.withScrollNotBun}>
+          <div className={bun ? cls.with_scroll : cls.with_scroll_not_bun}>
             {stuffing.map((ing, index) => (
               <DragbleElement key={ing.createdAt} index={index}>
                 <ConstructorElement
@@ -88,7 +91,7 @@ export const BurgerConstructor = () => {
               </DragbleElement>
             ))}
           </div>
-          <div className={clsx(cls.constructorElement, bun && 'pl-8 mt-4')}>
+          <div className={clsx({ 'pl-8 mb-4': bun })}>
             {bun && (
               <ConstructorElement
                 type='bottom'
@@ -110,7 +113,7 @@ export const BurgerConstructor = () => {
 
       {isModalOpen && modalType === 'OrderDetails' && (
         <Modal>
-          <OrderDetails orderId={modalContent} isLoading={isLoading} error={error} />
+          <OrderDetails orderId={modalContent} isLoading={isLoading} isError={isError} />
         </Modal>
       )}
     </>

@@ -40,13 +40,15 @@ export const DragbleElement = ({ index, children }: Props) => {
     },
   });
 
+  //bug in react-dnd lib
+  //https://github.com/react-dnd/react-dnd/issues/3452
   useEffect(() => {
     previewRef(dropRef(ref));
   }, [dragRef, dropRef, previewRef, ref]);
 
   return (
-    <div className={clsx(cls.constructorElement, { [cls.drag]: isDragging })} ref={ref}>
-      <div className={clsx(cls.dragIcon, 'mr-2')} ref={dragRef}>
+    <div className={clsx(cls.constructor_element, { [cls.drag]: isDragging })} ref={ref}>
+      <div className={clsx(cls.drag_icon, 'mr-2')} ref={dragRef}>
         <DragIcon type='primary' />
       </div>
       {children}

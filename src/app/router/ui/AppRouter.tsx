@@ -1,4 +1,4 @@
-import { Route, Routes, useLocation } from 'react-router-dom';
+import { Route, Routes, useLocation, useNavigationType } from 'react-router-dom';
 import { ROUTER_PATHS } from '@/shared/models/routes';
 
 import { LazyLoad } from './LazyLoad';
@@ -20,7 +20,9 @@ import {
 
 export const AppRouter = () => {
   const location = useLocation();
-  const background = location.state?.background;
+  const navType = useNavigationType();
+
+  const background = navType === 'REPLACE' && location.state?.background;
 
   return (
     <Routes location={background || location}>

@@ -1,28 +1,34 @@
 import doneImg from '../../assets/done.png';
 import cls from './OrderDetails.module.css';
 import clsx from 'clsx';
-import { FetchBaseQueryError } from '@reduxjs/toolkit/query';
-import { SerializedError } from '@reduxjs/toolkit';
+import { Loader } from '@/shared/ui/Loader';
+import { LogoSmall } from '@/shared/ui/LogoSmall';
 
 interface Props {
-  error: FetchBaseQueryError | SerializedError | undefined;
   orderId: number | null;
+  isError: boolean;
   isLoading: boolean;
 }
 
-export const OrderDetails = ({ orderId, isLoading, error }: Props) => {
+export const OrderDetails = ({ orderId, isLoading, isError }: Props) => {
   if (isLoading) {
-    return <div className={cls.loader}></div>;
+    return (
+      <div className={cls.wrap}>
+        <Loader className={cls.logo_loader} />
+        <p className='text text_type_main-medium mt-10'>Подождите, пока оформляется заказ</p>
+      </div>
+    );
   }
 
-  if (error) {
+  if (isError) {
     return (
-      <>
-        <p className={clsx(cls.error, 'text text_type_main-medium mb-8')}>
+      <div className={cls.wrap}>
+        <LogoSmall className={clsx(cls.logo, cls.logo_static)} />
+        <p className={clsx(cls.error_text, 'text text_type_main-medium mt-4 mb-4')}>
           Во время оформления заказа что-то пошло не так, попробуйте позднее
         </p>
         <p className='text text_type_main-medium'>{':_('}</p>
-      </>
+      </div>
     );
   }
 
