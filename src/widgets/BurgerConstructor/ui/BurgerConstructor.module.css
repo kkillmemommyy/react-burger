@@ -9,11 +9,12 @@
 
 .constructor_container {
   height: calc(100vh - 342px);
-  border: 1px solid #131316;
+  padding: 1px;
 }
 
 .constructor_container_over {
-  border: 1px dashed #c5c5c5;
+  border: 1px solid var(--colors-interface-accent);
+  padding: 0;
 }
 
 .with_scroll {
