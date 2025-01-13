@@ -18,6 +18,7 @@ export const IngredientDetails = () => {
 
   return (
     <>
+      <h2 className={clsx(cls.title, 'text text_type_main-large')}>Детали ингредиента</h2>
       <img src={image} alt={name} className={clsx(cls.img, 'mb-4')} />
       <p className={clsx(cls.name, 'text text_type_main-medium mb-8')}>{name}</p>
       <div className={clsx(cls.details, 'mb-15')}>

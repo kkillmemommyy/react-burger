@@ -1,17 +1,15 @@
 .modal {
   background-color: #1c1c21;
   border-radius: 40px;
-}
 
-.modal_head {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  height: 64px;
-  width: 640px;
+  position: relative;
 }
 
 .close_icon {
+  position: absolute;
+  top: 63px;
+  right: 43px;
+
   height: 24px;
   background-color: transparent;
   border: none;
@@ -25,6 +23,6 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  max-width: 640px;
+  max-width: var(--max-width-modal);
   padding: 0 40px;
 }

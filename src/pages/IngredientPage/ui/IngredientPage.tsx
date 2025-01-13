@@ -3,10 +3,11 @@ import { IngredientDetails } from '@/widgets/IngredientDetails/IngredientDetails
 
 const IngredientPage = () => {
   return (
-    <div className={cls.wrap}>
-      <h1 className='text text_type_main-large'>Детали Ингредиента</h1>
-      <IngredientDetails />
-    </div>
+    <main className={cls.main}>
+      <div className={cls.wrap}>
+        <IngredientDetails />
+      </div>
+    </main>
   );
 };
 

@@ -4,11 +4,9 @@ import { selectOrderById } from '@/shared/api/orderFeedApi/orderFeedApiSelectors
 import { FormattedDate, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import clsx from 'clsx';
 import { memo } from 'react';
-import { useTypedDispatch } from '@/shared/lib/typedReduxHooks';
-import { modalActions } from '@/shared/models/slices/modalSlice/modalSlice';
-import { selectModal } from '@/shared/models/slices/modalSlice/modalSelectors';
 import { getStatusLable } from '@/shared/lib/formatters';
-import { OrderModal } from '../OrderModal/OrderModal';
+import { useNavigate } from 'react-router-dom';
+import { ROUTER_PATHS } from '@/shared/models/routes';
 
 const LIMIT_IMAGES_PER_LINE = 6;
 
@@ -18,15 +16,16 @@ interface OrderCardProps {
 
 export const OrderCard = memo(({ id }: OrderCardProps) => {
   const order = useTypedSelector(selectOrderById(id));
-  const dispatch = useTypedDispatch();
-  const { isModalOpen, modalType, modalContent } = useTypedSelector(selectModal);
+  const navigate = useNavigate();
 
   if (!order) {
     return;
   }
 
   const openModalHandle = () => {
-    dispatch(modalActions.openModal({ modalType: 'OrderInfo', modalContent: order }));
+    navigate(ROUTER_PATHS.FEED_ORDER.replace(':id', id), {
+      state: { background: ROUTER_PATHS.FEED_ORDER.replace(':id', id) },
+    });
   };
 
   const orderNumber = `#${order.number}`;
@@ -44,32 +43,29 @@ export const OrderCard = memo(({ id }: OrderCardProps) => {
   const status = getStatusLable(order.status);
 
   return (
-    <>
-      <li className={cls.orderCard} onClick={openModalHandle}>
+    <li className={cls.orderCard} onClick={openModalHandle}>
+      <div className={cls.flexContainer}>
+        <span className='text text_type_digits-default'>{orderNumber}</span>
+        <FormattedDate date={orderDate} className='text text_type_main-default text_color_inactive' />
+      </div>
+      <div>
+        <div className='mb-2 text text_type_main-medium'>{orderName}</div>
+        <div className='text text_type_main-default text_color_success'>{status}</div>
+      </div>
+      <div className={cls.flexContainer}>
+        <ul className={cls.ingredientImagesList}>
+          {ingredientImages.map((source, index) => (
+            <li className={clsx(cls.ingredientImage, { [cls.overflow]: isOverflowItem(index) })} key={index}>
+              <span className={clsx(cls.overflowCount, 'text text_type_main-default')}>{`+${overflowCount}`}</span>
+              <img className={cls.img} src={source} alt='ingredient' />
+            </li>
+          ))}
+        </ul>
         <div className={cls.flexContainer}>
-          <span className='text text_type_digits-default'>{orderNumber}</span>
-          <FormattedDate date={orderDate} className='text text_type_main-default text_color_inactive' />
+          <span className='mr-2 text text_type_digits-default'>{totalPrice}</span>
+          <CurrencyIcon type='primary' />
         </div>
-        <div>
-          <div className='mb-2 text text_type_main-medium'>{orderName}</div>
-          <div className='text text_type_main-default text_color_success'>{status}</div>
-        </div>
-        <div className={cls.flexContainer}>
-          <ul className={cls.ingredientImagesList}>
-            {ingredientImages.map((source, index) => (
-              <li className={clsx(cls.ingredientImage, { [cls.overflow]: isOverflowItem(index) })} key={index}>
-                <span className={clsx(cls.overflowCount, 'text text_type_main-default')}>{`+${overflowCount}`}</span>
-                <img className={cls.img} src={source} alt='ingredient' />
-              </li>
-            ))}
-          </ul>
-          <div className={cls.flexContainer}>
-            <span className='mr-2 text text_type_digits-default'>{totalPrice}</span>
-            <CurrencyIcon type='primary' />
-          </div>
-        </div>
-      </li>
-      {isModalOpen && modalType === 'OrderInfo' && modalContent._id === id && <OrderModal order={order} />}
-    </>
+      </div>
+    </li>
   );
 });

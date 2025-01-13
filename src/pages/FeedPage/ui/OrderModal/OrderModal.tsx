@@ -25,7 +25,7 @@ export const OrderModal = ({ order }: Props) => {
 
   return (
     <Modal title={title} titleType='digit'>
-      <OrderDetails order={order} />
+      <OrderDetails />
     </Modal>
   );
 };

@@ -1,9 +1,8 @@
 import { memo } from 'react';
-import { useTypedDispatch, useTypedSelector } from '@/shared/lib/typedReduxHooks';
+import { useTypedSelector } from '@/shared/lib/typedReduxHooks';
 import clsx from 'clsx';
 import cls from './IngredientCard.module.css';
 import { CurrencyIcon, Counter } from '@ya.praktikum/react-developer-burger-ui-components';
-import { modalActions } from '@/shared/models/slices/modalSlice/modalSlice';
 import { selectIngredientById } from '@/shared/api/ingredientsApi/ingredientsApiSelectors';
 import { selectIngredientCountById } from '@/shared/models/slices/selectedIngredientsSlice/selectedIngredientsSelectors';
 import { useDrag } from 'react-dnd';
@@ -15,7 +14,6 @@ interface Props {
 }
 
 export const IngredientCard = memo(({ id }: Props) => {
-  const dispatch = useTypedDispatch();
   const navigate = useNavigate();
 
   const ingredient = useTypedSelector(selectIngredientById(id));
@@ -33,18 +31,8 @@ export const IngredientCard = memo(({ id }: Props) => {
   });
 
   const openModalHandle = () => {
-    const modalContent = {
-      id: ingredient._id,
-      name: ingredient.name,
-      proteins: ingredient.proteins,
-      fat: ingredient.fat,
-      carbohydrates: ingredient.carbohydrates,
-      calories: ingredient.calories,
-      image: ingredient.image_large,
-    };
-    dispatch(modalActions.openModal({ modalContent, modalType: 'IngredientDetails' }));
-    navigate(ROUTER_PATHS.INGREDIENT.replace(':id', modalContent.id), {
-      state: { background: ROUTER_PATHS.INGREDIENT.replace(':id', modalContent.id) },
+    navigate(ROUTER_PATHS.INGREDIENT.replace(':id', id), {
+      state: { background: ROUTER_PATHS.INGREDIENT.replace(':id', id) },
     });
   };
 

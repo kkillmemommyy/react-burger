@@ -1,17 +1,23 @@
 import clsx from 'clsx';
 import cls from './OrderDetails.module.css';
-import { EnhancedOrder } from '@/shared/api/orderFeedApi/types';
 import { CurrencyIcon, FormattedDate } from '@ya.praktikum/react-developer-burger-ui-components';
 import { Ingredient } from '@/shared/types/api';
 import { getStatusLable } from '@/shared/lib/formatters';
-
-interface Props {
-  order: EnhancedOrder;
-}
+import { Navigate, useParams } from 'react-router-dom';
+import { useTypedSelector } from '@/shared/lib/typedReduxHooks';
+import { selectOrderById } from '@/shared/api/orderFeedApi/orderFeedApiSelectors';
+import { ROUTER_PATHS } from '@/shared/models/routes';
 
 type CountedIngredient = Ingredient & { count: number };
 
-export const OrderDetails = ({ order }: Props) => {
+export const OrderDetails = () => {
+  const { id } = useParams();
+  const order = useTypedSelector(selectOrderById(id ?? ''));
+
+  if (!order) {
+    return <Navigate to={ROUTER_PATHS.NOT_FOUND} replace />;
+  }
+
   const { name, status, totalPrice, createdAt, ingredients } = order;
 
   const countedIngs = ingredients.reduce<Record<string, CountedIngredient>>((acc, ing) => {
@@ -29,6 +35,7 @@ export const OrderDetails = ({ order }: Props) => {
 
   return (
     <>
+      <h1 className={clsx(cls.title, 'text text_type_digits-default', 'mb-5')}>{`#${order.number}`}</h1>
       <div className={clsx(cls.flex_wrap, 'mb-15')}>
         <h2 className='text text_type_main-medium mb-3'>{name}</h2>
         <p className='text text_type_main-default text_color_success'>{statusLable}</p>

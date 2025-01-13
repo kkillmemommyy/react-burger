@@ -19,6 +19,7 @@ import {
 } from '../config/pages';
 import { Modal } from '@/shared/ui/Modal';
 import { IngredientDetails } from '@/widgets/IngredientDetails/IngredientDetails';
+import { OrderDetails } from '@/widgets/OrderDetails';
 
 export const AppRouter = () => {
   const location = useLocation();
@@ -37,16 +38,26 @@ export const AppRouter = () => {
               <Route
                 path={ROUTER_PATHS.INGREDIENT}
                 element={
-                  <Modal title='Детали ингредиента' onClose={() => navigate(-1)}>
+                  <Modal onClose={() => navigate(-1)}>
                     <IngredientDetails />
                   </Modal>
                 }
               />
             )}
           </Route>
-
           <Route path={ROUTER_PATHS.INGREDIENT} element={<IngredientPage />} />
-          <Route path={ROUTER_PATHS.FEED} element={<FeedPage />} />
+          <Route path={ROUTER_PATHS.FEED} element={<FeedPage />}>
+            {background && (
+              <Route
+                path={ROUTER_PATHS.FEED_ORDER}
+                element={
+                  <Modal onClose={() => navigate(-1)}>
+                    <OrderDetails />
+                  </Modal>
+                }
+              />
+            )}
+          </Route>
           <Route path={ROUTER_PATHS.FEED_ORDER} element={<OrderPage />} />
 
           {/* Protected Routes */}

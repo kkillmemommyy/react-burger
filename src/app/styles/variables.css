@@ -3,4 +3,6 @@
   --container-side-padding: 20px;
 
   --header-height: 88px;
+
+  --max-width-modal: 720px;
 }

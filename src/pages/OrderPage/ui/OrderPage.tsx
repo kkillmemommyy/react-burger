@@ -21,10 +21,9 @@ const OrderPage = () => {
   }
 
   return (
-    <main className={cls.page}>
+    <main className={cls.main}>
       <div className={cls.wrap}>
-        <h2 className='text text_type_digits-default'>{`#${order.number}`}</h2>
-        <OrderDetails order={order} />
+        <OrderDetails />
       </div>
     </main>
   );
