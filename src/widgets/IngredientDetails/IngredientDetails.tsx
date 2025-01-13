@@ -1,10 +1,21 @@
 import clsx from 'clsx';
 import cls from './IngredientDetails.module.css';
-import { IngredientDetails as IngredientDetailsType} from '@/shared/models/slices/modalSlice/types';
+import { Navigate, useParams } from 'react-router-dom';
+import { selectIngredientById } from '@/shared/api/ingredientsApi/ingredientsApiSelectors';
+import { useTypedSelector } from '@/shared/lib/typedReduxHooks';
+import { ROUTER_PATHS } from '@/shared/models/routes';
 
-type Props = Omit<IngredientDetailsType, 'id'>;
+export const IngredientDetails = () => {
+  const { id } = useParams();
 
-export const IngredientDetails = ({ proteins, fat, carbohydrates, calories, image, name }: Props) => {
+  const ingredient = useTypedSelector(selectIngredientById(id ?? ''));
+
+  if (!ingredient) {
+    return <Navigate to={ROUTER_PATHS.NOT_FOUND} replace />;
+  }
+
+  const { proteins, fat, carbohydrates, calories, name, image_large: image } = ingredient;
+
   return (
     <>
       <img src={image} alt={name} className={clsx(cls.img, 'mb-4')} />

@@ -5,7 +5,7 @@ import { Loader } from '@/shared/ui/Loader';
 import { LogoSmall } from '@/shared/ui/LogoSmall';
 
 interface Props {
-  orderId: number | null;
+  orderId: number | undefined;
   isError: boolean;
   isLoading: boolean;
 }

@@ -4,9 +4,6 @@ import cls from './BurgerIngredients.module.css';
 import { Tabs } from './Tabs/Tabs';
 import { IngredientsSection } from './IngredientsSection/IngredientsSection';
 import { IngredientType } from '@/shared/types/api';
-import { IngredientModal } from './IngredientModal/IngredientModal';
-import { useTypedSelector } from '@/shared/lib/typedReduxHooks';
-import { selectModal } from '@/shared/models/slices/modalSlice/modalSelectors';
 
 interface ingredientsSectionType {
   type: IngredientType;
@@ -16,7 +13,6 @@ interface ingredientsSectionType {
 
 export const BurgerIngredients = () => {
   const [currentTab, setCurrentTab] = useState<IngredientType>('bun');
-  const { isModalOpen, modalType, modalContent } = useTypedSelector(selectModal);
 
   const { ref: bunsRef, inView: bunsInView } = useInView();
   const { ref: saucesRef, inView: saucesInView } = useInView();
@@ -39,18 +35,13 @@ export const BurgerIngredients = () => {
   ];
 
   return (
-    <>
-      <section className={cls.wrapp}>
-        <Tabs currentTab={currentTab} />
-        <div className={cls.ingredients}>
-          {ingredientsSections.map((section) => (
-            <IngredientsSection type={section.type} title={section.title} ref={section.ref} key={section.type} />
-          ))}
-        </div>
-      </section>
-      {isModalOpen && modalType === 'IngredientDetails' && (
-        <IngredientModal modalContent={modalContent} />
-      )}
-    </>
+    <section className={cls.wrapp}>
+      <Tabs currentTab={currentTab} />
+      <div className={cls.ingredients}>
+        {ingredientsSections.map((section) => (
+          <IngredientsSection type={section.type} title={section.title} ref={section.ref} key={section.type} />
+        ))}
+      </div>
+    </section>
   );
 };

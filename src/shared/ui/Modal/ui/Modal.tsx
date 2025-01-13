@@ -13,9 +13,10 @@ interface Props {
   children: ReactNode;
   title?: string;
   titleType?: 'text' | 'digit';
+  onClose?: () => void;
 }
 
-export const Modal = ({ children, title, titleType = 'text' }: Props) => {
+export const Modal = ({ children, title, onClose, titleType = 'text' }: Props) => {
   const dispatch = useTypedDispatch();
 
   const titleClass = titleType === 'text' ? 'text text_type_main-large' : 'text text_type_digits-default';
@@ -24,21 +25,25 @@ export const Modal = ({ children, title, titleType = 'text' }: Props) => {
     const closeModalOnEsc = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
         dispatch(modalActions.closeModal());
+        onClose && onClose();
       }
     };
     document.addEventListener('keyup', closeModalOnEsc);
-    
-    return () => document.removeEventListener('keyup', closeModalOnEsc);
-  }, [dispatch]);
 
-  const closeModalHandler = () => dispatch(modalActions.closeModal());
+    return () => document.removeEventListener('keyup', closeModalOnEsc);
+  }, [dispatch, onClose]);
+
+  const closeModalHandler = () => {
+    dispatch(modalActions.closeModal());
+    onClose && onClose();
+  };
 
   if (!modalRoot) {
     return null;
   }
 
   return createPortal(
-    <ModalOverlay>
+    <ModalOverlay onClose={onClose}>
       <div className={clsx(cls.modal, 'pt-10')}>
         <div className={clsx(cls.modal_head, 'pl-10 pr-10')}>
           <h2 className={titleClass}>{title}</h2>

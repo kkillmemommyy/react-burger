@@ -4,6 +4,8 @@ import { AggregateInfo } from './AggregateInfo/AggregateInfo';
 import { useGetOrderFeedQuery } from '@/shared/api/orderFeedApi/orderFeedApi';
 import { Loader } from '@/shared/ui/Loader';
 import { OrderFeed } from './OrderFeed/OrderFeed';
+import { Outlet } from 'react-router-dom';
+import { PageErrorMessage } from '@/shared/ui/PageErrorMessage';
 
 const FeedPage = () => {
   const { isLoading, isError } = useGetOrderFeedQuery();
@@ -13,11 +15,7 @@ const FeedPage = () => {
   }
 
   if (isError) {
-    return (
-      <div className='prerender text text_type_main-large'>
-        При загрузке страницы что-то пошло не так. Попробуйте перезагрузить страницу или вернуться позднее.
-      </div>
-    );
+    return <PageErrorMessage />;
   }
 
   return (
@@ -27,6 +25,7 @@ const FeedPage = () => {
         <OrderFeed />
         <AggregateInfo />
       </div>
+      <Outlet />
     </main>
   );
 };

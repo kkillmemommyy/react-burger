@@ -4,6 +4,7 @@ import { BurgerIngredients } from '@/widgets/BurgerIngredients/ui/BurgerIngredie
 import { BurgerConstructor } from '@/widgets/BurgerConstructor/ui/BurgerConstructor';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
+import { Outlet } from 'react-router-dom';
 
 const HomePage = () => {
   return (
@@ -15,6 +16,7 @@ const HomePage = () => {
           <BurgerConstructor />
         </DndProvider>
       </div>
+      <Outlet />
     </main>
   );
 };

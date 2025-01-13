@@ -1,4 +1,4 @@
-import { Route, Routes, useLocation, useNavigationType } from 'react-router-dom';
+import { Route, Routes, useLocation, useNavigate, useNavigationType } from 'react-router-dom';
 import { ROUTER_PATHS } from '@/shared/models/routes';
 
 import { LazyLoad } from './LazyLoad';
@@ -17,19 +17,34 @@ import {
   ResetPasswordPage,
   RootPage,
 } from '../config/pages';
+import { Modal } from '@/shared/ui/Modal';
+import { IngredientDetails } from '@/widgets/IngredientDetails/IngredientDetails';
 
 export const AppRouter = () => {
   const location = useLocation();
   const navType = useNavigationType();
+  const navigate = useNavigate();
 
-  const background = navType === 'REPLACE' && location.state?.background;
+  const background = navType === 'PUSH' && location.state?.background;
 
   return (
     <Routes location={background || location}>
       <Route element={<RootPage />}>
         <Route element={<LazyLoad />}>
           {/* Public Routes */}
-          <Route index element={<HomePage />} />
+          <Route path={ROUTER_PATHS.HOME_PAGE} element={<HomePage />}>
+            {background && (
+              <Route
+                path={ROUTER_PATHS.INGREDIENT}
+                element={
+                  <Modal title='Детали ингредиента' onClose={() => navigate(-1)}>
+                    <IngredientDetails />
+                  </Modal>
+                }
+              />
+            )}
+          </Route>
+
           <Route path={ROUTER_PATHS.INGREDIENT} element={<IngredientPage />} />
           <Route path={ROUTER_PATHS.FEED} element={<FeedPage />} />
           <Route path={ROUTER_PATHS.FEED_ORDER} element={<OrderPage />} />
