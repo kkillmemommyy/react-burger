@@ -1,4 +1,4 @@
-import { Status } from '@/shared/api/orderFeedApi/types';
+import { Status } from '@/shared/api/orderFeed/types';
 
 export const getStatusLable = (status: Status) => {
   switch (status) {

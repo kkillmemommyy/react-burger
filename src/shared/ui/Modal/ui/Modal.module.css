@@ -1,15 +1,15 @@
 .modal {
+  position: relative;
   background-color: #1c1c21;
   border-radius: 40px;
-
-  position: relative;
+  max-width: 720px;
+  border: 1px solid var(--colors-interface-accent);
 }
 
 .close_icon {
   position: absolute;
   top: 63px;
   right: 43px;
-
   height: 24px;
   background-color: transparent;
   border: none;
@@ -17,12 +17,4 @@
   &:hover svg {
     fill: white;
   }
-}
-
-.modal_content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  max-width: var(--max-width-modal);
-  padding: 0 40px;
 }

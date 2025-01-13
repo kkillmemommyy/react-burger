@@ -1,5 +1,5 @@
-import { selectedIngredientsReducer } from './selectedIngredientsSlice/selectedIngredientsSlice';
-import { userReducer } from './userSlice/userSlice';
+import { selectedIngredientsReducer } from './selectedIngredients/selectedIngredientsSlice';
+import { userReducer } from './user/userSlice';
 
 export const rootSlicesReducer = {
   selectedIngredients: selectedIngredientsReducer,

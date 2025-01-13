@@ -1,6 +1,14 @@
+.main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: var(--max-width-modal-content);
+}
+
 .title {
-  width: 100%;
   line-height: 64px;
+  width: 100%;
 }
 
 .img {
@@ -13,8 +21,7 @@
 }
 
 .details {
-  width: 516px;
-  height: 56px;
+  width: 100%;
   display: flex;
   gap: 20px;
 }

@@ -34,11 +34,11 @@ export const Modal = ({ children, onClose }: Props) => {
 
   return createPortal(
     <ModalOverlay onClose={onClose}>
-      <div className={clsx(cls.modal, 'pt-10')}>
+      <div className={clsx(cls.modal, 'pl-10 pt-10 pr-10')}>
         <button onClick={closeModalHandler} className={cls.close_icon} aria-label='close'>
           <CloseIcon type='primary' />
         </button>
-        <div className={cls.modal_content}>{children}</div>
+        {children}
       </div>
     </ModalOverlay>,
     modalRoot

@@ -1,5 +1,8 @@
+.order_details {
+  width: var(--max-width-modal-content);
+}
+
 .title {
-  width: 100%;
   line-height: 64px;
 }
 

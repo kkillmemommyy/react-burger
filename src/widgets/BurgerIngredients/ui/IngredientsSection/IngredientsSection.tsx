@@ -3,7 +3,7 @@ import cls from './IngredientSection.module.css';
 import clsx from 'clsx';
 import { IngredientCard } from '../IngredientCard/IngredientCard';
 import { useTypedSelector } from '@/shared/lib/typedReduxHooks';
-import { selectIngredientsByType } from '@/shared/api/ingredientsApi/ingredientsApiSelectors';
+import { selectIngredientsByType } from '@/shared/api/ingredients/ingredientsApiSelectors';
 import { IngredientType } from '@/shared/types/api';
 
 interface Props {

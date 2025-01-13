@@ -1,4 +1,4 @@
-import { refreshTokenApi } from './refreshTokenApi/refreshTokenApi';
+import { refreshTokenApi } from './refreshToken/refreshTokenApi';
 import { baseApiWithReauth } from './baseApiWithReauth';
 import { baseApi } from './baseApi';
 

@@ -3,7 +3,7 @@ import clsx from 'clsx';
 import cls from './TotalPrice.module.css';
 import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import { useSelector } from 'react-redux';
-import { selectTotalPrice } from '@/shared/models/slices/selectedIngredientsSlice/selectedIngredientsSelectors';
+import { selectTotalPrice } from '@/shared/models/slices/selectedIngredients/selectedIngredientsSelectors';
 
 export const TotalPrice = memo(() => {
   const totalPrice = useSelector(selectTotalPrice);

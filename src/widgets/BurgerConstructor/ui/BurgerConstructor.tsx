@@ -4,20 +4,17 @@ import clsx from 'clsx';
 import cls from './BurgerConstructor.module.css';
 import { ConstructorElement as CE, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import { Modal } from '@/shared/ui/Modal/ui/Modal';
-import { OrderDetails } from './OrderDetails/OrderDetails';
+import { OrderModal } from './OrderModal/OrderModal';
 import { TotalPrice } from './TotalPrice/TotalPrice';
-import { useMakeOrderMutation } from '@/shared/api/userApi/userApi';
+import { useMakeOrderMutation } from '@/shared/api/user/userApi';
 import { useDrop } from 'react-dnd';
-import { selectedIngredientsActions } from '@/shared/models/slices/selectedIngredientsSlice/selectedIngredientsSlice';
+import { selectedIngredientsActions } from '@/shared/models/slices/selectedIngredients/selectedIngredientsSlice';
 import { DragbleElement } from './DragbleElement/DragbleElement';
-import { AddIngredientPayload } from '@/shared/models/slices/selectedIngredientsSlice/types';
-import { selectUser } from '@/shared/models/slices/userSlice/userSelectors';
+import { AddIngredientPayload } from '@/shared/models/slices/selectedIngredients/types';
+import { selectUser } from '@/shared/models/slices/user/userSelectors';
 import { createSearchParams, useNavigate } from 'react-router-dom';
 import { ROUTER_PATHS } from '@/shared/models/routes';
-import {
-  selectBun,
-  selectStuffing,
-} from '@/shared/models/slices/selectedIngredientsSlice/selectedIngredientsSelectors';
+import { selectBun, selectStuffing } from '@/shared/models/slices/selectedIngredients/selectedIngredientsSelectors';
 
 const ConstructorElement = memo(CE);
 
@@ -112,7 +109,7 @@ export const BurgerConstructor = () => {
 
       {isModalOpen && (
         <Modal onClose={() => setIsModalOpen(false)}>
-          <OrderDetails orderId={data?.order.number} isLoading={isLoading} isError={isError} />
+          <OrderModal orderId={data?.order.number} isLoading={isLoading} isError={isError} />
         </Modal>
       )}
     </>

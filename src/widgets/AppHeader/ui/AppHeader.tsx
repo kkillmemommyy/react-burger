@@ -3,7 +3,7 @@ import { Logo, BurgerIcon, ListIcon, ProfileIcon } from '@ya.praktikum/react-dev
 import { NavLink } from 'react-router-dom';
 import { ROUTER_PATHS } from '@/shared/models/routes';
 import { useTypedSelector } from '@/shared/lib/typedReduxHooks';
-import { selectUser } from '@/shared/models/slices/userSlice/userSelectors';
+import { selectUser } from '@/shared/models/slices/user/userSelectors';
 import { NavItem } from './NavItem';
 
 export const AppHeader = () => {

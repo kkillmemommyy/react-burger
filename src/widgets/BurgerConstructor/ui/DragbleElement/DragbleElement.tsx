@@ -2,7 +2,7 @@ import clsx from 'clsx';
 import cls from './DragbleElement.module.css';
 import { DragIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import { useDrag, useDrop } from 'react-dnd';
-import { selectedIngredientsActions } from '@/shared/models/slices/selectedIngredientsSlice/selectedIngredientsSlice';
+import { selectedIngredientsActions } from '@/shared/models/slices/selectedIngredients/selectedIngredientsSlice';
 import { useTypedDispatch } from '@/shared/lib/typedReduxHooks';
 import { useRef, useEffect, ReactNode } from 'react';
 

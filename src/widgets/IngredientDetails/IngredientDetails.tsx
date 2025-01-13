@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import cls from './IngredientDetails.module.css';
 import { Navigate, useParams } from 'react-router-dom';
-import { selectIngredientById } from '@/shared/api/ingredientsApi/ingredientsApiSelectors';
+import { selectIngredientById } from '@/shared/api/ingredients/ingredientsApiSelectors';
 import { useTypedSelector } from '@/shared/lib/typedReduxHooks';
 import { ROUTER_PATHS } from '@/shared/models/routes';
 
@@ -17,7 +17,7 @@ export const IngredientDetails = () => {
   const { proteins, fat, carbohydrates, calories, name, image_large: image } = ingredient;
 
   return (
-    <>
+    <div className={cls.main}>
       <h2 className={clsx(cls.title, 'text text_type_main-large')}>Детали ингредиента</h2>
       <img src={image} alt={name} className={clsx(cls.img, 'mb-4')} />
       <p className={clsx(cls.name, 'text text_type_main-medium mb-8')}>{name}</p>
@@ -39,6 +39,6 @@ export const IngredientDetails = () => {
           <p className='text text_type_digits-default text_color_inactive'>{carbohydrates}</p>
         </div>
       </div>
-    </>
+    </div>
   );
 };
