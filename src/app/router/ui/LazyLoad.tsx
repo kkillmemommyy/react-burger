@@ -4,7 +4,7 @@ import { Outlet } from 'react-router-dom';
 
 export const LazyLoad = () => {
   return (
-    <Suspense fallback={<Loader />}>
+    <Suspense fallback={<Loader delay/>}>
       <Outlet />
     </Suspense>
   );

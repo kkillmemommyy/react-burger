@@ -17,7 +17,7 @@ const IngredientsSectionComponent = ({ type, title }: Props, ref: ForwardedRef<H
   return (
     <article className='mb-10' ref={ref} id={type}>
       <h2 className='mb-6 text text_type_main-medium'>{title}</h2>
-      <ul className={clsx(cls.category_items, 'pl-4')}>
+      <ul className={clsx(cls.category_items, 'pr-4')}>
         {ingredients.map((ing) => (
           <IngredientCard id={ing._id} key={ing._id} />
         ))}
