@@ -99,93 +99,95 @@ const EditProfile = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className={cls.form}>
-      <Controller
-        name='name'
-        control={control}
-        render={({ field, fieldState: { invalid, error } }) => (
-          // @ts-expect-error onPointerEnterCapture, onPointerLeaveCapture is required
-          <Input
-            {...field}
-            placeholder='Имя'
-            type='text'
-            icon='EditIcon'
-            ref={nameInputRef}
-            disabled={!isEditing.name}
-            onIconClick={() => onIconClick('name')}
-            error={invalid}
-            errorText={error?.message}
-            extraClass={clsx('mb-6', cls.input)}
-            onChange={(e) => {
-              if (invalid) {
-                clearErrors('name');
-              }
-              field.onChange(e);
-            }}
-          />
-        )}
-      />
-      <Controller
-        name='email'
-        control={control}
-        render={({ field, fieldState: { invalid, error } }) => (
-          // @ts-expect-error onPointerEnterCapture, onPointerLeaveCapture is required
-          <Input
-            {...field}
-            placeholder='Логин'
-            type='text'
-            icon='EditIcon'
-            ref={emailInputRef}
-            disabled={!isEditing.email}
-            onIconClick={() => onIconClick('email')}
-            error={invalid}
-            errorText={error?.message}
-            extraClass={clsx('mb-6', cls.input)}
-            onChange={(e) => {
-              if (invalid) {
-                clearErrors('email');
-              }
-              field.onChange(e);
-            }}
-          />
-        )}
-      />
-      <Controller
-        name='password'
-        control={control}
-        render={({ field, fieldState: { invalid, error } }) => (
-          // @ts-expect-error onPointerEnterCapture, onPointerLeaveCapture is required
-          <Input
-            {...field}
-            placeholder='Пароль'
-            type='password'
-            icon='EditIcon'
-            ref={passwordInputRef}
-            disabled={!isEditing.password}
-            onIconClick={() => onIconClick('password')}
-            error={invalid}
-            errorText={error?.message}
-            extraClass={clsx('mb-6', cls.input)}
-            onChange={(e) => {
-              if (invalid) {
-                clearErrors('password');
-              }
-              field.onChange(e);
-            }}
-          />
-        )}
-      />
-      <div className={cls.container}>
-        <div className={clsx('mr-5', cls.btnWrap)}>
-          <Button htmlType='reset' onClick={onClickReset} disabled={isResetBtnDisabled}>
-            Отменить
+    <main className={cls.main}>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <Controller
+          name='name'
+          control={control}
+          render={({ field, fieldState: { invalid, error } }) => (
+            // @ts-expect-error onPointerEnterCapture, onPointerLeaveCapture is required
+            <Input
+              {...field}
+              placeholder='Имя'
+              type='text'
+              icon='EditIcon'
+              ref={nameInputRef}
+              disabled={!isEditing.name}
+              onIconClick={() => onIconClick('name')}
+              error={invalid}
+              errorText={error?.message}
+              extraClass={clsx('mb-6', cls.input)}
+              onChange={(e) => {
+                if (invalid) {
+                  clearErrors('name');
+                }
+                field.onChange(e);
+              }}
+            />
+          )}
+        />
+        <Controller
+          name='email'
+          control={control}
+          render={({ field, fieldState: { invalid, error } }) => (
+            // @ts-expect-error onPointerEnterCapture, onPointerLeaveCapture is required
+            <Input
+              {...field}
+              placeholder='Логин'
+              type='text'
+              icon='EditIcon'
+              ref={emailInputRef}
+              disabled={!isEditing.email}
+              onIconClick={() => onIconClick('email')}
+              error={invalid}
+              errorText={error?.message}
+              extraClass={clsx('mb-6', cls.input)}
+              onChange={(e) => {
+                if (invalid) {
+                  clearErrors('email');
+                }
+                field.onChange(e);
+              }}
+            />
+          )}
+        />
+        <Controller
+          name='password'
+          control={control}
+          render={({ field, fieldState: { invalid, error } }) => (
+            // @ts-expect-error onPointerEnterCapture, onPointerLeaveCapture is required
+            <Input
+              {...field}
+              placeholder='Пароль'
+              type='password'
+              icon='EditIcon'
+              ref={passwordInputRef}
+              disabled={!isEditing.password}
+              onIconClick={() => onIconClick('password')}
+              error={invalid}
+              errorText={error?.message}
+              extraClass={clsx('mb-6', cls.input)}
+              onChange={(e) => {
+                if (invalid) {
+                  clearErrors('password');
+                }
+                field.onChange(e);
+              }}
+            />
+          )}
+        />
+        <div className={cls.container}>
+          <div className={clsx('mr-5', cls.btnWrap)}>
+            <Button htmlType='reset' onClick={onClickReset} disabled={isResetBtnDisabled}>
+              Отменить
+            </Button>
+          </div>
+          <Button htmlType='submit' disabled={isSubmitBtnDisabled}>
+            Сохранить
           </Button>
         </div>
-        <Button htmlType='submit' disabled={isSubmitBtnDisabled}>
-          Сохранить
-        </Button>
-      </div>
-    </form>
+      </form>
+    </main>
   );
 };
 

@@ -2,24 +2,34 @@
   --hover-color: #f2f2f3;
 }
 
-.main {
-  margin: 120px auto 0;
-  max-width: 1240px;
+.wrap {
+  margin: 0 auto;
+  max-width: var(--container-width);
+  padding: 0 var(--container-side-padding);
   display: flex;
 }
 
-.wrap {
-  width: 320px;
+.aside {
+  margin-top: 120px;
+  flex: 0.42;
+}
+
+.aside_nav {
+  margin-bottom: 80px;
+}
+
+.aside_subtitle {
+  opacity: 70%;
 }
 
 .link {
   padding: 17px 0;
   display: inline-block;
   cursor: pointer;
-  transition: color 0.2s linear;
+  transition: var(--common-transition);
   &:hover {
     color: var(--hover-color);
-    transition: color 0.2s linear;
+    transition: var(--common-transition);
   }
 }
 
@@ -27,18 +37,14 @@
   background-color: transparent;
   padding: 17px 0;
   cursor: pointer;
-  transition: color 0.2s linear;
+  transition: var(--common-transition);
   &:hover {
     color: var(--hover-color);
-    transition: color 0.2s linear;
+    transition: var(--common-transition);
   }
 }
 
 .active {
   color: var(--hover-color);
-}
-
-.p {
-  opacity: 70%;
 }
 
