@@ -3,7 +3,7 @@ import cls from './FeedPage.module.css';
 import { AggregateInfo } from './AggregateInfo/AggregateInfo';
 import { useGetOrderFeedQuery } from '@/shared/api/orderFeed/orderFeedApi';
 import { Loader } from '@/shared/ui/Loader';
-import { OrderFeed } from './OrderFeed/OrderFeed';
+import { OrderFeed } from '@/widgets/OrderFeed';
 import { Outlet } from 'react-router-dom';
 import { PageErrorMessage } from '@/shared/ui/PageErrorMessage';
 
