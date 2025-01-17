@@ -21,7 +21,7 @@ const schema = z.object({
   password: z.string().min(6, 'Пароль должен содержать не менее 6 символов').or(z.literal('')),
 });
 
-export const EditProfile = () => {
+const EditProfile = () => {
   const user = useTypedSelector(selectUser);
   const [patchUserRequest] = usePatchUserMutation();
 
@@ -188,3 +188,5 @@ export const EditProfile = () => {
     </form>
   );
 };
+
+export default EditProfile;

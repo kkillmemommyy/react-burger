@@ -5,6 +5,7 @@ import { LazyLoad } from './LazyLoad';
 import { ProtectedRoute } from './ProtectedRoute';
 import { UnProtectedRoute } from './UnProtectedRoute';
 import {
+  EditProfile,
   FeedPage,
   ForgotPasswordPage,
   HomePage,
@@ -60,7 +61,9 @@ export const AppRouter = () => {
 
         {/* Protected Routes */}
         <Route element={<ProtectedRoute />}>
-          <Route path={ROUTER_PATHS.PROFILE} element={<ProfilePage />} />
+          <Route path={ROUTER_PATHS.PROFILE} element={<ProfilePage />}>
+            <Route index element={<EditProfile />} />
+          </Route>
         </Route>
 
         {/* Unprotected Routes */}

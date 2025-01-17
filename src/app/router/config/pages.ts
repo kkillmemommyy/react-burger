@@ -5,6 +5,7 @@ const IngredientPage = lazy(() => import('@/pages/Ingredient'));
 const FeedPage = lazy(() => import('@/pages/Feed'));
 const OrderPage = lazy(() => import('@/pages/Order'));
 const ProfilePage = lazy(() => import('@/pages/Profile'));
+const EditProfile = lazy(() => import('@/pages/EditProfile'));
 const LoginPage = lazy(() => import('@/pages/Login'));
 const RegistrationPage = lazy(() => import('@/pages/Registration'));
 const ForgotPasswordPage = lazy(() => import('@/pages/ForgotPassword'));
@@ -22,4 +23,5 @@ export {
   ForgotPasswordPage,
   ResetPasswordPage,
   NotFound404Page,
+  EditProfile,
 };

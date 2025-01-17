@@ -1,9 +1,8 @@
 import cls from './ProfilePage.module.css';
 import clsx from 'clsx';
 import { ROUTER_PATHS } from '@/shared/models/routes';
-import { NavLink } from 'react-router-dom';
+import { NavLink, Outlet } from 'react-router-dom';
 import { useLogoutMutation } from '@/shared/api/auth/authApi';
-import { EditProfile } from './EditProfile/EditProfile';
 
 const ProfilePage = () => {
   const [logoutRequest] = useLogoutMutation();
@@ -47,7 +46,7 @@ const ProfilePage = () => {
         </p>
       </aside>
 
-      <EditProfile />
+      <Outlet />
     </main>
   );
 };
