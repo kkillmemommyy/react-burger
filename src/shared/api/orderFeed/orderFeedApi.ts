@@ -9,10 +9,13 @@ export const orderFeedApi = baseApi.injectEndpoints({
     getOrder: builder.query<Order, string>({
       query: (id) => `orders/${id}`,
     }),
-    getOrderFeed: builder.query<SuccessGetOrderFeedResponse, void>({
-      query: () => 'orders/all',
-      async onCacheEntryAdded(_, { updateCachedData, cacheDataLoaded, cacheEntryRemoved }) {
-        const ws = new WebSocket(`${NORMA_API_BASE_WSS_URL}/orders/all`);
+    getOrderFeed: builder.query<SuccessGetOrderFeedResponse, string | void>({
+      queryFn: () => ({
+        data: { success: true, orders: [], total: 0, totalToday: 0 },
+      }),
+      async onCacheEntryAdded(token, { updateCachedData, cacheDataLoaded, cacheEntryRemoved }) {
+        const wsPath = token ? `/orders?token=${token}` : '/orders/all';
+        const ws = new WebSocket(`${NORMA_API_BASE_WSS_URL}${wsPath}`);
         let messageListener: MessageListener = null;
 
         try {

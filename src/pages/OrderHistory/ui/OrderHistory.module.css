@@ -1,5 +1,6 @@
 .main {
-  margin-left: 40px;
-  margin-top: 36px;
+  max-height: calc(100vh - 88px - 40px);
+  margin-top: 40px;
+  margin-left: 60px;
   flex: 1
 }
