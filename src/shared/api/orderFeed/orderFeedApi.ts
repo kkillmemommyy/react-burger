@@ -1,11 +1,14 @@
 import { baseApi } from '../baseApi';
 import { NORMA_API_BASE_WSS_URL } from '../routes';
-import { SuccessGetOrderFeedResponse } from './types';
+import { Order, SuccessGetOrderFeedResponse } from './types';
 
 type MessageListener = null | ((event: MessageEvent) => void);
 
 export const orderFeedApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
+    getOrder: builder.query<Order, string>({
+      query: (id) => `orders/${id}`,
+    }),
     getOrderFeed: builder.query<SuccessGetOrderFeedResponse, void>({
       query: () => 'orders/all',
       async onCacheEntryAdded(_, { updateCachedData, cacheDataLoaded, cacheEntryRemoved }) {
@@ -41,4 +44,4 @@ export const orderFeedApi = baseApi.injectEndpoints({
   overrideExisting: false,
 });
 
-export const { useGetOrderFeedQuery } = orderFeedApi;
+export const { useGetOrderQuery, useGetOrderFeedQuery } = orderFeedApi;

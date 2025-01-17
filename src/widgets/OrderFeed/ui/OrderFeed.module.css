@@ -1,9 +1,10 @@
 .orderFeed {
   flex: 1;
+  max-height: inherit;
 }
 
 .withScroll {
-  height: calc(100vh - 88px - 40px - 40px - 20px);
+  max-height: inherit;
   overflow-y: scroll;
   scroll-behavior: smooth;
   scrollbar-width: thin;

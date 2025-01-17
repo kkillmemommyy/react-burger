@@ -11,4 +11,5 @@
 .wrap {
   display: flex;
   gap: 60px;
+  max-height: calc(100vh - var(--header-height) - 40px - 40px - 20px);
 }
