@@ -12,6 +12,12 @@ export interface Order {
   number: number;
 }
 
+//не совсем так
+export interface SuccessGetOrderResponse {
+  success: true;
+  orders: Order[]
+}
+
 export interface SuccessGetOrderFeedResponse {
   success: true;
   orders: Order[];

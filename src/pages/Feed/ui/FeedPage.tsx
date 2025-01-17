@@ -8,9 +8,9 @@ import { Outlet } from 'react-router-dom';
 import { PageErrorMessage } from '@/shared/ui/PageErrorMessage';
 
 const FeedPage = () => {
-  const { isLoading, isError } = useGetOrderFeedQuery();
+  const { data, isLoading, isError, isSuccess } = useGetOrderFeedQuery();
 
-  if (isLoading) {
+  if (isLoading || !isSuccess) {
     return <Loader />;
   }
 
@@ -22,7 +22,7 @@ const FeedPage = () => {
     <main className={clsx(cls.main, 'pt-10')}>
       <h1 className={clsx(cls.h1, 'mb-5 text text_type_main-large')}>Лента заказов</h1>
       <div className={cls.wrap}>
-        <OrderFeed />
+        <OrderFeed orders={data?.orders} />
         <AggregateInfo />
       </div>
       <Outlet />

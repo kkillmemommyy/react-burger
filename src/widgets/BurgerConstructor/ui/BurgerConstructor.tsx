@@ -87,7 +87,7 @@ export const BurgerConstructor = () => {
               </DragbleElement>
             ))}
           </div>
-          <div className={clsx({ 'pl-8 mb-4': bun })}>
+          <div className={clsx({ 'pl-8 mt-4': bun })}>
             {bun && (
               <ConstructorElement
                 type='bottom'

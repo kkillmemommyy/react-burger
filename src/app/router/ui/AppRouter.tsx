@@ -64,8 +64,20 @@ export const AppRouter = () => {
         <Route element={<ProtectedRoute />}>
           <Route path={ROUTER_PATHS.PROFILE} element={<ProfilePage />}>
             <Route index element={<EditProfile />} />
-            <Route path={ROUTER_PATHS.PROFILE_ORDERS} element={<OrderHistory />} />
+            <Route path={ROUTER_PATHS.PROFILE_ORDERS} element={<OrderHistory />}>
+              {background && (
+                <Route
+                  path={ROUTER_PATHS.PROFILE_ORDER}
+                  element={
+                    <Modal onClose={() => navigate(-1)}>
+                      <OrderDetails />
+                    </Modal>
+                  }
+                />
+              )}
+            </Route>
           </Route>
+          <Route path={ROUTER_PATHS.PROFILE_ORDER} element={<OrderPage />} />
         </Route>
 
         {/* Unprotected Routes */}

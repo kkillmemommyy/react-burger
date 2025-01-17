@@ -1,17 +1,18 @@
 import cls from './OrderFeed.module.css';
 import { OrderCard } from './OrderCard/OrderCard';
-import { useTypedSelector } from '@/shared/lib/typedReduxHooks';
-import { selectOrderIds } from '@/shared/api/orderFeed/orderFeedApiSelectors';
+import { Order } from '@/shared/api/orderFeed/types';
 
-export const OrderFeed = () => {
-  const ordersIds = useTypedSelector(selectOrderIds);
+interface Props {
+  orders: Order[];
+}
 
+export const OrderFeed = ({ orders }: Props) => {
   return (
     <div className={cls.orderFeed}>
       <div className={cls.withScroll}>
         <ul className={cls.orderList}>
-          {ordersIds.map((id) => (
-            <OrderCard id={id} key={id} />
+          {orders.map((order) => (
+            <OrderCard order={order} key={order._id} />
           ))}
         </ul>
       </div>

@@ -1,6 +1,6 @@
 import { baseApi } from '../baseApi';
 import { NORMA_API_BASE_WSS_URL } from '../routes';
-import { Order, SuccessGetOrderFeedResponse } from './types';
+import { Order, SuccessGetOrderFeedResponse, SuccessGetOrderResponse } from './types';
 
 type MessageListener = null | ((event: MessageEvent) => void);
 
@@ -8,6 +8,9 @@ export const orderFeedApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     getOrder: builder.query<Order, string>({
       query: (id) => `orders/${id}`,
+      transformResponse: (response: SuccessGetOrderResponse) => {
+        return response.orders[0];
+      },
     }),
     getOrderFeed: builder.query<SuccessGetOrderFeedResponse, string | void>({
       queryFn: () => ({

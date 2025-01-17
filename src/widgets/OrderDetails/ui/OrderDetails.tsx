@@ -2,25 +2,37 @@ import clsx from 'clsx';
 import cls from './OrderDetails.module.css';
 import { CurrencyIcon, FormattedDate } from '@ya.praktikum/react-developer-burger-ui-components';
 import { Ingredient } from '@/shared/types/api';
-import { getStatusLable } from '@/shared/lib/formatters';
+import { getFormattedOrder, getStatusLable } from '@/shared/lib/formatters';
 import { Navigate, useParams } from 'react-router-dom';
-import { useTypedSelector } from '@/shared/lib/typedReduxHooks';
-import { selectOrderById } from '@/shared/api/orderFeed/orderFeedApiSelectors';
 import { ROUTER_PATHS } from '@/shared/models/routes';
+import { useGetOrderQuery } from '@/shared/api/orderFeed/orderFeedApi';
+import { useTypedSelector } from '@/shared/lib/typedReduxHooks';
+import { selectIngredients } from '@/shared/api/ingredients/ingredientsApiSelectors';
+import { skipToken } from '@reduxjs/toolkit/query';
+import { Loader } from '@/shared/ui/Loader';
 
 type CountedIngredient = Ingredient & { count: number };
 
 export const OrderDetails = () => {
   const { id } = useParams();
-  const order = useTypedSelector(selectOrderById(id ?? ''));
+  const { data: order, isLoading } = useGetOrderQuery(id ?? skipToken);
+  const ingredients = useTypedSelector(selectIngredients);
+
+  if (isLoading) {
+    return <Loader/>
+  }
 
   if (!order) {
     return <Navigate to={ROUTER_PATHS.NOT_FOUND} replace />;
   }
 
-  const { name, status, totalPrice, createdAt, ingredients } = order;
+  console.log(order)
 
-  const countedIngs = ingredients.reduce<Record<string, CountedIngredient>>((acc, ing) => {
+  const formattedOrder = getFormattedOrder(order, ingredients);
+
+  const { name, status, totalPrice, createdAt, ingredients: unmappedIngredients } = formattedOrder;
+
+  const countedIngs = unmappedIngredients.reduce<Record<string, CountedIngredient>>((acc, ing) => {
     const currentIng = acc[ing._id];
     if (currentIng && currentIng.type !== 'bun') {
       currentIng.count += 1;

@@ -1,41 +1,46 @@
-import { useTypedSelector } from '@/shared/lib/typedReduxHooks';
 import cls from './OrderCard.module.css';
-import { selectOrderById } from '@/shared/api/orderFeed/orderFeedApiSelectors';
 import { FormattedDate, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import clsx from 'clsx';
 import { memo } from 'react';
 import { getStatusLable } from '@/shared/lib/formatters';
-import { useNavigate } from 'react-router-dom';
+import { useMatch, useNavigate } from 'react-router-dom';
 import { ROUTER_PATHS } from '@/shared/models/routes';
+import { Order } from '@/shared/api/orderFeed/types';
+import { useTypedSelector } from '@/shared/lib/typedReduxHooks';
+import { selectIngredients } from '@/shared/api/ingredients/ingredientsApiSelectors';
+import { getFormattedOrder } from '@/shared/lib/formatters';
 
 const LIMIT_IMAGES_PER_LINE = 6;
 
 interface OrderCardProps {
-  id: string;
+  order: Order;
 }
 
-export const OrderCard = memo(({ id }: OrderCardProps) => {
-  const order = useTypedSelector(selectOrderById(id));
+export const OrderCard = memo(({ order }: OrderCardProps) => {
   const navigate = useNavigate();
+  const ingredients = useTypedSelector(selectIngredients);
 
-  if (!order) {
-    return;
-  }
+  const isPublicFeed = useMatch(ROUTER_PATHS.FEED);
+  const modalPath = isPublicFeed
+    ? ROUTER_PATHS.FEED_ORDER.replace(':id', `${order.number}`)
+    : ROUTER_PATHS.PROFILE_ORDER.replace(':id', `${order.number}`);
+
+  const formattedOrder = getFormattedOrder(order, ingredients);
 
   const openModalHandle = () => {
-    navigate(ROUTER_PATHS.FEED_ORDER.replace(':id', id), {
-      state: { background: ROUTER_PATHS.FEED_ORDER.replace(':id', id) },
+    navigate(modalPath, {
+      state: { background: modalPath },
     });
   };
 
-  const orderNumber = `#${order.number}`;
-  const orderDate = new Date(order.createdAt);
-  const orderName = order.name;
-  const totalPrice = order.totalPrice;
-  const overflowCount = order.ingredients.length - LIMIT_IMAGES_PER_LINE;
+  const orderNumber = `#${formattedOrder.number}`;
+  const orderDate = new Date(formattedOrder.createdAt);
+  const orderName = formattedOrder.name;
+  const totalPrice = formattedOrder.totalPrice;
+  const overflowCount = formattedOrder.ingredients.length - LIMIT_IMAGES_PER_LINE;
   const isOverflowItem = (index: number) => index === 0 && overflowCount > 0;
 
-  const ingredientImages = order.ingredients
+  const ingredientImages = formattedOrder.ingredients
     .slice(0, LIMIT_IMAGES_PER_LINE)
     .map((ing) => ing.image)
     .reverse();
