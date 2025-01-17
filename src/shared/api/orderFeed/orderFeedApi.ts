@@ -8,7 +8,6 @@ export const orderFeedApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     getOrderFeed: builder.query<SuccessGetOrderFeedResponse, void>({
       query: () => 'orders/all',
-      keepUnusedDataFor: Infinity,
       async onCacheEntryAdded(_, { updateCachedData, cacheDataLoaded, cacheEntryRemoved }) {
         const ws = new WebSocket(`${NORMA_API_BASE_WSS_URL}/orders/all`);
         let messageListener: MessageListener = null;

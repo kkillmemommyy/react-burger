@@ -1,10 +1,13 @@
-import { Ingredient, IngredientType } from '@/shared/types/api';
+type IngredientType = 'bun' | 'main' | 'sauce';
 
-type SelectedIngredient<T extends IngredientType = IngredientType> = Pick<Ingredient, 'name' | 'price' | 'image'> & {
+export interface SelectedIngredient<T extends IngredientType = IngredientType> {
+  name: string;
+  price: number;
+  image: string;
   id: string;
   createdAt: number;
   type: T;
-};
+}
 
 export interface SelectedIngredientsState {
   bun: null | SelectedIngredient<'bun'>;
