@@ -16,6 +16,7 @@ import {
   ProfilePage,
   RegistrationPage,
   ResetPasswordPage,
+  OrderHistory,
 } from '../config/pages';
 import { Modal } from '@/shared/ui/Modal';
 import { IngredientDetails } from '@/widgets/IngredientDetails/IngredientDetails';
@@ -63,6 +64,7 @@ export const AppRouter = () => {
         <Route element={<ProtectedRoute />}>
           <Route path={ROUTER_PATHS.PROFILE} element={<ProfilePage />}>
             <Route index element={<EditProfile />} />
+            <Route path={ROUTER_PATHS.PROFILE_ORDERS} element={<OrderHistory />} />
           </Route>
         </Route>
 
