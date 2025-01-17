@@ -1,7 +1,7 @@
-// import cls from './OrderHistory.module.css';
+import cls from './OrderHistory.module.css';
 
 const OrderHistory = () => {
-  return <div>123</div>;
+  return <main className={cls.main}>123</main>;
 };
 
 export default OrderHistory;
