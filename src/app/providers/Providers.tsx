@@ -1,4 +1,4 @@
-import { store } from '@/shared/models/store';
+import { store } from '../store';
 import { ReactNode } from 'react';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';

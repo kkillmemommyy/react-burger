@@ -1,6 +1,5 @@
 import { ingredientsApi } from './ingredientsApi';
 import { createSelector } from '@reduxjs/toolkit';
-import { AppState } from '@/shared/types/reduxTypes';
 import { IngredientType } from '@/shared/types/api';
 
 export const selectAll = (state: AppState) =>

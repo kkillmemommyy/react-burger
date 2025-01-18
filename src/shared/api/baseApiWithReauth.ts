@@ -1,5 +1,4 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { AppState } from '../types/reduxTypes';
 import { NORMA_API_BASE_URL } from './routes';
 import { refreshTokenApi } from './refreshToken/refreshTokenApi';
 

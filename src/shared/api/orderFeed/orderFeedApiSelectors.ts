@@ -1,4 +1,3 @@
-import { AppState } from '@/shared/types/reduxTypes';
 import { orderFeedApi } from './orderFeedApi';
 import { createSelector } from '@reduxjs/toolkit';
 import { selectIngredients } from '../ingredients/ingredientsApiSelectors';

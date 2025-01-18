@@ -1,5 +1,4 @@
 import { createSelector } from '@reduxjs/toolkit';
-import { AppState } from '@/shared/types/reduxTypes';
 
 export const selectSelectedIngredients = (state: AppState) => state.selectedIngredients;
 
