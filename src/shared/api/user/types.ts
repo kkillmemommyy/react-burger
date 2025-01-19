@@ -36,3 +36,20 @@ export interface MakeOrderResponse {
     };
   };
 }
+
+export interface Order {
+  _id: string;
+  ingredients: string[];
+  status: 'done' | 'created' | 'pending';
+  name: string;
+  createdAt: string;
+  updatedAt: string;
+  number: number;
+}
+
+export interface GetUserOrdersResponse {
+  success: true;
+  orders: Order[];
+  total: number;
+  totalToday: number;
+}

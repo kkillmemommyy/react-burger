@@ -19,14 +19,12 @@ export const OrderDetails = () => {
   const ingredients = useTypedSelector(selectIngredients);
 
   if (isLoading) {
-    return <Loader/>
+    return <Loader />;
   }
 
   if (!order) {
     return <Navigate to={ROUTER_PATHS.NOT_FOUND} replace />;
   }
-
-  console.log(order)
 
   const formattedOrder = getFormattedOrder(order, ingredients);
 
