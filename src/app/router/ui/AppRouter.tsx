@@ -17,9 +17,9 @@ import {
   RegistrationPage,
   ResetPasswordPage,
   OrderHistory,
-} from '../config/pages';
+} from '../config/lazyPages';
 import { Modal } from '@/shared/ui/Modal';
-import { IngredientDetails } from '@/widgets/IngredientDetails/IngredientDetails';
+import { IngredientDetails } from '@/widgets/IngredientDetails';
 import { OrderDetails } from '@/widgets/OrderDetails';
 
 export const AppRouter = () => {

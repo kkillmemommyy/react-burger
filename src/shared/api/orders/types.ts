@@ -1,5 +1,3 @@
-import { Ingredient } from '@/shared/types/api';
-
 export type Status = 'done' | 'created' | 'pending';
 
 export interface Order {
@@ -12,10 +10,9 @@ export interface Order {
   number: number;
 }
 
-//не совсем так
 export interface SuccessGetOrderResponse {
   success: true;
-  orders: Order[]
+  orders: Order[];
 }
 
 export interface SuccessGetOrderFeedResponse {
@@ -24,14 +21,3 @@ export interface SuccessGetOrderFeedResponse {
   total: number;
   totalToday: number;
 }
-
-export type EnhancedOrder = Omit<Order, 'ingredients'> & {
-  totalPrice: number;
-  ingredients: Ingredient[];
-};
-
-export type EnhancedOrderFeed = Omit<SuccessGetOrderFeedResponse, 'orders'> & {
-  orders: EnhancedOrder[];
-  pending: number[];
-  completed: number[];
-};

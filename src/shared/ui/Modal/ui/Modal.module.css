@@ -4,6 +4,9 @@
   border-radius: 40px;
   max-width: 720px;
   border: 1px solid var(--colors-interface-accent);
+
+  min-width: 400px;
+  min-height: 400px;
 }
 
 .close_icon {

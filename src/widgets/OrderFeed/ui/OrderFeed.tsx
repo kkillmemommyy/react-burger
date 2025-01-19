@@ -1,6 +1,6 @@
 import cls from './OrderFeed.module.css';
 import { OrderCard } from './OrderCard/OrderCard';
-import { Order } from '@/shared/api/orderFeed/types';
+import { Order } from '@/shared/api/orders/types';
 
 interface Props {
   orders: Order[];

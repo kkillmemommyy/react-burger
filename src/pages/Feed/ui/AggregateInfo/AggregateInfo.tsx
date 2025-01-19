@@ -1,6 +1,6 @@
 import cls from './AggregateInfo.module.css';
 import clsx from 'clsx';
-import { useGetOrderFeedQuery } from '@/shared/api/orderFeed/orderFeedApi';
+import { useGetOrderFeedQuery } from '@/shared/api/orders/ordersApi';
 
 export const AggregateInfo = () => {
   const { total, totalToday, completedOrders, pendingOrders } = useGetOrderFeedQuery(undefined, {

@@ -1,4 +1,4 @@
-import { baseApi } from '../baseApi';
+import { baseApi } from '../base/baseApi';
 import { GetIngredientsResponse, NormalizedIngredients } from './types';
 
 export const ingredientsApi = baseApi.injectEndpoints({

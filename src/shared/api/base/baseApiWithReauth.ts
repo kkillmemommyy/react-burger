@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { NORMA_API_BASE_URL } from './routes';
-import { refreshTokenApi } from './refreshToken/refreshTokenApi';
+import { NORMA_API_BASE_URL } from '../routes';
+import { refreshTokenApi } from '../refreshToken/refreshTokenApi';
 
 const baseQuery = fetchBaseQuery({
   baseUrl: NORMA_API_BASE_URL,

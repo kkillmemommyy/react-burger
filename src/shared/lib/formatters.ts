@@ -1,5 +1,5 @@
-import { Status } from '@/shared/api/orderFeed/types';
-import { Order } from '@/shared/api/orderFeed/types';
+import { Status } from '@/shared/api/orders/types';
+import { Order } from '@/shared/api/orders/types';
 import { Ingredient } from '@/shared/types/api';
 
 export const getStatusLable = (status: Status) => {

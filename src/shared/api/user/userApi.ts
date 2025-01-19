@@ -1,4 +1,4 @@
-import { baseApiWithReauth } from '../baseApiWithReauth';
+import { baseApiWithReauth } from '../base/baseApiWithReauth';
 import { NORMA_API_BASE_WSS_URL } from '../routes';
 import {
   GetUserOrdersResponse,

@@ -1,10 +1,10 @@
-import { baseApi } from '../baseApi';
+import { baseApi } from '../base/baseApi';
 import { NORMA_API_BASE_WSS_URL } from '../routes';
 import { Order, SuccessGetOrderFeedResponse, SuccessGetOrderResponse } from './types';
 
 type MessageListener = null | ((event: MessageEvent) => void);
 
-export const orderFeedApi = baseApi.injectEndpoints({
+export const ordersApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     getOrder: builder.query<Order, string>({
       query: (id) => `orders/${id}`,
@@ -47,4 +47,4 @@ export const orderFeedApi = baseApi.injectEndpoints({
   overrideExisting: false,
 });
 
-export const { useGetOrderQuery, useGetOrderFeedQuery } = orderFeedApi;
+export const { useGetOrderQuery, useGetOrderFeedQuery } = ordersApi;

@@ -13,7 +13,7 @@ export const Preloader = ({ children }: Props) => {
   const { isLoading: isUserLoading } = useGetUserQuery();
 
   if (isIngredientsLoading || isUserLoading) {
-    return <Loader />;
+    return <Loader/>;
   }
 
   if (isError) {

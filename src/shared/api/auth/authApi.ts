@@ -7,7 +7,7 @@ import {
   LoginRequest,
 } from './types';
 import { localStorageGetItem } from '@/shared/lib/localStorage';
-import { baseApi } from '../baseApi';
+import { baseApi } from '../base/baseApi';
 
 export const authApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({

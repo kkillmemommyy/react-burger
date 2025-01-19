@@ -1,5 +1,5 @@
 import cls from './IngredientPage.module.css';
-import { IngredientDetails } from '@/widgets/IngredientDetails/IngredientDetails';
+import { IngredientDetails } from '@/widgets/IngredientDetails';
 
 const IngredientPage = () => {
   return (

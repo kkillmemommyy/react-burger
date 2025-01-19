@@ -9,7 +9,7 @@ const OrderHistory = () => {
   const { data, isLoading, isError, isSuccess } = useGetUserOrdersQuery();
 
   if (isLoading) {
-    return <Loader />;
+    return <Loader center={false} className={cls.loader} type='text' text='Загружаем ваши заказы' />;
   }
 
   if (isError || !isSuccess) {

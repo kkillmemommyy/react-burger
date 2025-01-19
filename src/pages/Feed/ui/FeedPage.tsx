@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import cls from './FeedPage.module.css';
 import { AggregateInfo } from './AggregateInfo/AggregateInfo';
-import { useGetOrderFeedQuery } from '@/shared/api/orderFeed/orderFeedApi';
+import { useGetOrderFeedQuery } from '@/shared/api/orders/ordersApi';
 import { Loader } from '@/shared/ui/Loader';
 import { OrderFeed } from '@/widgets/OrderFeed';
 import { Outlet } from 'react-router-dom';
@@ -10,11 +10,11 @@ import { PageErrorMessage } from '@/shared/ui/PageErrorMessage';
 const FeedPage = () => {
   const { data, isLoading, isError, isSuccess } = useGetOrderFeedQuery();
 
-  if (isLoading || !isSuccess) {
+  if (isLoading) {
     return <Loader />;
   }
 
-  if (isError) {
+  if (isError || !isSuccess) {
     return <PageErrorMessage />;
   }
 

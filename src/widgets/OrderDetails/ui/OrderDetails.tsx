@@ -5,7 +5,7 @@ import { Ingredient } from '@/shared/types/api';
 import { getFormattedOrder, getStatusLable } from '@/shared/lib/formatters';
 import { Navigate, useParams } from 'react-router-dom';
 import { ROUTER_PATHS } from '@/shared/models/routes';
-import { useGetOrderQuery } from '@/shared/api/orderFeed/orderFeedApi';
+import { useGetOrderQuery } from '@/shared/api/orders/ordersApi';
 import { useTypedSelector } from '@/shared/lib/typedReduxHooks';
 import { selectIngredients } from '@/shared/api/ingredients/ingredientsApiSelectors';
 import { skipToken } from '@reduxjs/toolkit/query';
@@ -27,7 +27,6 @@ export const OrderDetails = () => {
   }
 
   const formattedOrder = getFormattedOrder(order, ingredients);
-
   const { name, status, totalPrice, createdAt, ingredients: unmappedIngredients } = formattedOrder;
 
   const countedIngs = unmappedIngredients.reduce<Record<string, CountedIngredient>>((acc, ing) => {

@@ -1,11 +1,10 @@
 import cls from './OrderCard.module.css';
 import { FormattedDate, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import clsx from 'clsx';
-import { memo } from 'react';
 import { getStatusLable } from '@/shared/lib/formatters';
 import { useMatch, useNavigate } from 'react-router-dom';
 import { ROUTER_PATHS } from '@/shared/models/routes';
-import { Order } from '@/shared/api/orderFeed/types';
+import { Order } from '@/shared/api/orders/types';
 import { useTypedSelector } from '@/shared/lib/typedReduxHooks';
 import { selectIngredients } from '@/shared/api/ingredients/ingredientsApiSelectors';
 import { getFormattedOrder } from '@/shared/lib/formatters';
@@ -16,7 +15,7 @@ interface OrderCardProps {
   order: Order;
 }
 
-export const OrderCard = memo(({ order }: OrderCardProps) => {
+export const OrderCard = ({ order }: OrderCardProps) => {
   const navigate = useNavigate();
   const ingredients = useTypedSelector(selectIngredients);
 
@@ -73,4 +72,4 @@ export const OrderCard = memo(({ order }: OrderCardProps) => {
       </div>
     </li>
   );
-});
+};

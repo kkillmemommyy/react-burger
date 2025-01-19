@@ -1,11 +1,8 @@
 import { localStorageGetItem } from '@/shared/lib/localStorage';
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query';
-import { NORMA_API_BASE_URL } from '../routes';
 import { SuccessRefreshTokenResponse } from './types';
+import { baseApi } from '../base/baseApi';
 
-export const refreshTokenApi = createApi({
-  reducerPath: 'refreshTokenApi',
-  baseQuery: fetchBaseQuery({ baseUrl: NORMA_API_BASE_URL }),
+export const refreshTokenApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     refreshToken: builder.mutation<SuccessRefreshTokenResponse, void>({
       query: () => ({

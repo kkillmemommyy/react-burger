@@ -1,11 +1,9 @@
-import { refreshTokenApi } from './refreshToken/refreshTokenApi';
-import { baseApiWithReauth } from './baseApiWithReauth';
-import { baseApi } from './baseApi';
+import { baseApiWithReauth } from './base/baseApiWithReauth';
+import { baseApi } from './base/baseApi';
 
 export const rootApiReducer = {
   [baseApi.reducerPath]: baseApi.reducer,
   [baseApiWithReauth.reducerPath]: baseApiWithReauth.reducer,
-  [refreshTokenApi.reducerPath]: refreshTokenApi.reducer,
 };
 
-export const apiMiddlewares = [baseApi.middleware, baseApiWithReauth.middleware, refreshTokenApi.middleware];
+export const apiMiddlewares = [baseApi.middleware, baseApiWithReauth.middleware];
