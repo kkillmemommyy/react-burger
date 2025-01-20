@@ -1,0 +1,39 @@
+.wrap {
+  flex: 1;
+}
+
+.total {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.constructor_container {
+  height: calc(100vh - 342px);
+  padding: 1px;
+}
+
+.constructor_container_over {
+  border: 1px solid var(--colors-interface-accent);
+  padding: 0;
+}
+
+.with_scroll {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  height: calc(100vh - 536px);
+  overflow-y: auto;
+  scroll-behavior: smooth;
+  scrollbar-width: thin;
+}
+
+.with_scroll_not_bun {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  height: 528px;
+  margin-bottom: 40px;
+  overflow-y: auto;
+  scroll-behavior: smooth;
+  scrollbar-width: thin;
+}

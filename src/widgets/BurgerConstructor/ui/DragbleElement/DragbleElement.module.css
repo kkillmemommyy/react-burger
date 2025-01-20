@@ -1,0 +1,14 @@
+.constructor_element {
+  display: flex;
+  max-height: 80px;
+}
+
+.drag {
+  opacity: 0;
+}
+
+.drag_icon {
+  display: flex;
+  align-items: center;
+  cursor: grab;
+}

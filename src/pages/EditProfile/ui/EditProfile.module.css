@@ -1,0 +1,28 @@
+.main {
+  margin-top: 120px;
+  margin-left: 60px;
+}
+
+.input {
+  & svg:active {
+    transition: transform 0.2s ease, opacity 0.2s ease;
+    transform: scale(0.7);
+    opacity: 0.8;
+  }
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+}
+
+.btnWrap {
+  width: 166.41px;
+  & button {
+    width: 100%;
+  }
+}
+
+input:disabled {
+  cursor: text;
+}

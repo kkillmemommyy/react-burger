@@ -1,0 +1,18 @@
+.orderFeed {
+  flex: 1;
+  max-height: inherit;
+}
+
+.withScroll {
+  max-height: inherit;
+  overflow-y: scroll;
+  scroll-behavior: smooth;
+  scrollbar-width: thin;
+}
+
+.orderList {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding-right: 8px;
+}

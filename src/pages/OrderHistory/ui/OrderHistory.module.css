@@ -1,0 +1,13 @@
+.main {
+  max-height: calc(100vh - 88px - 40px);
+  margin-top: 40px;
+  margin-left: 60px;
+  flex: 1;
+}
+
+.loader {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+}

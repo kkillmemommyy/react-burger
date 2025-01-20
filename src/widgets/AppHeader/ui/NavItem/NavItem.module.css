@@ -1,0 +1,28 @@
+.nav_item {
+  padding: 16px 20px;
+  display: flex;
+  white-space: nowrap;
+  &:last-child {
+    margin-right: 0;
+    margin-left: auto;
+  }
+  & span,
+  & svg {
+    transition: var(--common-transition);
+  }
+  &:hover span {
+    color: var(--text-primary-color);
+  }
+  &:hover svg {
+    fill: var(--text-primary-color);
+  }
+}
+
+.active {
+  & span {
+    color: var(--text-primary-color);
+  }
+  & svg {
+    fill: var(--text-primary-color);
+  }
+}

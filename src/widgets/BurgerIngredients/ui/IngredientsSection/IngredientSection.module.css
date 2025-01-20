@@ -1,0 +1,6 @@
+.category_items {
+  display: flex;
+  flex: 1;
+  gap: 32px 24px;
+  flex-wrap: wrap;
+}
