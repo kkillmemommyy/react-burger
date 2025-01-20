@@ -7,6 +7,7 @@ const rootReducer = { ...rootApiReducer, ...rootSlicesReducer };
 export const store = configureStore({
   reducer: rootReducer,
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(apiMiddlewares),
+  devTools: import.meta.env.MODE === 'development',
 });
 
 export type AppState = ReturnType<typeof store.getState>;
