@@ -10,7 +10,7 @@ interface Props {
 export const Providers = ({ children }: Props) => {
   return (
     <Provider store={store}>
-      <BrowserRouter basename={import.meta.env.BASE_URL}>{children}</BrowserRouter>
+      <BrowserRouter>{children}</BrowserRouter>
     </Provider>
   );
 };
