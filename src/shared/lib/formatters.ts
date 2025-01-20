@@ -26,3 +26,29 @@ export const getFormattedOrder = (order: Order, ingredients: Record<string, Ingr
 
   return { totalPrice, ingredients: transformedIngredients, ...other };
 };
+
+export const getFormattedDate = (date: Date) => {
+  const msInDay = 86400000;
+
+  const time = new Intl.DateTimeFormat('ru', {
+    hour: '2-digit',
+    minute: '2-digit',
+  }).format(date);
+
+  const today = new Date();
+  let dayAgo = Math.floor((today.getTime() - date.getTime()) / msInDay);
+  const msRemains = today.getTime() - (date.getTime() + dayAgo * msInDay);
+  const dateAgoMsRemains = new Date(today.getTime() - msRemains).getDate();
+
+  dayAgo += today.getDate() !== dateAgoMsRemains ? 1 : 0;
+
+  if (dayAgo === 0) {
+    return `Сегодня, ${time}`;
+  } else if (dayAgo === 1) {
+    return `Вчера, ${time}`;
+  } else if (dayAgo > 1 && dayAgo <= 4) {
+    return `${dayAgo} дня назад, ${time}`;
+  } else {
+    return `${dayAgo} дней назад, ${time}`;
+  }
+};

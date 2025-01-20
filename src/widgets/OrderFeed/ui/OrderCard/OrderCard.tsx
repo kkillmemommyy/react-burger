@@ -1,5 +1,5 @@
 import cls from './OrderCard.module.css';
-import { FormattedDate, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
+import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import clsx from 'clsx';
 import { getStatusLable } from '@/shared/lib/formatters';
 import { useMatch, useNavigate } from 'react-router-dom';
@@ -8,6 +8,7 @@ import { Order } from '@/shared/api/orders/types';
 import { useTypedSelector } from '@/shared/lib/typedReduxHooks';
 import { selectIngredients } from '@/shared/api/ingredients/ingredientsApiSelectors';
 import { getFormattedOrder } from '@/shared/lib/formatters';
+import FormattedDate from '@/shared/ui/FormattedDate/FormattedDate';
 
 const LIMIT_IMAGES_PER_LINE = 6;
 
@@ -50,7 +51,7 @@ export const OrderCard = ({ order }: OrderCardProps) => {
     <li className={cls.orderCard} onClick={openModalHandle}>
       <div className={cls.flexContainer}>
         <span className='text text_type_digits-default'>{orderNumber}</span>
-        <FormattedDate date={orderDate} className='text text_type_main-default text_color_inactive' />
+        <FormattedDate date={orderDate} />
       </div>
       <div>
         <div className='mb-2 text text_type_main-medium'>{orderName}</div>

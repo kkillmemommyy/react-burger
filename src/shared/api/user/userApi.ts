@@ -27,7 +27,7 @@ export const userApi = baseApiWithReauth.injectEndpoints({
         const accessToken = (getState() as AppState).user.accessToken?.replace('Bearer ', '');
         const ws = new WebSocket(`${NORMA_API_BASE_WSS_URL}/orders?token=${accessToken}`);
         let messageListener: MessageListener = null;
-
+        
         try {
           await cacheDataLoaded;
           messageListener = (event) => {
@@ -40,7 +40,6 @@ export const userApi = baseApiWithReauth.injectEndpoints({
               draft.orders = data.orders.reverse();
             });
           };
-
           ws.addEventListener('message', messageListener);
         } catch {
           // no-op in case `cacheEntryRemoved` resolves before `cacheDataLoaded`,

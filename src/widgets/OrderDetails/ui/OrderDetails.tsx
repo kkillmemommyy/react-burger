@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import cls from './OrderDetails.module.css';
-import { CurrencyIcon, FormattedDate } from '@ya.praktikum/react-developer-burger-ui-components';
+import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import { Ingredient } from '@/shared/types/api';
 import { getFormattedOrder, getStatusLable } from '@/shared/lib/formatters';
 import { Navigate, useParams } from 'react-router-dom';
@@ -10,6 +10,7 @@ import { useTypedSelector } from '@/shared/lib/typedReduxHooks';
 import { selectIngredients } from '@/shared/api/ingredients/ingredientsApiSelectors';
 import { skipToken } from '@reduxjs/toolkit/query';
 import { Loader } from '@/shared/ui/Loader';
+import FormattedDate from '@/shared/ui/FormattedDate/FormattedDate';
 
 type CountedIngredient = Ingredient & { count: number };
 
@@ -71,7 +72,7 @@ export const OrderDetails = () => {
         </div>
       </div>
       <div className={clsx(cls.flex_wrap_space_between, 'mb-10')}>
-        <FormattedDate date={new Date(createdAt)} className='text text_type_main-default text_color_inactive' />
+        <FormattedDate date={new Date(createdAt)} />
         <div className={cls.align_items}>
           <span className='text text_type_digits-default mr-2'>{totalPrice}</span>
           <CurrencyIcon type='primary' />
