@@ -10,7 +10,9 @@ interface Props {
 export const Providers = ({ children }: Props) => {
   return (
     <Provider store={store}>
-      <BrowserRouter>{children}</BrowserRouter>
+      <BrowserRouter basename={import.meta.env.MODE !== 'production' ? undefined : '/react-burger'}>
+        {children}
+      </BrowserRouter>
     </Provider>
   );
 };
