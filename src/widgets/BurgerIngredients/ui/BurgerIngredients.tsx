@@ -7,7 +7,7 @@ import { IngredientType } from '@/shared/types/api';
 
 interface ingredientsSectionType {
   type: IngredientType;
-  title: 'Булки' | 'Соусы' | 'Начинки';
+  title: string;
   ref: (node?: Element | null) => void;
 }
 

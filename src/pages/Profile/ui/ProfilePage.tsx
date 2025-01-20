@@ -27,7 +27,6 @@ const ProfilePage = () => {
             <li role='menuitem'>
               <NavLink
                 to={ROUTER_PATHS.PROFILE_ORDERS}
-                end
                 className={({ isActive }) =>
                   clsx('text text_type_main-medium text_color_inactive', cls.link, { [cls.active]: isActive })
                 }

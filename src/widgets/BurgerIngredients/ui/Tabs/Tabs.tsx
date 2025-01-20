@@ -6,7 +6,7 @@ import { IngredientType  } from '@/shared/types/api';
 interface Tab {
   type: IngredientType;
   href: string;
-  title: 'Булки' | 'Соусы' | 'Начинки';
+  title: string;
 }
 
 interface Props {

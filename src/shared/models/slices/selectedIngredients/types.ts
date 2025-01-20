@@ -1,4 +1,4 @@
-type IngredientType = 'bun' | 'main' | 'sauce';
+import { IngredientType } from "@/shared/types/api";
 
 export interface SelectedIngredient<T extends IngredientType = IngredientType> {
   name: string;
