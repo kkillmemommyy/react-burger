@@ -8,6 +8,7 @@ import {
 } from './types';
 import { localStorageGetItem } from '@/shared/lib/localStorage';
 import { baseApi } from '../base/baseApi';
+import { userApi } from '../user/userApi';
 
 export const authApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
@@ -24,6 +25,10 @@ export const authApi = baseApi.injectEndpoints({
         method: 'POST',
         body: { token: localStorageGetItem('refreshToken') ?? '' },
       }),
+      onQueryStarted: async (_, { queryFulfilled, dispatch }) => {
+        await queryFulfilled;
+        dispatch(userApi.util.invalidateTags(['getUserOrders']))
+      }
     }),
     registration: builder.mutation<SuccessRegistrationAndLoginResponse, RegistrationRequest>({
       query: (data) => ({

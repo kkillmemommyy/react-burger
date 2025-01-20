@@ -31,4 +31,5 @@ export const baseApiWithReauth = createApi({
   reducerPath: 'normaApiWithReauth',
   baseQuery: baseQueryWithReauth,
   endpoints: () => ({}),
+  tagTypes: ['getUserOrders']
 });

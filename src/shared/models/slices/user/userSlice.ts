@@ -16,8 +16,12 @@ const userSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
+      .addMatcher(authApi.endpoints.logout.matchPending, (state) => {
+        state.user = null;
+        state.accessToken = null;
+      })
       .addMatcher(
-        isAnyOf(refreshTokenApi.endpoints.refreshToken.matchRejected, authApi.endpoints.logout.matchPending),
+        isAnyOf(refreshTokenApi.endpoints.refreshToken.matchRejected, authApi.endpoints.logout.matchFulfilled),
         (state) => {
           state.user = null;
           state.accessToken = null;

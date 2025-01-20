@@ -20,14 +20,16 @@ export const userApi = baseApiWithReauth.injectEndpoints({
     }),
     getUserOrders: builder.query<GetUserOrdersResponse, void>({
       query: () => 'orders',
+      keepUnusedDataFor: 20,
       transformResponse: (response: GetUserOrdersResponse) => {
         return { ...response, orders: response.orders.reverse() };
       },
+      providesTags: ['getUserOrders'],
       async onCacheEntryAdded(_, { updateCachedData, cacheDataLoaded, cacheEntryRemoved, getState }) {
         const accessToken = (getState() as AppState).user.accessToken?.replace('Bearer ', '');
         const ws = new WebSocket(`${NORMA_API_BASE_WSS_URL}/orders?token=${accessToken}`);
         let messageListener: MessageListener = null;
-        
+
         try {
           await cacheDataLoaded;
           messageListener = (event) => {
