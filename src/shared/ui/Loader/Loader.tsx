@@ -17,7 +17,7 @@ export const Loader = ({ type = 'icon', className, delay = false, text = 'LOADIN
   useEffect(() => {
     if (!delay) return;
 
-    const timerId = setTimeout(() => setIsLoaderShow(true), 1500);
+    const timerId = setTimeout(() => setIsLoaderShow(true), 1000);
     return () => clearTimeout(timerId);
   }, [delay]);
 
