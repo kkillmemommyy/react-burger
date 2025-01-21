@@ -42,13 +42,24 @@ export const getFormattedDate = (date: Date) => {
 
   dayAgo += today.getDate() !== dateAgoMsRemains ? 1 : 0;
 
+  const lastDigit = dayAgo % 10;
+  const lastTwoDigits = dayAgo % 100;
+
   if (dayAgo === 0) {
     return `Сегодня, ${time}`;
-  } else if (dayAgo === 1) {
+  }
+
+  if (dayAgo === 1) {
     return `Вчера, ${time}`;
-  } else if (dayAgo > 1 && dayAgo <= 4) {
-    return `${dayAgo} дня назад, ${time}`;
-  } else {
+  }
+
+  if (lastTwoDigits >= 11 && lastTwoDigits <= 14) {
     return `${dayAgo} дней назад, ${time}`;
   }
+
+  if (lastDigit >= 2 && lastDigit <= 4) {
+    return `${dayAgo} дня назад, ${time}`;
+  }
+
+  return `${dayAgo} дней назад, ${time}`;
 };
