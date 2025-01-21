@@ -1,13 +1,16 @@
 .main {
-  max-height: calc(100vh - 88px - 40px);
+  max-height: calc(100vh - var(--header-height) - 40px);
   margin-top: 40px;
   margin-left: 60px;
   flex: 1;
 }
 
 .loader {
+  flex: 1;
+}
+
+.flex_center {
   display: flex;
   align-items: center;
   justify-content: center;
-  flex: 1;
 }
