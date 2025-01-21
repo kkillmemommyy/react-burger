@@ -1,46 +1,61 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { useInView } from 'react-intersection-observer';
 import cls from './BurgerIngredients.module.css';
 import { Tabs } from './Tabs/Tabs';
 import { IngredientsSection } from './IngredientsSection/IngredientsSection';
-import { IngredientType } from '@/shared/types/api';
-
-interface ingredientsSectionType {
-  type: IngredientType;
-  title: string;
-  ref: (node?: Element | null) => void;
-}
 
 export const BurgerIngredients = () => {
-  const [currentTab, setCurrentTab] = useState<IngredientType>('bun');
+  const [currentTab, setCurrentTab] = useState<'buns' | 'mains' | 'sauces'>('buns');
 
-  const { ref: bunsRef, inView: bunsInView } = useInView();
-  const { ref: saucesRef, inView: saucesInView } = useInView();
-  const { ref: mainRef, inView: mainInView } = useInView();
+  const { ref: bunsInViewRef, inView: bunsInView } = useInView();
+  const { ref: saucesInViewRef, inView: saucesInView } = useInView();
+  const { ref: mainsInViewRef, inView: mainInView } = useInView();
+
+  const bunsRef = useRef<HTMLDivElement | null>(null);
+  const saucesRef = useRef<HTMLDivElement | null>(null);
+  const mainsRef = useRef<HTMLDivElement | null>(null);
+
+  const setBunsRefs = useCallback(
+    (node: HTMLDivElement | null) => {
+      bunsRef.current = node;
+      bunsInViewRef(node);
+    },
+    [bunsInViewRef]
+  );
+
+  const setSaucesRefs = useCallback(
+    (node: HTMLDivElement | null) => {
+      saucesRef.current = node;
+      saucesInViewRef(node);
+    },
+    [saucesInViewRef]
+  );
+
+  const setMainsRefs = useCallback(
+    (node: HTMLDivElement | null) => {
+      mainsRef.current = node;
+      mainsInViewRef(node);
+    },
+    [mainsInViewRef]
+  );
 
   useEffect(() => {
     if (bunsInView) {
-      setCurrentTab('bun');
+      setCurrentTab('buns');
     } else if (saucesInView) {
-      setCurrentTab('sauce');
+      setCurrentTab('sauces');
     } else if (mainInView) {
-      setCurrentTab('main');
+      setCurrentTab('mains');
     }
   }, [bunsInView, saucesInView, mainInView]);
 
-  const ingredientsSections: ingredientsSectionType[] = [
-    { type: 'bun', title: 'Булки', ref: bunsRef },
-    { type: 'sauce', title: 'Соусы', ref: saucesRef },
-    { type: 'main', title: 'Начинки', ref: mainRef },
-  ];
-
   return (
     <section className={cls.wrapp}>
-      <Tabs currentTab={currentTab} />
+      <Tabs activeTab={currentTab} bunsRef={bunsRef} saucesRef={saucesRef} mainsRef={mainsRef} />
       <div className={cls.ingredients}>
-        {ingredientsSections.map((section) => (
-          <IngredientsSection type={section.type} title={section.title} ref={section.ref} key={section.type} />
-        ))}
+        <IngredientsSection type='bun' title='Булки' ref={setBunsRefs} />
+        <IngredientsSection type='sauce' title='Соусы' ref={setSaucesRefs} />
+        <IngredientsSection type='main' title='Начинки' ref={setMainsRefs} />
       </div>
     </section>
   );
