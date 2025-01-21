@@ -1,0 +1,1 @@
+import{j as a,I as n}from"./index-DrBQN9hb.js";const e="_main_gclb5_1",r="_wrap_gclb5_7",s={main:e,wrap:r},t=()=>a.jsx("main",{className:s.main,children:a.jsx("div",{className:s.wrap,children:a.jsx(n,{})})});export{t as default};
