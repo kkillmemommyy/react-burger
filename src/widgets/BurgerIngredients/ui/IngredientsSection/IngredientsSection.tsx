@@ -15,7 +15,7 @@ const IngredientsSectionComponent = ({ type, title }: Props, ref: ForwardedRef<H
   const ingredients = useTypedSelector(selectIngredientsByType(type));
 
   return (
-    <article className='mb-10' ref={ref} id={type}>
+    <article className='mb-10' ref={ref}>
       <h2 className='mb-6 text text_type_main-medium'>{title}</h2>
       <ul className={clsx(cls.category_items, 'pr-4')}>
         {ingredients.map((ing) => (
